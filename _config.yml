@@ -1,36 +1,57 @@
+# —————  Site basics  —————
 title: "허정윤 | Backend & AI Developer"
 description: "Backend · AI · RAG · 멀티에이전트 · AWS 포트폴리오 & 블로그"
-url: "https://devunis.github.io"
+url: "https://devunis.github.io"   # 사용자 페이지면 그대로
+baseurl: ""                        # 사용자 페이지면 빈 값
 lang: ko
 timezone: Asia/Seoul
 
-# 핵심: 모던 테마
-remote_theme: "mmistakes/minimal-mistakes@4.26.2"
-minimal_mistakes_skin: "dark"   # "default", "air", "neon", "contrast", etc.
+# —————  Theme (GitHub Pages 호환)  —————
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"  # 안정 버전 권장
+minimal_mistakes_skin: "air"   # "default" | "dark" | "air" | "neon" 등 취향대로 변경 가능
 
-# 네비게이션
+# —————  Plugins (Pages 화이트리스트 내)  —————
+plugins:
+  - jekyll-include-cache   # MM 테마에 필수
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jemoji                 # (선택) 이모지 지원
+
+# —————  Build/Markdown  —————
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: /:categories/:title/
+
+# —————  Collections & Defaults  —————
 collections:
   posts:
     output: true
+
 defaults:
-  - scope: { path: "" , type: "posts" }
-    values: { layout: single, author_profile: true, read_time: true, toc: true, toc_sticky: true }
+  # 블로그 글 기본 레이아웃
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      toc: true
+      toc_sticky: true
+  # 일반 페이지 기본 레이아웃
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
-# 메뉴
-nav:
-  - title: "홈"
-    url: /
-  - title: "프로젝트"
-    url: /projects/
-  - title: "블로그"
-    url: /year-archive/
-  - title: "소개"
-    url: /about/
-
-# 소셜(푸터/사이드)
+# —————  Author / Social  —————
 author:
   name: "허정윤"
-  avatar: "/assets/img/avatar.jpg"   # 없으면 나중에 추가
+  avatar: "/assets/img/avatar.jpg"   # 없으면 나중에 추가해도 됨
   bio: "Backend & AI Developer · Java Spring · Python · RAG · AWS"
   location: "Seoul, KR"
   links:
@@ -41,20 +62,16 @@ author:
       icon: "fas fa-fw fa-envelope"
       url: "mailto:gjwjddbsg@gmail.com"
 
-# SEO & 피드
-plugins:
-  - jekyll-include-cache
-  - jekyll-feed
-  - jekyll-seo-tag
+# —————  SEO / Feed / Search  —————
+repository: "devunis/devunis.github.io"
+search: true
+feed:
+  path: feed.xml
 
-# Sass(폰트/색 커스텀용)
-sass:
-  style: compressed
-
-# (선택) 포스트/레이아웃 기본값
-collections:
-  posts:
-    output: true
-defaults:
-  - scope: { path: "", type: "posts" }
-    values: { layout: single, author_profile: true, read_time: true, toc: true, toc_sticky: true }
+# —————  Exclude (빌드 불필요 파일)  —————
+exclude:
+  - "README.md"
+  - "node_modules"
+  - "vendor"
+  - "Gemfile"
+  - "Gemfile.lock"
