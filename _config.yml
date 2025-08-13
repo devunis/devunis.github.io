@@ -14,7 +14,7 @@ timezone: "Asia/Seoul"
 # --- Author / Social (사이드바) ---
 author:
   name: "허정윤"
-  avatar: "/assets/images/avatar.jpg"   # 이미지 넣으면 자동 표기
+  avatar: "/assets/images/avatar.png"   # 이미지 넣으면 자동 표기
   bio: "Backend & AI · Java Spring · Python · RAG · AWS"
   location: "Seoul, KR"
   links:
