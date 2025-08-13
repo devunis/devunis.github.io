@@ -31,7 +31,7 @@ nav:
 # 소셜 링크
 author:
   name: "정윤 허"
-  avatar: "/assets/images/avatar.jpg" # 이미지 경로 (assets에 넣기)
+  avatar: "/assets/images/avatar.png" # 이미지 경로 (assets에 넣기)
   bio: "백엔드 · AI 서비스 개발자"
   location: "Seoul, Korea"
   links:
