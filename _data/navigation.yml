@@ -1,0 +1,9 @@
+main:
+  - title: "홈"
+    url: /
+  - title: "프로젝트"
+    url: /projects/
+  - title: "소개"
+    url: /about/
+  - title: "블로그"
+    url: /year-archive/

@@ -1,72 +1,54 @@
-# _config.yml
-
-# 테마 설정 (Minimal Mistakes)
+# --- Theme ---
 remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: "dark"   # "air", "contrast", "neon" 등도 가능
 
-# 사이트 기본 정보
-title: "정윤 허"
-name: "정윤 허"
-description: "백엔드 & AI 개발자 포트폴리오"
-url: "https://username.github.io" # 본인 GitHub Pages 주소
-baseurl: "" # 루트일 경우 비워둠
-
-# 기본 언어 및 시간대
+# --- Site ---
+title: "허정윤 | Backend & AI Developer"
+name: "허정윤"
+description: "백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오 & 블로그"
+url: "https://devunis.github.io"
+baseurl: ""
 lang: "ko"
 timezone: "Asia/Seoul"
 
-# 사이트 기본 색상 스킴 (다크 모드 기본)
-minimal_mistakes_skin: "dark" # dark, contrast, neon, air 등 지원
-
-# 네비게이션 바 메뉴
-nav:
-  - title: "홈"
-    url: /
-  - title: "프로젝트"
-    url: /projects/
-  - title: "블로그"
-    url: /posts/
-  - title: "소개"
-    url: /about/
-
-# 소셜 링크
+# --- Author / Social (사이드바) ---
 author:
-  name: "정윤 허"
-  avatar: "/assets/images/avatar.png" # 이미지 경로 (assets에 넣기)
-  bio: "백엔드 · AI 서비스 개발자"
-  location: "Seoul, Korea"
+  name: "허정윤"
+  avatar: "/assets/images/avatar.jpg"   # 이미지 넣으면 자동 표기
+  bio: "Backend & AI · Java Spring · Python · RAG · AWS"
+  location: "Seoul, KR"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/username"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://linkedin.com/in/username"
+      url: "https://github.com/devunis"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:gjwjddbsg@gmail.com"
 
-# 플러그인 (Minimal Mistakes 필수)
+# --- Plugins (GitHub Pages 허용 목록 위주) ---
 plugins:
+  - jekyll-include-cache
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-archives
   - jekyll-paginate
   - jekyll-sitemap
+  - jemoji
 
-# 페이지네이션
+# --- Pagination ---
 paginate: 5
 paginate_path: "/page:num/"
 
-# 아카이브 설정
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layout: archive
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/
+# --- Defaults ---
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: single, author_profile: true, read_time: true, toc: true, toc_sticky: true }
+  - scope: { path: "", type: pages }
+    values: { layout: single, author_profile: true }
 
-# 제외 파일/폴더
+# --- Exclude ---
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "node_modules"
+  - "vendor"
+  - "README.md"
