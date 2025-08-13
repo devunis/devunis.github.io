@@ -43,9 +43,18 @@ author:
 
 # SEO & 피드
 plugins:
+  - jekyll-include-cache
   - jekyll-feed
   - jekyll-seo-tag
 
 # Sass(폰트/색 커스텀용)
 sass:
   style: compressed
+
+# (선택) 포스트/레이아웃 기본값
+collections:
+  posts:
+    output: true
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: single, author_profile: true, read_time: true, toc: true, toc_sticky: true }
