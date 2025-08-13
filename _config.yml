@@ -1,16 +1,13 @@
-remote_theme: cotes2020/jekyll-theme-chirpy@v6.6.2
+remote_theme: cotes2020/jekyll-theme-chirpy
 
 lang: ko
 timezone: Asia/Seoul
 
 title: "허정윤 | Backend & AI Developer"
 tagline: "Backend · AI · RAG · AWS"
-description: >-
-  백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오 & 기술 블로그.
-
+description: "백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오 & 기술 블로그."
 url: "https://devunis.github.io"
-baseurl: ""   # 사용자 페이지는 빈 값
-avatar: /assets/images/avatar.png
+baseurl: ""
 
 github:
   username: devunis
@@ -30,7 +27,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
 
-# Chirpy가 탭을 이 컬렉션으로 읽어옵니다.
 collections:
   tabs:
     output: true
