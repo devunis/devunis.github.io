@@ -1,77 +1,32 @@
-# —————  Site basics  —————
 title: "허정윤 | Backend & AI Developer"
-description: "Backend · AI · RAG · 멀티에이전트 · AWS 포트폴리오 & 블로그"
-url: "https://devunis.github.io"   # 사용자 페이지면 그대로
-baseurl: ""                        # 사용자 페이지면 빈 값
+description: "포트폴리오 & 기술 블로그 — Backend · AI · RAG · AWS"
+url: "https://devunis.github.io"
+baseurl: ""           # 사용자 페이지면 빈 값 유지
 lang: ko
 timezone: Asia/Seoul
 
-# —————  Theme (GitHub Pages 호환)  —————
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"  # 안정 버전 권장
-minimal_mistakes_skin: "air"   # "default" | "dark" | "air" | "neon" 등 취향대로 변경 가능
+# ✅ GitHub Pages 내장 테마 (추가 설정/원격 테마 불필요)
+theme: jekyll-theme-cayman
 
-# —————  Plugins (Pages 화이트리스트 내)  —————
+# 가벼운 기본 플러그인만 (둘 다 Pages 화이트리스트)
 plugins:
-  - jekyll-include-cache   # MM 테마에 필수
   - jekyll-feed
   - jekyll-seo-tag
-  - jemoji                 # (선택) 이모지 지원
 
-# —————  Build/Markdown  —————
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
-permalink: /:categories/:title/
-
-# —————  Collections & Defaults  —————
+# 포스트 출력
 collections:
   posts:
     output: true
 
+# 기본 레이아웃 적용
 defaults:
-  # 블로그 글 기본 레이아웃
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      toc: true
-      toc_sticky: true
-  # 일반 페이지 기본 레이아웃
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: true
+  - scope: { path: "", type: "posts" }
+    values: { layout: post }
+  - scope: { path: "", type: "pages" }
+    values: { layout: page }
 
-# —————  Author / Social  —————
-author:
-  name: "허정윤"
-  avatar: "/assets/img/avatar.jpg"   # 없으면 나중에 추가해도 됨
-  bio: "Backend & AI Developer · Java Spring · Python · RAG · AWS"
-  location: "Seoul, KR"
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/devunis"
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope"
-      url: "mailto:gjwjddbsg@gmail.com"
-
-# —————  SEO / Feed / Search  —————
-repository: "devunis/devunis.github.io"
-search: true
-feed:
-  path: feed.xml
-
-# —————  Exclude (빌드 불필요 파일)  —————
+# 빌드 제외
 exclude:
   - "README.md"
   - "node_modules"
   - "vendor"
-  - "Gemfile"
-  - "Gemfile.lock"

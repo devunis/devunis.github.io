@@ -1,24 +1,18 @@
 ---
-layout: single
-title: "프로젝트"
-permalink: /projects/
-toc: false
+layout: page
+title: 프로젝트
+permalink: /projects
 ---
 
-<div class="grid__wrapper">
-  <div class="archive__item">
-    <a class="archive__item-teaser" href="https://github.com/devunis/SenPick">
-      <img src="/assets/img/project-senpick.webp" alt="SenPick">
-    </a>
-    <h2 class="archive__item-title"><a href="https://github.com/devunis/SenPick">🛍 SenPick</a></h2>
-    <p class="archive__item-excerpt">개인 선물 추천 AI — GPT-4o + RAG(Qdrant)로 취향·상황 기반 추천 (CTR 15%↑)</p>
-  </div>
+## 🛍 SenPick
+- **개요**: 개인 선물 추천 AI — GPT-4o + RAG(Qdrant)로 취향·상황 기반 추천
+- **역할**: 아키텍처 설계, 백엔드, 파인튜닝(PEFT/QLoRA)
+- **성과**: CTR 15% 향상
+- **링크**: <a href="https://github.com/devunis/SenPick">코드</a>
 
-  <div class="archive__item">
-    <a class="archive__item-teaser" href="https://github.com/devunis/Travel-Checker">
-      <img src="/assets/img/project-travel.webp" alt="Travel Checker">
-    </a>
-    <h2 class="archive__item-title"><a href="https://github.com/devunis/Travel-Checker">🧳 Travel Checker</a></h2>
-    <p class="archive__item-excerpt">여행 반입금지 품목 챗봇 — Django + Gemma3 + FAISS RAG</p>
-  </div>
-</div>
+---
+
+## 🧳 Travel Checker
+- **개요**: 국가별 반입금지 품목 안내 챗봇 (Django + Gemma3 + FAISS RAG)
+- **역할**: LLM 백엔드, 데이터 전처리/크롤링, API
+- **링크**: <a href="https://github.com/devunis/Travel-Checker">코드</a
