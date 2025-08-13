@@ -5,7 +5,7 @@ permalink: /
 header:
   overlay_color: "#000"
   overlay_filter: "0.35"
-  overlay_image: /assets/images/hero.jpg   # 없으면 주석 처리해도 됨
+  overlay_image: /assets/images/hero.png   # 없으면 주석 처리해도 됨
   actions:
     - label: "GitHub"
       url: "https://github.com/devunis"
@@ -13,14 +13,14 @@ header:
       url: "mailto:gjwjddbsg@gmail.com"
 excerpt: "Backend & AI Developer — Java Spring · Python · RAG · AWS"
 feature_row:
-  - image_path: /assets/images/project-senpick.jpg
+  - image_path: /assets/images/project-senpick.png
     alt: "SenPick"
     title: "🛍 SenPick"
     excerpt: "GPT-4o + RAG(Qdrant) 기반 개인 선물 추천 · CTR 15%↑"
     url: "https://github.com/devunis/SenPick"
     btn_label: "코드 보기"
     btn_class: "btn--primary"
-  - image_path: /assets/images/project-travel.jpg
+  - image_path: /assets/images/project-travel.png
     alt: "Travel Checker"
     title: "🧳 Travel Checker"
     excerpt: "Django + Gemma3 + FAISS RAG로 반입금지 품목 안내"
