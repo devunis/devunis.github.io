@@ -1,77 +1,43 @@
-# ================================
-# Site settings
-# ================================
-remote_theme: cotes2020/jekyll-theme-chirpy
+remote_theme: cotes2020/jekyll-theme-chirpy@v6.6.2
+
 lang: ko
 timezone: Asia/Seoul
 
-title: 정윤 허
-tagline: Backend Developer & AI Enthusiast
+title: "허정윤 | Backend & AI Developer"
+tagline: "Backend · AI · RAG · AWS"
 description: >-
-  백엔드 개발과 AI에 관심이 많은 개발자입니다. Java Spring, Python, AWS, LLM, RAG 등을 활용한 프로젝트 경험이 있습니다.
+  백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오 & 기술 블로그.
 
-# the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/avatar.jpg
+url: "https://devunis.github.io"
+baseurl: ""   # 사용자 페이지는 빈 값
+avatar: /assets/images/avatar.png
 
-url: "https://devunis.github.io"  # 본인 깃헙페이지 주소로 변경
-baseurl: "" # 루트에서 배포하면 빈 값 유지
-
-# ================================
-# Author / Social
-# ================================
 github:
   username: devunis
 
 social:
-  name: 정윤 허
-  email: your_email@example.com
+  name: "허정윤"
+  email: gjwjddbsg@gmail.com
   links:
     - https://github.com/devunis
-    - https://www.linkedin.com/in/your-profile
-    - https://twitter.com/your_twitter
+    - mailto:gjwjddbsg@gmail.com
 
-# ================================
-# Posts / Layout
-# ================================
 paginate: 10
 toc: true
 
-# ================================
-# Comments (필요 없으면 주석 처리)
-# ================================
-comments:
-  provider: giscus
-  giscus:
-    repo: devunis/devunis.github.io
-    repo_id: ""
-    category: "General"
-    category_id: ""
-    mapping: "pathname"
-    reactions_enabled: "1"
-    input_position: "bottom"
-    lang: "ko"
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-feed
 
-# ================================
-# PWA (설치 가능 웹앱)
-# ================================
-pwa:
-  enabled: true
-  cache:
-    enabled: true
+# Chirpy가 탭을 이 컬렉션으로 읽어옵니다.
+collections:
+  tabs:
+    output: true
+    sort_by: order
 
-# ================================
-# Build settings
-# ================================
-markdown: kramdown
-kramdown:
-  syntax_highlighter: rouge
-sass:
-  style: compressed
-
-exclude:
-  - "*.gem"
-  - "*.gemspec"
-  - docs
-  - tools
-  - README.md
-  - LICENSE
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post, comments: false, toc: true, permalink: /posts/:title/ }
+  - scope: { path: "", type: tabs }
+    values: { layout: page, permalink: /:title/ }
