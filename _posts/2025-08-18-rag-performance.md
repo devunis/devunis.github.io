@@ -1,7 +1,7 @@
 ---
 title: "RAG 성능 비교: FAISS, Qdrant, Chroma, Milvus"
 date: 2025-08-18 21:00:00 +0900
-categories: [AI, RAG]
+categories: [Blog, AI, RAG]
 tags: [RAG, VectorDB, FAISS, Qdrant, Chroma, Milvus]
 ---
 
