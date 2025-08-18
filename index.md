@@ -49,9 +49,7 @@ feature_row:
   <a href="https://solved.ac/gjwjddbsg">
     <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=gjwjddbsg" alt="solvedac" />
   </a>
-  <!-- LeetCode 있으면 아래 주석 해제
-  <a href="https://leetcode.com/아이디/">
-    <img src="https://leetcard.jacoblin.cool/아이디?theme=dark&ext=activity" alt="leetcode" />
+  <a href="https://leetcode.com/gjwjddbsg/">
+    <img src="https://leetcard.jacoblin.cool/gjwjddbsg?theme=dark&ext=activity" alt="leetcode" />
   </a>
-  -->
 </p>
