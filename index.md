@@ -7,6 +7,7 @@ header:
   overlay_filter: "0.0"
 ---
 
+<link rel="stylesheet" href="/assets/css/theme.css">
 <link rel="stylesheet" href="/assets/css/landing.css">
 
 <!-- Hero Section -->

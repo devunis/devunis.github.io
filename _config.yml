@@ -1,6 +1,6 @@
 # --- Theme ---
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: "dark"   # "air", "contrast", "neon" 등도 가능
+minimal_mistakes_skin: "default"   # "air", "contrast", "neon" 등도 가능
 
 # --- Site ---
 title: "허정윤 | Backend & AI Developer"
