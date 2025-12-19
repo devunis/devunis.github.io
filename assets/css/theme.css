@@ -147,11 +147,14 @@ body {
 ==================== */
 a {
   color: var(--primary);
+  text-decoration: none;
 }
 
 a:hover {
   color: var(--accent);
 }
+
+/* 랜딩 페이지 버튼은 landing.css에서 별도 스타일 적용 */
 
 /* ==================== 
    버튼
@@ -297,4 +300,58 @@ section {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ==================== 
+   Jekyll 테마 오버라이드
+==================== */
+.page__content,
+.page__meta,
+.page__title {
+  color: var(--text-primary) !important;
+}
+
+.archive__item-title {
+  color: var(--text-primary) !important;
+}
+
+.archive__item-excerpt {
+  color: var(--text-secondary) !important;
+}
+
+/* Masthead 완전 오버라이드 */
+.masthead {
+  background: var(--nav-bg) !important;
+}
+
+.masthead__inner-wrap {
+  background: transparent !important;
+}
+
+.site-title,
+.site-subtitle {
+  color: var(--text-primary) !important;
+}
+
+.greedy-nav a,
+.greedy-nav button {
+  color: var(--text-primary) !important;
+}
+
+.greedy-nav a:hover,
+.greedy-nav button:hover {
+  color: var(--primary) !important;
+}
+
+/* 사이드바 */
+.sidebar {
+  background: var(--bg-card) !important;
+}
+
+.author__name {
+  color: var(--text-primary) !important;
+}
+
+.author__bio {
+  color: var(--text-secondary) !important;
 }
