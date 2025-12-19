@@ -9,7 +9,7 @@
   let bird = { x: 50, y: 200, velocity: 0, radius: 15 };
   let pipes = [];
   let score = 0;
-  let highScore = localStorage.getItem('flappyHighScore') || 0;
+  let highScore = parseInt(localStorage.getItem('flappyHighScore')) || 0;
   let gameLoop = null;
   let isGameOver = false;
 
@@ -42,7 +42,7 @@
     bird.y += bird.velocity;
 
     // 바닥/천장 충돌
-    if (bird.y + bird.radius > canvas.height || bird.y - bird.radius < 0) {
+    if (bird.y + bird.radius >= canvas.height || bird.y - bird.radius <= 0) {
       gameOver();
       return;
     }

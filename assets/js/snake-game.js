@@ -14,7 +14,7 @@
   let dx = 0;
   let dy = 0;
   let score = 0;
-  let highScore = localStorage.getItem('snakeHighScore') || 0;
+  let highScore = parseInt(localStorage.getItem('snakeHighScore')) || 0;
   let gameLoop = null;
 
   highScoreEl.textContent = highScore;
