@@ -10,6 +10,7 @@
   --text-secondary: #6c757d;
   --border-color: rgba(0, 0, 0, 0.1);
   --primary: #3498db;
+  --primary-rgb: 52, 152, 219;
   --accent: #2ecc71;
   --gradient: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
   --shadow: rgba(0, 0, 0, 0.1);
@@ -25,6 +26,7 @@
   --text-secondary: #a0aec0;
   --border-color: rgba(255, 255, 255, 0.1);
   --primary: #667eea;
+  --primary-rgb: 102, 126, 234;
   --accent: #f093fb;
   --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --shadow: rgba(102, 126, 234, 0.3);

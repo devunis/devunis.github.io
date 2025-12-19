@@ -95,14 +95,17 @@
   // ==================== 
   // 초기화
   // ==================== 
-  document.addEventListener('DOMContentLoaded', () => {
+  // 페이지 로드 전에 테마 적용 (깜빡임 방지)
+  try {
     detectSystemTheme();
     initTheme();
+  } catch (e) {
+    console.error('Theme initialization error:', e);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
     createToggleButton();
     initNavScroll();
     initSmoothScroll();
   });
-
-  // 페이지 로드 전에 테마 적용 (깜빡임 방지)
-  initTheme();
 })();
