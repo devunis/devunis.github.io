@@ -208,7 +208,7 @@ tongue-twist 프로젝트를 통해 Streamlit과 OpenAI API를 활용한 음성 
 
 음성 AI 기술은 이제 개인 개발자도 쉽게 접근할 수 있는 수준이 되었으며, 앞으로 더 많은 창의적인 애플리케이션이 등장할 것으로 기대됩니다.
 
-🔗 **프로젝트 GitHub**: <a href="https://github.com/devunis/tongue-twist">devunis/tongue-twist</a>
+🔗 **프로젝트 GitHub**: [devunis/tongue-twist](https://github.com/devunis/tongue-twist)
 
 ---
 
