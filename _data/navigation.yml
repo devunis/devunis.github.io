@@ -3,6 +3,8 @@ main:
     url: /
   - title: "프로젝트"
     url: /projects/
+  - title: "게임"
+    url: /games/
   - title: "소개"
     url: /about/
   - title: "블로그"
