@@ -4,6 +4,8 @@ title: "🎮 개발자 미니 게임"
 permalink: /games/
 ---
 
+<link rel="stylesheet" href="/assets/css/games.css">
+
 잠깐의 휴식이 필요할 때! 간단한 게임으로 머리를 식혀보세요. 🎯
 
 ---
