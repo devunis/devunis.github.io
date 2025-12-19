@@ -154,11 +154,7 @@ a:hover {
   color: var(--accent);
 }
 
-/* 랜딩 페이지 링크는 별도 처리 */
-.hero-buttons a,
-.cta-buttons a {
-  /* 버튼 자체 스타일 유지 */
-}
+/* 랜딩 페이지 버튼은 landing.css에서 별도 스타일 적용 */
 
 /* ==================== 
    버튼
