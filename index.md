@@ -27,6 +27,13 @@ feature_row:
     url: "https://github.com/devunis/Travel-Checker"
     btn_label: "코드 보기"
     btn_class: "btn--primary"
+  - image_path: /assets/images/project-tongue-twist.png
+    alt: "Tongue Twist"
+    title: "🎤 Tongue Twist"
+    excerpt: "Streamlit + Whisper + GPT-4o로 AI 발음 연습 게임"
+    url: "https://github.com/devunis/tongue-twist"
+    btn_label: "코드 보기"
+    btn_class: "btn--primary"
 ---
 
 {% include feature_row id="feature_row" %}

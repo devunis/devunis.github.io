@@ -15,7 +15,7 @@ permalink: /about/
  - CGMS(연속혈당측정시스템) 대시보드 구축 (대학 연구 과제 참여)
 
 ### 🧠 기술 스택
-Java/Spring, Python/Django, LangChain/LangGraph, Qdrant/FAISS, AWS, Docker, MariaDB/MySQL/PostgreSQL
+Java/Spring, Python/Django/FastAPI, **Streamlit**, LangChain/LangGraph, Qdrant/FAISS, AWS, Docker, MariaDB/MySQL/PostgreSQL
 
 ### 🎓 학력/자격
 서울과학기술대 컴공(학사, 2021) · SQLD(2021) · PCCP Lv.3(2025) · 빅데이터분석기사(2025)
