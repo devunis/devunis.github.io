@@ -93,6 +93,7 @@ body {
 }
 
 .highlight {
+  color: #f093fb;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -240,6 +241,7 @@ body {
 .stat-number {
   font-size: 3.5rem;
   font-weight: 800;
+  color: var(--primary);
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -265,6 +267,7 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 60px;
+  color: var(--primary);
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

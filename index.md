@@ -49,6 +49,7 @@ header:
   <div class="container">
     <div class="stats-grid">
       <div class="stat-card">
+        <!-- Career months: 2021.11 - 2024.05 = 31 months. Update manually as needed -->
         <div class="stat-number" data-target="31">0</div>
         <div class="stat-label">개월 경력</div>
       </div>
@@ -61,7 +62,7 @@ header:
         <div class="stat-label">주요 프로젝트</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number" data-target="30">0</div>
+        <div class="stat-number" data-target="{{ site.posts | size }}">0</div>
         <div class="stat-label">블로그 포스트</div>
       </div>
     </div>

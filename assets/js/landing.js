@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 스크롤 시 헤더 변경 (옵션)
 window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
+  const scrolled = window.scrollY;
   const hero = document.querySelector('.hero-section');
   if (hero && scrolled > 100) {
     const opacity = Math.max(0, 1 - (scrolled / 500));
