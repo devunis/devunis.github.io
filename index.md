@@ -259,22 +259,4 @@ header:
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-content" data-aos="zoom-in">
-      <h2>함께 일하고 싶으신가요?</h2>
-      <p>백엔드 개발, AI/RAG 시스템, 데이터 파이프라인 구축 프로젝트를 찾고 있습니다.</p>
-      <div class="cta-buttons">
-        <a href="mailto:gjwjddbsg@gmail.com" class="btn-primary-large">
-          <i class="fas fa-envelope"></i> 이메일 보내기
-        </a>
-        <a href="/about/" class="btn-secondary-large">
-          <i class="fas fa-user"></i> 더 알아보기
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <script src="/assets/js/landing.js"></script>

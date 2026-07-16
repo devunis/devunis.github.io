@@ -196,10 +196,6 @@ a:hover { color: var(--accent); }
   background: var(--bg-secondary);
 }
 
-.cta-section {
-  background: var(--gradient);
-}
-
 /* ====================
    랜딩 카드 공통
 ==================== */

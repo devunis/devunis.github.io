@@ -544,68 +544,6 @@ body {
 .post-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 
 /* ====================
-   CTA Section
-==================== */
-.cta-section { padding: 100px 20px; }
-
-.cta-content {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto;
-}
-.cta-content h2 {
-  font-size: 2.4rem;
-  margin-bottom: 18px;
-  color: white;
-  font-weight: 800;
-}
-.cta-content p {
-  font-size: 1.1rem;
-  margin-bottom: 40px;
-  opacity: 0.88;
-  color: white;
-  line-height: 1.65;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-primary-large, .btn-secondary-large {
-  padding: 16px 38px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.btn-primary-large {
-  background: white;
-  color: var(--primary);
-}
-.btn-primary-large:hover {
-  color: var(--primary);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(255,255,255,0.25);
-}
-.btn-secondary-large {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-}
-.btn-secondary-large:hover {
-  background: rgba(255,255,255,0.12);
-  color: white;
-  transform: translateY(-3px);
-}
-
-/* ====================
    Animations
 ==================== */
 @keyframes fadeInDown {
