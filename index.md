@@ -12,16 +12,17 @@ header:
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="particles" id="particles"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1 class="greeting">안녕하세요 👋</h1>
-      <h2 class="name">저는 <span class="highlight">허정윤</span>입니다</h2>
+  <div class="container">
+    <div class="hero-content">
+      <p class="greeting">안녕하세요, 저는</p>
+      <h1 class="name"><span class="highlight">허정윤</span>입니다.</h1>
       <div class="typing-container">
         <span class="typing-text" id="typing-text"></span>
         <span class="cursor">|</span>
       </div>
       <p class="description">
-        2년 7개월 백엔드 개발 경력 | Spring · Python · AI/RAG 전문가
+        Java Spring · Python · AI/RAG 전문가로 <br>
+        헬스케어 백엔드 2년 7개월 경력을 가진 개발자입니다.
       </p>
       <div class="hero-buttons">
         <a href="https://github.com/devunis" class="btn-primary" target="_blank">
@@ -40,7 +41,7 @@ header:
     <div class="mouse">
       <div class="wheel"></div>
     </div>
-    <p>Scroll Down</p>
+    <p>Scroll</p>
   </div>
 </section>
 

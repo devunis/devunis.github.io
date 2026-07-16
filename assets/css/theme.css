@@ -2,37 +2,43 @@
    테마 변수
 ==================== */
 :root {
-  /* 라이트 모드 */
-  --bg-primary:    #f8fafc;
-  --bg-secondary:  #f1f5f9;
+  /* 라이트 모드 — GitHub 스타일 클린 */
+  --bg-primary:    #f6f8fa;
+  --bg-secondary:  #eaeef2;
   --bg-card:       #ffffff;
-  --text-primary:  #0f172a;
-  --text-secondary:#64748b;
-  --border-color:  #e2e8f0;
-  --primary:       #6366f1;
-  --primary-rgb:   99, 102, 241;
-  --accent:        #10b981;
-  --gradient:      linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --shadow:        rgba(99, 102, 241, 0.15);
-  --shadow-sm:     rgba(0, 0, 0, 0.07);
-  --nav-bg:        rgba(248, 250, 252, 0.95);
+  --text-primary:  #0d1117;
+  --text-secondary:#656d76;
+  --border-color:  #d0d7de;
+  --primary:       #0969da;
+  --primary-rgb:   9, 105, 218;
+  --accent:        #1a7f37;
+  --teal:          #0ea5e9;
+  --gradient:      linear-gradient(135deg, #0a192f 0%, #112240 100%);
+  --hero-bg:       #0a192f;
+  --shadow:        rgba(9, 105, 218, 0.12);
+  --shadow-sm:     rgba(13, 17, 23, 0.08);
+  --nav-bg:        rgba(246, 248, 250, 0.96);
+  --mono-font:     'Fira Code', 'Consolas', monospace;
 }
 
-/* 다크 모드 */
+/* 다크 모드 — Brittany Chiang 네이비 스타일 */
 [data-theme="dark"] {
-  --bg-primary:    #0f172a;
-  --bg-secondary:  #1e293b;
-  --bg-card:       #1e293b;
-  --text-primary:  #f1f5f9;
-  --text-secondary:#94a3b8;
-  --border-color:  #334155;
-  --primary:       #818cf8;
-  --primary-rgb:   129, 140, 248;
-  --accent:        #34d399;
-  --gradient:      linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --shadow:        rgba(129, 140, 248, 0.18);
-  --shadow-sm:     rgba(0, 0, 0, 0.3);
-  --nav-bg:        rgba(15, 23, 42, 0.97);
+  --bg-primary:    #0a192f;
+  --bg-secondary:  #112240;
+  --bg-card:       #112240;
+  --text-primary:  #ccd6f6;
+  --text-secondary:#8892b0;
+  --border-color:  #233554;
+  --primary:       #64ffda;
+  --primary-rgb:   100, 255, 218;
+  --accent:        #64ffda;
+  --teal:          #64ffda;
+  --gradient:      linear-gradient(135deg, #0a192f 0%, #020c1b 100%);
+  --hero-bg:       #0a192f;
+  --shadow:        rgba(100, 255, 218, 0.08);
+  --shadow-sm:     rgba(2, 12, 27, 0.7);
+  --nav-bg:        rgba(10, 25, 47, 0.97);
+  --mono-font:     'Fira Code', 'Consolas', monospace;
 }
 
 /* ====================
@@ -41,6 +47,7 @@
 body {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
+  font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -116,8 +123,8 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.dark-icon  { color: #fbbf24; opacity: 0; }
-.light-icon { color: #6366f1; opacity: 1; }
+.dark-icon  { color: #64ffda; opacity: 0; }
+.light-icon { color: #0969da; opacity: 1; }
 
 [data-theme="dark"] .dark-icon  { opacity: 1; }
 [data-theme="dark"] .light-icon { opacity: 0; }
@@ -175,10 +182,10 @@ a:hover { color: var(--accent); }
 }
 
 /* ====================
-   Hero Section
+   Hero Section (항상 다크 네이비 유지)
 ==================== */
 .hero-section {
-  background: var(--gradient) !important;
+  background-color: #0a192f !important;
 }
 
 /* ====================
