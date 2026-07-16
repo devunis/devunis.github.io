@@ -12,16 +12,17 @@ header:
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="particles" id="particles"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1 class="greeting">안녕하세요 👋</h1>
-      <h2 class="name">저는 <span class="highlight">허정윤</span>입니다</h2>
+  <div class="container">
+    <div class="hero-content">
+      <p class="greeting">안녕하세요, 저는</p>
+      <h1 class="name"><span class="highlight">허정윤</span>입니다.</h1>
       <div class="typing-container">
         <span class="typing-text" id="typing-text"></span>
         <span class="cursor">|</span>
       </div>
       <p class="description">
-        2년 7개월 백엔드 개발 경력 | Spring · Python · AI/RAG 전문가
+        Java Spring · Python · AI/RAG 전문가로 <br>
+        헬스케어 백엔드 2년 7개월 경력을 가진 개발자입니다.
       </p>
       <div class="hero-buttons">
         <a href="https://github.com/devunis" class="btn-primary" target="_blank">
@@ -40,7 +41,7 @@ header:
     <div class="mouse">
       <div class="wheel"></div>
     </div>
-    <p>Scroll Down</p>
+    <p>Scroll</p>
   </div>
 </section>
 
@@ -72,7 +73,7 @@ header:
 <!-- Tech Stack Section -->
 <section class="tech-section">
   <div class="container">
-    <h2 class="section-title">💻 기술 스택</h2>
+    <h2 class="section-title"><span class="num">01.</span> 기술 스택</h2>
     <div class="tech-grid">
       <div class="tech-card" data-tilt>
         <div class="tech-icon">🐍</div>
@@ -111,11 +112,12 @@ header:
 <!-- Projects Section -->
 <section class="projects-section">
   <div class="container">
-    <h2 class="section-title">🚀 주요 프로젝트</h2>
+    <h2 class="section-title"><span class="num">02.</span> 주요 프로젝트</h2>
     <div class="projects-grid">
       
       <div class="project-card" data-aos="fade-up">
         <div class="project-image">
+          <span class="project-image-icon">🛍</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/SenPick" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -139,6 +141,7 @@ header:
 
       <div class="project-card" data-aos="fade-up" data-aos-delay="100">
         <div class="project-image">
+          <span class="project-image-icon">🧳</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/Travel-Checker" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -162,6 +165,7 @@ header:
 
       <div class="project-card" data-aos="fade-up" data-aos-delay="200">
         <div class="project-image">
+          <span class="project-image-icon">🎤</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/tongue-twist" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -190,7 +194,7 @@ header:
 <!-- Experience Section -->
 <section class="experience-section">
   <div class="container">
-    <h2 class="section-title">💼 경력</h2>
+    <h2 class="section-title"><span class="num">03.</span> 경력</h2>
     <div class="timeline">
       
       <div class="timeline-item" data-aos="fade-right">
@@ -215,7 +219,7 @@ header:
 <!-- GitHub Activity Section -->
 <section class="activity-section">
   <div class="container">
-    <h2 class="section-title">📊 개발 활동</h2>
+    <h2 class="section-title"><span class="num">04.</span> 개발 활동</h2>
     <div class="activity-grid">
       <div class="activity-card" data-aos="zoom-in">
         <img src="https://github-readme-activity-graph.vercel.app/graph?username=devunis&theme=react-dark&hide_border=true&area=true" alt="GitHub Activity" />
@@ -239,7 +243,7 @@ header:
 <!-- Latest Posts Section -->
 <section class="posts-section">
   <div class="container">
-    <h2 class="section-title">📝 최신 블로그 글</h2>
+    <h2 class="section-title"><span class="num">05.</span> 최신 블로그 글</h2>
     <div class="posts-grid">
       {% for post in site.posts limit:6 %}
       <div class="post-card" data-aos="fade-up">
@@ -255,24 +259,6 @@ header:
     </div>
     <div class="text-center" style="margin-top: 30px;">
       <a href="/posts/" class="btn-primary">모든 글 보기 →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-content" data-aos="zoom-in">
-      <h2>함께 일하고 싶으신가요?</h2>
-      <p>백엔드 개발, AI/RAG 시스템, 데이터 파이프라인 구축 프로젝트를 찾고 있습니다.</p>
-      <div class="cta-buttons">
-        <a href="mailto:gjwjddbsg@gmail.com" class="btn-primary-large">
-          <i class="fas fa-envelope"></i> 이메일 보내기
-        </a>
-        <a href="/about/" class="btn-secondary-large">
-          <i class="fas fa-user"></i> 더 알아보기
-        </a>
-      </div>
     </div>
   </div>
 </section>
