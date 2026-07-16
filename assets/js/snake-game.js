@@ -111,18 +111,21 @@
     switch(e.key) {
       case 'ArrowUp':
         if (dy === 0) { dx = 0; dy = -1; }
+        e.preventDefault();
         break;
       case 'ArrowDown':
         if (dy === 0) { dx = 0; dy = 1; }
+        e.preventDefault();
         break;
       case 'ArrowLeft':
         if (dx === 0) { dx = -1; dy = 0; }
+        e.preventDefault();
         break;
       case 'ArrowRight':
         if (dx === 0) { dx = 1; dy = 0; }
+        e.preventDefault();
         break;
     }
-    e.preventDefault();
   });
 
   resetBtn.addEventListener('click', initGame);
