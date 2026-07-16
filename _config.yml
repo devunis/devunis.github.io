@@ -1,6 +1,6 @@
 # --- Theme ---
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: "dark"   # "air", "contrast", "neon" 등도 가능
+# 커스텀 theme.css가 라이트/다크 모드를 모두 처리하므로 스킨은 기본값 사용
 
 # --- Site ---
 title: "허정윤 | Backend & AI Developer"
