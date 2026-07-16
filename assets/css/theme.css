@@ -2,26 +2,26 @@
    테마 변수
 ==================== */
 :root {
-  /* 라이트 모드 — GitHub 스타일 클린 */
-  --bg-primary:    #f6f8fa;
-  --bg-secondary:  #eaeef2;
+  /* 라이트 모드 — 따뜻한 화이트 */
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f0f4f8;
   --bg-card:       #ffffff;
-  --text-primary:  #0d1117;
-  --text-secondary:#656d76;
-  --border-color:  #d0d7de;
+  --text-primary:  #1a202c;
+  --text-secondary:#4a5568;
+  --border-color:  #e2e8f0;
   --primary:       #0969da;
   --primary-rgb:   9, 105, 218;
   --accent:        #1a7f37;
   --teal:          #0ea5e9;
   --gradient:      linear-gradient(135deg, #0a192f 0%, #112240 100%);
   --hero-bg:       #0a192f;
-  --shadow:        rgba(9, 105, 218, 0.12);
-  --shadow-sm:     rgba(13, 17, 23, 0.08);
-  --nav-bg:        rgba(246, 248, 250, 0.96);
+  --shadow:        rgba(9, 105, 218, 0.15);
+  --shadow-sm:     rgba(26, 32, 44, 0.08);
+  --nav-bg:        rgba(255, 255, 255, 0.96);
   --mono-font:     'Fira Code', 'Consolas', monospace;
 }
 
-/* 다크 모드 — Brittany Chiang 네이비 스타일 */
+/* 다크 모드 — Brittany Chiang 네이비 */
 [data-theme="dark"] {
   --bg-primary:    #0a192f;
   --bg-secondary:  #112240;
@@ -35,9 +35,9 @@
   --teal:          #64ffda;
   --gradient:      linear-gradient(135deg, #0a192f 0%, #020c1b 100%);
   --hero-bg:       #0a192f;
-  --shadow:        rgba(100, 255, 218, 0.08);
-  --shadow-sm:     rgba(2, 12, 27, 0.7);
-  --nav-bg:        rgba(10, 25, 47, 0.97);
+  --shadow:        rgba(100, 255, 218, 0.07);
+  --shadow-sm:     rgba(2, 12, 27, 0.6);
+  --nav-bg:        rgba(10, 25, 47, 0.98);
   --mono-font:     'Fira Code', 'Consolas', monospace;
 }
 
@@ -205,11 +205,31 @@ a:hover { color: var(--accent); }
 }
 
 /* ====================
-   Hero Section (항상 다크 네이비 유지)
+   Minimal Mistakes splash 레이아웃 여백 제거
 ==================== */
+.page__hero--overlay,
+.page__hero {
+  display: none !important;
+}
+
+.page__content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.splash .page__content {
+  padding: 0 !important;
+}
+
+.initial-content {
+  padding-top: 0 !important;
+}
+
+/* masthead 높이만큼 첫 히어로 오프셋 */
 .hero-section {
   background-color: #0a192f !important;
 }
+
 
 /* ====================
    섹션 배경
@@ -224,6 +244,11 @@ a:hover { color: var(--accent); }
 .experience-section,
 .posts-section {
   background: var(--bg-secondary);
+}
+
+/* 다크 모드: 히어로와 첫 섹션 사이 자연스러운 전환 */
+[data-theme="dark"] .stats-section {
+  background: linear-gradient(180deg, #020c1b 0%, #0a192f 40%);
 }
 
 /* ====================
