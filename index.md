@@ -1,10 +1,7 @@
 ---
 layout: splash
-title: "허정윤 | Backend & AI Developer"
+title: " "
 permalink: /
-header:
-  overlay_color: "#000"
-  overlay_filter: "0.0"
 ---
 
 <link rel="stylesheet" href="/assets/css/landing.css">
