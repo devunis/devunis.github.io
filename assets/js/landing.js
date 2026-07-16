@@ -188,12 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
   smoothScroll();
 });
 
-// 스크롤 시 헤더 변경 (옵션)
+// 스크롤 시 히어로 패럴랙스 효과
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
-  const hero = document.querySelector('.hero-section');
-  if (hero && scrolled > 100) {
-    const opacity = Math.max(0, 1 - (scrolled / 500));
-    hero.style.opacity = opacity;
+  const hero = document.querySelector('.hero-content');
+  if (hero && scrolled < window.innerHeight) {
+    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
   }
 });

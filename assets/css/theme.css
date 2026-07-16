@@ -41,8 +41,8 @@
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
 }
 
 /* ==================== 
@@ -133,7 +133,6 @@ body {
    카드 스타일
 ==================== */
 .archive__item,
-.page__content,
 .sidebar {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
