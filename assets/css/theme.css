@@ -69,11 +69,34 @@ body {
 .site-title,
 .greedy-nav a {
   color: var(--text-primary) !important;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.88rem !important;
   transition: color 0.2s ease;
+}
+
+/* 링크 hover: 밑줄이 왼쪽에서 자라남 */
+.greedy-nav .visible-links a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.greedy-nav .visible-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary);
+  transition: width 0.3s ease;
 }
 
 .greedy-nav .visible-links a:hover {
   color: var(--primary) !important;
+}
+
+.greedy-nav .visible-links a:hover::after {
+  width: 100%;
 }
 
 .greedy-nav .visible-links a::before {

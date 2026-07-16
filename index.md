@@ -73,7 +73,7 @@ header:
 <!-- Tech Stack Section -->
 <section class="tech-section">
   <div class="container">
-    <h2 class="section-title">💻 기술 스택</h2>
+    <h2 class="section-title"><span class="num">01.</span> 기술 스택</h2>
     <div class="tech-grid">
       <div class="tech-card" data-tilt>
         <div class="tech-icon">🐍</div>
@@ -112,11 +112,12 @@ header:
 <!-- Projects Section -->
 <section class="projects-section">
   <div class="container">
-    <h2 class="section-title">🚀 주요 프로젝트</h2>
+    <h2 class="section-title"><span class="num">02.</span> 주요 프로젝트</h2>
     <div class="projects-grid">
       
       <div class="project-card" data-aos="fade-up">
         <div class="project-image">
+          <span class="project-image-icon">🛍</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/SenPick" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -140,6 +141,7 @@ header:
 
       <div class="project-card" data-aos="fade-up" data-aos-delay="100">
         <div class="project-image">
+          <span class="project-image-icon">🧳</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/Travel-Checker" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -163,6 +165,7 @@ header:
 
       <div class="project-card" data-aos="fade-up" data-aos-delay="200">
         <div class="project-image">
+          <span class="project-image-icon">🎤</span>
           <div class="project-overlay">
             <a href="https://github.com/devunis/tongue-twist" class="project-link" target="_blank">
               <i class="fas fa-external-link-alt"></i>
@@ -191,7 +194,7 @@ header:
 <!-- Experience Section -->
 <section class="experience-section">
   <div class="container">
-    <h2 class="section-title">💼 경력</h2>
+    <h2 class="section-title"><span class="num">03.</span> 경력</h2>
     <div class="timeline">
       
       <div class="timeline-item" data-aos="fade-right">
@@ -216,7 +219,7 @@ header:
 <!-- GitHub Activity Section -->
 <section class="activity-section">
   <div class="container">
-    <h2 class="section-title">📊 개발 활동</h2>
+    <h2 class="section-title"><span class="num">04.</span> 개발 활동</h2>
     <div class="activity-grid">
       <div class="activity-card" data-aos="zoom-in">
         <img src="https://github-readme-activity-graph.vercel.app/graph?username=devunis&theme=react-dark&hide_border=true&area=true" alt="GitHub Activity" />
@@ -240,7 +243,7 @@ header:
 <!-- Latest Posts Section -->
 <section class="posts-section">
   <div class="container">
-    <h2 class="section-title">📝 최신 블로그 글</h2>
+    <h2 class="section-title"><span class="num">05.</span> 최신 블로그 글</h2>
     <div class="posts-grid">
       {% for post in site.posts limit:6 %}
       <div class="post-card" data-aos="fade-up">
