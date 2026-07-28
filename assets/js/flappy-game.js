@@ -1,137 +1,239 @@
 (function() {
+  'use strict';
+
   const canvas = document.getElementById('flappy-canvas');
-  const ctx = canvas.getContext('2d');
   const scoreEl = document.getElementById('flappy-score');
   const highScoreEl = document.getElementById('flappy-high-score');
+  const levelEl = document.getElementById('flappy-level');
+  const stateEl = document.getElementById('flappy-state');
   const resultEl = document.getElementById('flappy-result');
-  const resetBtn = document.getElementById('flappy-reset');
+  const hintButton = document.getElementById('flappy-hint');
+  const resetButton = document.getElementById('flappy-reset');
+  const highScoreStorageKey = 'bugEscapeHighScore';
 
-  let bird = { x: 50, y: 200, velocity: 0, radius: 15 };
+  if (!canvas || !resetButton) return;
+
+  const context = canvas.getContext('2d');
+  const gravity = .42;
+  const jumpPower = -7.6;
+  const pipeWidth = 58;
+  const baseGap = 164;
+  let player = { x: 82, y: 260, velocity: 0, radius: 14 };
   let pipes = [];
+  let particles = [];
   let score = 0;
-  let highScore = parseInt(localStorage.getItem('flappyHighScore')) || 0;
-  let gameLoop = null;
+  let highScore = Number.parseInt(localStorage.getItem(highScoreStorageKey), 10) || 0;
+  let frameId = null;
+  let frameCount = 0;
+  let isRunning = false;
   let isGameOver = false;
 
-  const gravity = 0.5;
-  const jump = -10;
-  const pipeWidth = 50;
-  const pipeGap = 150;
-  const pipeSpeed = 2;
-
-  highScoreEl.textContent = highScore;
-
-  function initGame() {
-    bird = { x: 50, y: 200, velocity: 0, radius: 15 };
-    pipes = [];
-    score = 0;
-    isGameOver = false;
-    scoreEl.textContent = '0';
-    resultEl.classList.remove('show', 'failure');
-    
-    if (gameLoop) cancelAnimationFrame(gameLoop);
-    addPipe();
-    gameLoop = requestAnimationFrame(update);
+  function currentLevel() {
+    return Math.floor(score / 5) + 1;
   }
 
-  function update() {
-    if (isGameOver) return;
-
-    // 새 움직임
-    bird.velocity += gravity;
-    bird.y += bird.velocity;
-
-    // 바닥/천장 충돌
-    if (bird.y + bird.radius >= canvas.height || bird.y - bird.radius <= 0) {
-      gameOver();
-      return;
-    }
-
-    // 파이프 움직임
-    pipes.forEach(pipe => {
-      pipe.x -= pipeSpeed;
-
-      // 충돌 감지
-      if (bird.x + bird.radius > pipe.x && bird.x - bird.radius < pipe.x + pipeWidth) {
-        if (bird.y - bird.radius < pipe.topHeight || bird.y + bird.radius > pipe.topHeight + pipeGap) {
-          gameOver();
-          return;
-        }
-      }
-
-      // 점수
-      if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
-        pipe.passed = true;
-        score++;
-        scoreEl.textContent = score;
-      }
-    });
-
-    // 파이프 제거 및 추가
-    pipes = pipes.filter(pipe => pipe.x + pipeWidth > 0);
-    if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
-      addPipe();
-    }
-
-    draw();
-    gameLoop = requestAnimationFrame(update);
+  function currentSpeed() {
+    return Math.min(4.2, 2.15 + currentLevel() * .18);
   }
 
-  function draw() {
-    // 배경
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // 새
-    ctx.fillStyle = '#FFD700';
-    ctx.beginPath();
-    ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 파이프
-    ctx.fillStyle = '#2ecc71';
-    pipes.forEach(pipe => {
-      ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
-      ctx.fillRect(pipe.x, pipe.topHeight + pipeGap, pipeWidth, canvas.height);
-    });
+  function currentGap() {
+    return Math.max(122, baseGap - currentLevel() * 5);
   }
 
   function addPipe() {
-    const topHeight = Math.random() * (canvas.height - pipeGap - 100) + 50;
-    pipes.push({ x: canvas.width, topHeight, passed: false });
+    const gap = currentGap();
+    const margin = 72;
+    const topHeight = margin + Math.random() * (canvas.height - gap - margin * 2);
+    pipes.push({ x: canvas.width + 20, topHeight, gap, passed: false });
   }
 
-  function gameOver() {
+  function addJumpParticles() {
+    for (let index = 0; index < 5; index += 1) {
+      particles.push({
+        x: player.x - 10,
+        y: player.y + (Math.random() - .5) * 12,
+        vx: -1.5 - Math.random(),
+        vy: (Math.random() - .5) * 1.2,
+        life: 20
+      });
+    }
+  }
+
+  function drawBackground() {
+    const gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, '#101931');
+    gradient.addColorStop(1, '#090c12');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.strokeStyle = 'rgba(135, 160, 255, .07)';
+    context.lineWidth = 1;
+    for (let y = 40; y < canvas.height; y += 48) {
+      context.beginPath();
+      context.moveTo(0, y);
+      context.lineTo(canvas.width, y);
+      context.stroke();
+    }
+  }
+
+  function drawPlayer() {
+    context.save();
+    context.translate(player.x, player.y);
+    context.rotate(Math.max(-.35, Math.min(.75, player.velocity * .055)));
+    context.fillStyle = '#ffd66d';
+    context.shadowColor = 'rgba(255, 214, 109, .55)';
+    context.shadowBlur = 14;
+    context.beginPath();
+    context.arc(0, 0, player.radius, 0, Math.PI * 2);
+    context.fill();
+    context.shadowBlur = 0;
+    context.fillStyle = '#0b0e14';
+    context.fillRect(-5, -3, 10, 6);
+    context.fillStyle = '#ffd66d';
+    context.font = '700 9px Fira Code';
+    context.textAlign = 'center';
+    context.fillText('DEV', 0, 3);
+    context.restore();
+  }
+
+  function drawPipes() {
+    pipes.forEach((pipe) => {
+      const gradient = context.createLinearGradient(pipe.x, 0, pipe.x + pipeWidth, 0);
+      gradient.addColorStop(0, '#684fe0');
+      gradient.addColorStop(1, '#87a0ff');
+      context.fillStyle = gradient;
+      context.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
+      context.fillRect(pipe.x, pipe.topHeight + pipe.gap, pipeWidth, canvas.height);
+
+      context.fillStyle = 'rgba(255, 255, 255, .2)';
+      context.fillRect(pipe.x + 9, 0, 2, pipe.topHeight);
+      context.fillRect(pipe.x + 9, pipe.topHeight + pipe.gap, 2, canvas.height);
+    });
+  }
+
+  function drawParticles() {
+    particles.forEach((particle) => {
+      context.fillStyle = `rgba(135, 160, 255, ${particle.life / 20})`;
+      context.fillRect(particle.x, particle.y, 4, 2);
+    });
+  }
+
+  function draw() {
+    drawBackground();
+    drawPipes();
+    drawParticles();
+    drawPlayer();
+  }
+
+  function update() {
+    if (!isRunning || isGameOver) return;
+    frameCount += 1;
+    player.velocity += gravity;
+    player.y += player.velocity;
+
+    pipes.forEach((pipe) => {
+      pipe.x -= currentSpeed();
+      const overlapsX = player.x + player.radius > pipe.x && player.x - player.radius < pipe.x + pipeWidth;
+      const hitsPipe = overlapsX && (
+        player.y - player.radius < pipe.topHeight ||
+        player.y + player.radius > pipe.topHeight + pipe.gap
+      );
+      if (hitsPipe) endGame();
+
+      if (!pipe.passed && pipe.x + pipeWidth < player.x) {
+        pipe.passed = true;
+        score += 1;
+        scoreEl.textContent = String(score);
+        levelEl.textContent = String(currentLevel()).padStart(2, '0');
+      }
+    });
+
+    particles.forEach((particle) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      particle.life -= 1;
+    });
+    particles = particles.filter((particle) => particle.life > 0);
+    pipes = pipes.filter((pipe) => pipe.x + pipeWidth > -10);
+
+    if (!pipes.length || pipes[pipes.length - 1].x < canvas.width - 210) addPipe();
+    if (player.y - player.radius <= 0 || player.y + player.radius >= canvas.height) endGame();
+
+    draw();
+    if (!isGameOver) frameId = window.requestAnimationFrame(update);
+  }
+
+  function jump() {
+    if (document.getElementById('game-flappy')?.hidden) return;
+    if (isGameOver) return;
+    if (!isRunning) {
+      isRunning = true;
+      stateEl.textContent = 'RUNNING';
+      hintButton.classList.add('is-hidden');
+      window.DevArcade?.recordPlay();
+      frameId = window.requestAnimationFrame(update);
+    }
+    player.velocity = jumpPower;
+    addJumpParticles();
+  }
+
+  function endGame() {
+    if (isGameOver) return;
     isGameOver = true;
-    cancelAnimationFrame(gameLoop);
-    
+    isRunning = false;
+    window.cancelAnimationFrame(frameId);
+    stateEl.textContent = 'CRASHED';
+    hintButton.textContent = 'GAME OVER · 새 게임을 눌러주세요';
+    hintButton.classList.remove('is-hidden');
+
     if (score > highScore) {
       highScore = score;
-      localStorage.setItem('flappyHighScore', highScore);
-      highScoreEl.textContent = highScore;
-      resultEl.textContent = `🎉 신기록! ${score}점`;
+      localStorage.setItem(highScoreStorageKey, String(highScore));
+      highScoreEl.textContent = String(highScore);
+      resultEl.textContent = `NEW BEST · ${score}개의 버그 게이트를 통과했습니다.`;
     } else {
-      resultEl.textContent = `게임 오버! 점수: ${score}점`;
+      resultEl.textContent = `DEPLOY FAILED · ${score}점 / 최고 기록 ${highScore}점`;
     }
-    
-    resultEl.classList.add('show', 'failure');
+    resultEl.className = 'game-result show failure';
   }
 
-  function handleJump() {
-    if (!isGameOver) {
-      bird.velocity = jump;
-    }
+  function resetGame() {
+    window.cancelAnimationFrame(frameId);
+    player = { x: 82, y: 260, velocity: 0, radius: 14 };
+    pipes = [];
+    particles = [];
+    score = 0;
+    frameCount = 0;
+    isRunning = false;
+    isGameOver = false;
+    scoreEl.textContent = '0';
+    levelEl.textContent = '01';
+    stateEl.textContent = 'READY';
+    hintButton.textContent = 'SPACE 또는 TAP으로 시작';
+    hintButton.classList.remove('is-hidden');
+    resultEl.className = 'game-result';
+    addPipe();
+    draw();
   }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space') {
-      e.preventDefault();
-      handleJump();
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space' && !document.getElementById('game-flappy')?.hidden) {
+      event.preventDefault();
+      jump();
     }
   });
-
-  canvas.addEventListener('click', handleJump);
-
-  resetBtn.addEventListener('click', initGame);
-  initGame();
+  document.addEventListener('arcade:activate', (event) => {
+    if (event.detail.panelId !== 'game-flappy' && isRunning) {
+      isRunning = false;
+      window.cancelAnimationFrame(frameId);
+      stateEl.textContent = 'PAUSED';
+      hintButton.textContent = 'TAP TO RESUME';
+      hintButton.classList.remove('is-hidden');
+    }
+  });
+  canvas.addEventListener('pointerdown', jump);
+  hintButton.addEventListener('click', jump);
+  resetButton.addEventListener('click', resetGame);
+  highScoreEl.textContent = String(highScore);
+  resetGame();
 })();

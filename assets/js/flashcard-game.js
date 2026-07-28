@@ -1,115 +1,127 @@
 (function() {
-  const terms = [
-    'RAG', 'RAG',
-    'LangGraph', 'LangGraph',
-    'Docker', 'Docker',
-    'FastAPI', 'FastAPI',
-    'JWT', 'JWT',
-    'Qdrant', 'Qdrant',
-    'Django', 'Django',
-    'Kubernetes', 'Kubernetes'
-  ];
+  'use strict';
 
-  let cards = [];
-  let flippedCards = [];
-  let matchedPairs = 0;
-  let moves = 0;
-  let startTime = null;
-  let timerInterval = null;
-
+  const terms = ['RAG', 'LangGraph', 'Docker', 'FastAPI', 'JWT', 'Qdrant', 'Django', 'K8s'];
   const board = document.getElementById('flashcard-board');
   const timerEl = document.getElementById('flashcard-timer');
   const matchesEl = document.getElementById('flashcard-matches');
   const movesEl = document.getElementById('flashcard-moves');
+  const bestEl = document.getElementById('flashcard-best');
   const resultEl = document.getElementById('flashcard-result');
-  const resetBtn = document.getElementById('flashcard-reset');
+  const resetButton = document.getElementById('flashcard-reset');
+  const bestStorageKey = 'stackMemoryBestMoves';
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+  if (!board || !resetButton) return;
+
+  let flippedCards = [];
+  let matchedPairs = 0;
+  let moves = 0;
+  let startTime = 0;
+  let timerId = null;
+  let lockBoard = false;
+  let hasInitialized = false;
+
+  function shuffle(items) {
+    const shuffled = [...items];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const target = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[target]] = [shuffled[target], shuffled[index]];
     }
-    return array;
+    return shuffled;
   }
 
-  function initGame() {
-    cards = shuffle([...terms]);
-    flippedCards = [];
-    matchedPairs = 0;
-    moves = 0;
-    startTime = Date.now();
-    
-    matchesEl.textContent = '0';
-    movesEl.textContent = '0';
-    timerEl.textContent = '0';
-    resultEl.classList.remove('show', 'success');
-    
-    board.innerHTML = '';
-    cards.forEach((term, index) => {
-      const card = document.createElement('div');
-      card.className = 'flashcard';
-      card.dataset.index = index;
-      card.dataset.term = term;
-      card.textContent = '?';
-      card.addEventListener('click', flipCard);
-      board.appendChild(card);
-    });
-
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 1000);
+  function getBest() {
+    return Number.parseInt(localStorage.getItem(bestStorageKey), 10) || 0;
   }
 
   function updateTimer() {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    timerEl.textContent = elapsed;
+    timerEl.textContent = String(Math.floor((Date.now() - startTime) / 1000));
   }
 
-  function flipCard(e) {
-    const card = e.target;
-    if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length === 2) {
-      return;
-    }
+  function createCard(term, index) {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'flashcard';
+    card.dataset.term = term;
+    card.dataset.cardNumber = String(index + 1).padStart(2, '0');
+    card.setAttribute('aria-label', `${index + 1}번 뒤집힌 카드`);
+    card.addEventListener('click', () => flipCard(card));
+    return card;
+  }
 
-    card.classList.add('flipped');
-    card.textContent = card.dataset.term;
+  function flipCard(card) {
+    if (lockBoard || card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
+
+    card.classList.add('is-flipped');
+    card.setAttribute('aria-label', `${card.dataset.term} 카드`);
     flippedCards.push(card);
 
-    if (flippedCards.length === 2) {
-      moves++;
-      movesEl.textContent = moves;
-      setTimeout(checkMatch, 800);
-    }
+    if (flippedCards.length !== 2) return;
+    moves += 1;
+    movesEl.textContent = String(moves);
+    lockBoard = true;
+    window.setTimeout(checkPair, 520);
   }
 
-  function checkMatch() {
-    const [card1, card2] = flippedCards;
-    
-    if (card1.dataset.term === card2.dataset.term) {
-      card1.classList.add('matched');
-      card2.classList.add('matched');
-      matchedPairs++;
-      matchesEl.textContent = matchedPairs;
+  function checkPair() {
+    const [firstCard, secondCard] = flippedCards;
+    const isMatch = firstCard.dataset.term === secondCard.dataset.term;
 
-      if (matchedPairs === 8) {
-        endGame();
-      }
+    if (isMatch) {
+      firstCard.classList.replace('is-flipped', 'is-matched');
+      secondCard.classList.replace('is-flipped', 'is-matched');
+      firstCard.disabled = true;
+      secondCard.disabled = true;
+      matchedPairs += 1;
+      matchesEl.textContent = String(matchedPairs);
+      if (matchedPairs === terms.length) finishGame();
     } else {
-      card1.classList.remove('flipped');
-      card2.classList.remove('flipped');
-      card1.textContent = '?';
-      card2.textContent = '?';
+      [firstCard, secondCard].forEach((card) => {
+        card.classList.remove('is-flipped');
+        card.setAttribute('aria-label', `${card.dataset.cardNumber}번 뒤집힌 카드`);
+      });
     }
 
     flippedCards = [];
+    lockBoard = false;
   }
 
-  function endGame() {
-    clearInterval(timerInterval);
-    const time = timerEl.textContent;
-    resultEl.textContent = `🎉 완료! ${time}초, ${moves}번 시도`;
-    resultEl.classList.add('show', 'success');
+  function finishGame() {
+    window.clearInterval(timerId);
+    const elapsed = timerEl.textContent;
+    const previousBest = getBest();
+    if (!previousBest || moves < previousBest) {
+      localStorage.setItem(bestStorageKey, String(moves));
+      bestEl.textContent = String(moves);
+      resultEl.textContent = `NEW BEST · ${elapsed}초 / ${moves}번의 시도로 모든 스택을 연결했습니다.`;
+    } else {
+      resultEl.textContent = `MEMORY CLEAR · ${elapsed}초 / ${moves}번의 시도`;
+    }
+    resultEl.className = 'game-result show success';
   }
 
-  resetBtn.addEventListener('click', initGame);
-  initGame();
+  function startGame() {
+    window.clearInterval(timerId);
+    const cards = shuffle(terms.flatMap((term) => [term, term]));
+    flippedCards = [];
+    matchedPairs = 0;
+    moves = 0;
+    lockBoard = false;
+    startTime = Date.now();
+    timerEl.textContent = '0';
+    matchesEl.textContent = '0';
+    movesEl.textContent = '0';
+    resultEl.className = 'game-result';
+    board.innerHTML = '';
+    cards.forEach((term, index) => board.appendChild(createCard(term, index)));
+    timerId = window.setInterval(updateTimer, 1000);
+    hasInitialized = true;
+    window.DevArcade?.recordPlay();
+  }
+
+  resetButton.addEventListener('click', startGame);
+  document.addEventListener('arcade:activate', (event) => {
+    if (event.detail.panelId === 'game-memory' && !hasInitialized) startGame();
+  });
+  bestEl.textContent = getBest() ? String(getBest()) : '—';
 })();
