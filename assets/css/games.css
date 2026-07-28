@@ -1,65 +1,705 @@
-/* 게임 컨테이너 공통 스타일 */
-#flashcard-game-container,
-#snake-game-container,
-#flappy-game-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #1a1a2e;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+.arcade-page {
+  --arcade-bg: #090b10;
+  --arcade-panel: #11151d;
+  --arcade-panel-2: #161b25;
+  --arcade-line: #2a303b;
+  --arcade-text: #f4f6fb;
+  --arcade-muted: #929aa8;
+  --arcade-blue: #87a0ff;
+  --arcade-violet: #9d83ff;
+  --arcade-green: #5de2aa;
+  --arcade-red: #ff6f78;
+  --arcade-yellow: #ffd66d;
+  min-height: 100vh;
+  color: var(--arcade-text);
+  background: var(--arcade-bg);
+  font-family: "Inter", "Noto Sans KR", sans-serif;
+  overflow: hidden;
 }
 
-.game-header {
+.arcade-page *,
+.arcade-page *::before,
+.arcade-page *::after {
+  box-sizing: border-box;
+}
+
+.arcade-page h1,
+.arcade-page h2,
+.arcade-page h3,
+.arcade-page p,
+.arcade-page dl,
+.arcade-page dd,
+.arcade-page ul {
+  margin: 0;
+}
+
+.arcade-page button,
+.arcade-page a {
+  font: inherit;
+}
+
+.arcade-page [hidden] {
+  display: none !important;
+}
+
+.arcade-shell {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.arcade-hero {
+  position: relative;
+  padding: 64px 0 92px;
+  border-bottom: 1px solid var(--arcade-line);
+  isolation: isolate;
+}
+
+.arcade-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, #000, transparent 90%);
+  z-index: -2;
+}
+
+.arcade-hero::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  top: -240px;
+  right: -90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(135, 160, 255, .18), transparent 68%);
+  z-index: -1;
+}
+
+.arcade-hero-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #16213e;
+  margin-bottom: 92px;
+  font-family: "Fira Code", monospace;
+  font-size: .64rem;
+  letter-spacing: .09em;
 }
 
-.game-stats {
+.arcade-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--arcade-muted) !important;
+  text-decoration: none !important;
+}
+
+.arcade-back:hover {
+  color: var(--arcade-blue) !important;
+}
+
+.arcade-build {
   display: flex;
-  gap: 20px;
-  font-size: 16px;
-  color: #eee;
+  align-items: center;
+  gap: 9px;
+  color: var(--arcade-muted);
 }
 
-.game-stats span {
+.arcade-build i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--arcade-green);
+  box-shadow: 0 0 0 5px rgba(93, 226, 170, .09);
+}
+
+.arcade-hero-grid {
+  display: grid;
+  grid-template-columns: 1.18fr .82fr;
+  gap: 100px;
+  align-items: end;
+}
+
+.arcade-kicker,
+.arcade-section-heading > div > p,
+.arcade-tech > .arcade-shell > p,
+.game-code {
+  color: var(--arcade-blue) !important;
+  font-family: "Fira Code", monospace;
+  font-size: .68rem;
   font-weight: 600;
+  letter-spacing: .1em;
 }
 
-.game-button {
-  padding: 10px 20px;
-  background: #0f3460;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.arcade-hero h1 {
+  margin-top: 20px !important;
+  color: var(--arcade-text);
+  font-size: clamp(3.5rem, 7vw, 6.8rem);
+  font-weight: 760;
+  letter-spacing: -.072em;
+  line-height: .98;
+  word-break: keep-all;
+}
+
+.arcade-hero h1 em {
+  color: var(--arcade-blue);
+  font-style: normal;
+}
+
+.arcade-hero-copy > p {
+  color: var(--arcade-muted) !important;
+  font-size: .98rem;
+  line-height: 1.85;
+  word-break: keep-all;
+}
+
+.arcade-hero-copy dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--arcade-line);
+}
+
+.arcade-hero-copy dl > div {
+  padding-right: 18px;
+  border-right: 1px solid var(--arcade-line);
+}
+
+.arcade-hero-copy dl > div:not(:first-child) {
+  padding-left: 18px;
+}
+
+.arcade-hero-copy dl > div:last-child {
+  border-right: 0;
+}
+
+.arcade-hero-copy dt {
+  color: var(--arcade-text);
+  font-size: 1.45rem;
+  font-weight: 750;
+}
+
+.arcade-hero-copy dd {
+  margin-top: 5px;
+  color: var(--arcade-muted);
+  font-family: "Fira Code", monospace;
+  font-size: .54rem;
+  letter-spacing: .08em;
+}
+
+.arcade-station {
+  padding: 112px 0 132px;
+}
+
+.arcade-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.arcade-section-heading h2 {
+  margin-top: 12px !important;
+  color: var(--arcade-text);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -.052em;
+}
+
+.arcade-section-heading > span {
+  color: var(--arcade-muted);
+  font-size: .75rem;
+}
+
+.arcade-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.arcade-selector-card {
+  position: relative;
+  min-height: 202px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 18px;
+  color: var(--arcade-text);
+  background: var(--arcade-panel);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s;
+  text-align: left;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
-.game-button:hover {
-  background: #16213e;
+.arcade-selector-card:hover {
+  transform: translateY(-4px);
+  border-color: #495369;
+}
+
+.arcade-selector-card.is-active {
+  color: #0b0e14;
+  border-color: var(--arcade-blue);
+  background: var(--arcade-blue);
+}
+
+.arcade-selector-index {
+  color: var(--arcade-muted);
+  font-family: "Fira Code", monospace;
+  font-size: .61rem;
+}
+
+.arcade-selector-card.is-active .arcade-selector-index {
+  color: rgba(11, 14, 20, .55);
+}
+
+.arcade-selector-card strong {
+  margin-top: auto;
+  font-size: 1.18rem;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+.arcade-selector-card small {
+  margin-top: 8px;
+  color: var(--arcade-muted);
+  font-size: .72rem;
+}
+
+.arcade-selector-card.is-active small {
+  color: rgba(11, 14, 20, .65);
+}
+
+.arcade-selector-card i {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 4px 7px;
+  border: 1px solid rgba(11, 14, 20, .18);
+  border-radius: 999px;
+  font-family: "Fira Code", monospace;
+  font-size: .52rem;
+  font-style: normal;
+}
+
+.arcade-console {
+  border: 1px solid var(--arcade-line);
+  border-radius: 22px;
+  background: var(--arcade-panel);
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, .28);
+}
+
+.arcade-console-bar {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--arcade-line);
+  color: #6f7888;
+  font-family: "Fira Code", monospace;
+  font-size: .55rem;
+  letter-spacing: .08em;
+}
+
+.arcade-console-bar > div {
+  display: flex;
+  gap: 7px;
+}
+
+.arcade-console-bar > div span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #343b48;
+}
+
+.arcade-console-bar > div span:first-child {
+  background: #ff6f78;
+}
+
+.arcade-console-bar > div span:nth-child(2) {
+  background: #ffd66d;
+}
+
+.arcade-console-bar > div span:last-child {
+  background: #5de2aa;
+}
+
+.arcade-console-bar > p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7e8797 !important;
+}
+
+.arcade-console-bar > p i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arcade-green);
+}
+
+.arcade-console-bar > span {
+  justify-self: end;
+}
+
+.game-panel {
+  padding: 52px;
+}
+
+.game-panel:focus {
+  outline: none;
+}
+
+.game-panel-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 50px;
+  align-items: end;
+}
+
+.game-panel-head h2 {
+  margin-top: 9px !important;
+  color: var(--arcade-text);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  letter-spacing: -.06em;
+}
+
+.game-panel-head > div:first-child > p:last-child {
+  max-width: 680px;
+  margin-top: 14px !important;
+  color: var(--arcade-muted) !important;
+  font-size: .88rem;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.game-head-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.arcade-button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 18px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 999px;
+  color: var(--arcade-text);
+  background: transparent;
+  cursor: pointer;
+  font-size: .76rem;
+  font-weight: 700;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.arcade-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(15, 52, 96, 0.4);
+  border-color: var(--arcade-blue);
 }
 
-.game-button:active {
-  transform: translateY(0);
+.arcade-button--primary {
+  color: #0b0e14;
+  border-color: var(--arcade-blue);
+  background: var(--arcade-blue);
+}
+
+.arcade-button--primary:hover {
+  background: #a0b2ff;
+}
+
+.game-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 40px 0 30px;
+  border-top: 1px solid var(--arcade-line);
+  border-bottom: 1px solid var(--arcade-line);
+}
+
+.game-metrics > div {
+  padding: 19px 20px;
+  border-right: 1px solid var(--arcade-line);
+}
+
+.game-metrics > div:first-child {
+  padding-left: 0;
+}
+
+.game-metrics > div:last-child {
+  border-right: 0;
+}
+
+.game-metrics span {
+  display: block;
+  color: var(--arcade-muted);
+  font-family: "Fira Code", monospace;
+  font-size: .56rem;
+  letter-spacing: .1em;
+}
+
+.game-metrics strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--arcade-text);
+  font-size: 1.35rem;
+  letter-spacing: -.04em;
+}
+
+.game-metrics strong b {
+  font: inherit;
+}
+
+.color-stage {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.color-stage-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 14px;
+  color: var(--arcade-muted);
+  font-family: "Fira Code", monospace;
+  font-size: .59rem;
+  letter-spacing: .06em;
+}
+
+.color-stage-top p {
+  color: inherit !important;
+}
+
+.color-board {
+  --grid-size: 2;
+  width: min(100%, 620px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  gap: clamp(5px, 1vw, 10px);
+  margin: 0 auto;
+  padding: 12px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 20px;
+  background: #0a0d12;
+}
+
+.color-board.is-idle {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(135, 160, 255, .12), transparent 60%),
+    #0a0d12;
+}
+
+.color-board.is-idle::before {
+  content: "COLOR SENSOR STANDBY";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #596273;
+  font-family: "Fira Code", monospace;
+  font-size: .68rem;
+  letter-spacing: .14em;
+}
+
+.color-cell {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(7px, 1.2vw, 14px);
+  cursor: crosshair;
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.color-cell:hover {
+  transform: scale(.965);
+  filter: brightness(1.04);
+}
+
+.color-cell:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+}
+
+.color-board.is-hit {
+  animation: boardHit .22s ease;
+}
+
+.color-board.is-miss {
+  animation: boardMiss .28s ease;
+}
+
+@keyframes boardHit {
+  50% { transform: scale(.985); filter: brightness(1.12); }
+}
+
+@keyframes boardMiss {
+  25% { transform: translateX(-7px); }
+  75% { transform: translateX(7px); }
+}
+
+.flashcard-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.flashcard {
+  position: relative;
+  aspect-ratio: 1.15;
+  padding: 0;
+  border: 1px solid var(--arcade-line);
+  border-radius: 14px;
+  color: var(--arcade-muted);
+  background: #0c1016;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.flashcard::before {
+  content: attr(data-card-number);
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  color: #465063;
+  font-family: "Fira Code", monospace;
+  font-size: .52rem;
+}
+
+.flashcard::after {
+  content: "?";
+  font-family: "Fira Code", monospace;
+  font-size: 1.25rem;
+}
+
+.flashcard:hover {
+  transform: translateY(-3px);
+  border-color: #566077;
+}
+
+.flashcard.is-flipped,
+.flashcard.is-matched {
+  color: var(--arcade-text);
+  border-color: var(--arcade-blue);
+  background: #1a2240;
+}
+
+.flashcard.is-flipped::after,
+.flashcard.is-matched::after {
+  content: attr(data-term);
+  font-size: clamp(.62rem, 1.4vw, .85rem);
+  font-weight: 700;
+}
+
+.flashcard.is-matched {
+  border-color: rgba(93, 226, 170, .65);
+  background: rgba(93, 226, 170, .1);
+  cursor: default;
+}
+
+.flashcard.is-matched::before {
+  color: var(--arcade-green);
+}
+
+.canvas-stage {
+  position: relative;
+  width: min(100%, 620px);
+  margin: 0 auto;
+  padding: 14px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 20px;
+  background: #090c11;
+}
+
+.canvas-stage--flappy {
+  width: min(100%, 560px);
+}
+
+.canvas-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #090c11;
+}
+
+.canvas-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 999px;
+  color: #c0c7d4;
+  background: rgba(9, 12, 17, .78);
+  backdrop-filter: blur(10px);
+  font-family: "Fira Code", monospace;
+  font-size: .6rem;
+  letter-spacing: .06em;
+  white-space: nowrap;
+  transition: opacity .2s ease;
+}
+
+.canvas-hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.canvas-hint--button {
+  cursor: pointer;
+}
+
+.mobile-dpad {
+  display: none;
+  grid-template-columns: repeat(3, 50px);
+  justify-content: center;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.mobile-dpad button {
+  width: 50px;
+  height: 46px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 12px;
+  color: var(--arcade-text);
+  background: var(--arcade-panel-2);
+  cursor: pointer;
+}
+
+.mobile-dpad button:first-child {
+  grid-column: 2;
+}
+
+.mobile-dpad button:nth-child(2) {
+  grid-column: 1;
 }
 
 .game-result {
-  margin-top: 20px;
-  padding: 15px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 8px;
   display: none;
+  max-width: 760px;
+  margin: 18px auto 0;
+  padding: 14px 18px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 12px;
+  color: var(--arcade-muted);
+  background: rgba(255, 255, 255, .025);
+  font-size: .78rem;
+  text-align: center;
 }
 
 .game-result.show {
@@ -67,116 +707,237 @@
 }
 
 .game-result.success {
-  background: #2ecc71;
-  color: white;
+  color: var(--arcade-green);
+  border-color: rgba(93, 226, 170, .35);
+  background: rgba(93, 226, 170, .07);
 }
 
 .game-result.failure {
-  background: #e74c3c;
-  color: white;
+  color: #ff9299;
+  border-color: rgba(255, 111, 120, .35);
+  background: rgba(255, 111, 120, .07);
 }
 
-.game-controls {
-  text-align: center;
-  margin-top: 15px;
-  color: #aaa;
-  font-size: 14px;
+.arcade-tech {
+  padding: 48px 0 72px;
+  border-top: 1px solid var(--arcade-line);
 }
 
-/* Flashcard Game */
-.flashcard-board {
+.arcade-tech .arcade-shell {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.flashcard {
-  aspect-ratio: 1;
-  background: #16213e;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
+  gap: 50px;
+}
+
+.arcade-tech > .arcade-shell > div {
+  display: flex;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  transition: all 0.3s;
-  position: relative;
-  transform-style: preserve-3d;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.flashcard:hover {
-  transform: scale(1.05);
+.arcade-tech > .arcade-shell > div span {
+  padding: 7px 10px;
+  border: 1px solid var(--arcade-line);
+  border-radius: 999px;
+  color: var(--arcade-muted);
+  font-family: "Fira Code", monospace;
+  font-size: .55rem;
 }
 
-.flashcard.flipped {
-  background: #0f3460;
-  transform: rotateY(180deg);
+.arcade-tech a {
+  color: var(--arcade-text) !important;
+  font-size: .78rem;
+  font-weight: 700;
+  text-decoration: none !important;
 }
 
-.flashcard.matched {
-  background: #2ecc71;
-  cursor: default;
-  animation: matchPulse 0.5s;
+.arcade-tech a:hover {
+  color: var(--arcade-blue) !important;
 }
 
-@keyframes matchPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+.arcade-page button:focus-visible,
+.arcade-page a:focus-visible {
+  outline: 3px solid var(--arcade-blue);
+  outline-offset: 3px;
 }
 
-/* Snake & Flappy Canvas */
-canvas {
-  display: block;
-  margin: 0 auto;
-  background: #0f0f0f;
-  border-radius: 10px;
-  border: 3px solid #16213e;
-}
-
-/* 모바일 반응형 */
-@media (max-width: 768px) {
-  #flashcard-game-container,
-  #snake-game-container,
-  #flappy-game-container {
-    padding: 20px;
-    margin: 20px 10px;
+@media (max-width: 900px) {
+  .arcade-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
   }
 
-  .game-header {
-    flex-direction: column;
-    gap: 15px;
+  .arcade-selector {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .game-stats {
+  .arcade-selector-card {
+    min-height: 170px;
+  }
+
+  .game-panel {
+    padding: 38px;
+  }
+
+  .game-panel-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .game-panel-head .arcade-button {
+    justify-self: start;
+  }
+
+  .arcade-tech .arcade-shell {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    text-align: center;
+  }
+
+  .arcade-tech > .arcade-shell > div {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .arcade-shell {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .arcade-hero {
+    padding: 46px 0 68px;
+  }
+
+  .arcade-hero-top {
+    margin-bottom: 64px;
+  }
+
+  .arcade-build {
+    display: none;
+  }
+
+  .arcade-hero h1 {
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+
+  .arcade-hero-copy dl {
+    margin-top: 34px;
+  }
+
+  .arcade-station {
+    padding: 78px 0 92px;
+  }
+
+  .arcade-section-heading {
+    align-items: start;
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
+  }
+
+  .arcade-selector {
+    display: flex;
+    gap: 9px;
+    margin-right: -14px;
+    padding-right: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .arcade-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .arcade-selector-card {
+    min-width: 158px;
+    min-height: 154px;
+    scroll-snap-align: start;
+  }
+
+  .arcade-console {
+    margin: 0 -5px;
+  }
+
+  .arcade-console-bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .arcade-console-bar > p {
+    display: none;
+  }
+
+  .game-panel {
+    padding: 28px 18px 30px;
+  }
+
+  .game-panel-head h2 {
+    font-size: 2.6rem;
+  }
+
+  .game-head-actions {
+    flex-wrap: wrap;
+  }
+
+  .game-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .game-metrics > div,
+  .game-metrics > div:first-child {
+    padding: 15px;
+    border-bottom: 1px solid var(--arcade-line);
+  }
+
+  .game-metrics > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .game-metrics > div:nth-child(3),
+  .game-metrics > div:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  .color-stage-top {
+    min-height: 42px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .color-board {
+    padding: 8px;
+    border-radius: 16px;
   }
 
   .flashcard-board {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 7px;
   }
 
   .flashcard {
-    font-size: 12px;
+    aspect-ratio: .9;
+    border-radius: 10px;
   }
 
-  canvas {
-    max-width: 100%;
-    height: auto;
+  .flashcard::before {
+    top: 7px;
+    left: 8px;
   }
 
-  #snake-canvas {
-    width: 100%;
-    height: auto;
+  .mobile-dpad {
+    display: grid;
   }
 
-  #flappy-canvas {
-    width: 100%;
-    height: auto;
+  .arcade-tech {
+    padding-bottom: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-page *,
+  .arcade-page *::before,
+  .arcade-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
   }
 }
