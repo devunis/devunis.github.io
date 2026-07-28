@@ -9,6 +9,7 @@ description: "백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리�
 url: "https://devunis.github.io"
 baseurl: ""
 lang: "ko"
+locale: "ko-KR"
 timezone: "Asia/Seoul"
 
 # --- Author / Social (사이드바) ---
@@ -27,6 +28,7 @@ author:
 
 # --- Plugins (GitHub Pages 허용 목록 위주) ---
 plugins:
+  - jekyll-remote-theme
   - jekyll-include-cache
   - jekyll-feed
   - jekyll-seo-tag
