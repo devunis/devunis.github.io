@@ -2,6 +2,7 @@
   "use strict";
 
   const INDEX_URL = window.DEVUNIS_RAG_INDEX_URL || "/rag-index.json";
+  const API_URL = String(window.DEVUNIS_CHAT_API_URL || "").replace(/\/+$/, "");
   const STARTERS = ["어떤 개발자예요?", "주요 기술 스택은?", "대표 프로젝트 알려줘", "경력은 어떻게 되나요?"];
   let documentsPromise;
 
@@ -31,6 +32,37 @@
         .then((payload) => Array.isArray(payload.documents) ? payload.documents : []);
     }
     return documentsPromise;
+  }
+
+  async function askRemote(question) {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(`${API_URL}/v1/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: question }),
+        signal: controller.signal
+      });
+      if (!response.ok) throw new Error(`RAG API returned ${response.status}`);
+      const payload = await response.json();
+      if (!payload || typeof payload.answer !== "string") throw new Error("Invalid RAG response");
+      return {
+        answer: payload.answer,
+        sources: Array.isArray(payload.sources) ? payload.sources : []
+      };
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  async function askStatic(question) {
+    const documents = await loadDocuments();
+    const results = window.DevunisRag.search(question, documents, { limit: 3 });
+    return {
+      answer: window.DevunisRag.composeAnswer(question, results),
+      sources: results
+    };
   }
 
   function addMessage(log, role, text, sources) {
@@ -82,7 +114,10 @@
     const titleWrap = createElement("div", "rag-header__title");
     const statusDot = createElement("span", "rag-status-dot");
     const heading = createElement("div");
-    heading.append(createElement("strong", "", "DEVUNIS AI"), createElement("small", "", "포트폴리오에서 근거를 찾아 답해요"));
+    heading.append(
+      createElement("strong", "", "DEVUNIS AI"),
+      createElement("small", "", API_URL ? "RAG 서버에서 근거를 찾아 답해요" : "포트폴리오에서 근거를 찾아 답해요")
+    );
     titleWrap.append(statusDot, heading);
     const close = createElement("button", "rag-close", "×");
     close.type = "button";
@@ -112,7 +147,11 @@
     submit.type = "submit";
     submit.setAttribute("aria-label", "질문 보내기");
     form.append(input, submit);
-    const privacy = createElement("p", "rag-privacy", "질문은 저장되거나 외부로 전송되지 않습니다.");
+    const privacy = createElement(
+      "p",
+      "rag-privacy",
+      API_URL ? "질문은 답변 생성을 위해 RAG 서버에서 처리됩니다." : "질문은 저장되거나 외부로 전송되지 않습니다."
+    );
 
     panel.append(header, log, starters, form, privacy);
     root.append(panel, launcher);
@@ -141,11 +180,19 @@
       pending.classList.add("rag-message--pending");
 
       try {
-        const documents = await loadDocuments();
-        const results = window.DevunisRag.search(question, documents, { limit: 3 });
-        const answer = window.DevunisRag.composeAnswer(question, results);
+        let result;
+        if (API_URL) {
+          try {
+            result = await askRemote(question);
+          } catch (_remoteError) {
+            statusDot.classList.add("rag-status-dot--error");
+            result = await askStatic(question);
+          }
+        } else {
+          result = await askStatic(question);
+        }
         pending.remove();
-        addMessage(log, "assistant", answer, results);
+        addMessage(log, "assistant", result.answer, result.sources);
       } catch (_error) {
         pending.remove();
         addMessage(log, "assistant", "지금은 지식 인덱스를 불러오지 못했어요. 잠시 후 다시 시도하거나 소개·프로젝트 페이지를 확인해 주세요.");
