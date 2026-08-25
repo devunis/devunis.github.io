@@ -1,0 +1,52 @@
+---
+layout: null
+permalink: /rag-index.json
+sitemap: false
+---
+{
+  "generatedAt": {{ site.time | date_to_xmlschema | jsonify }},
+  "documents": [
+    {% assign has_document = false %}
+    {% for item in site.data.chatbot %}
+      {% if has_document %},{% endif %}
+      {
+        "id": {{ item.id | jsonify }},
+        "title": {{ item.title | jsonify }},
+        "url": {{ item.url | relative_url | jsonify }},
+        "type": {{ item.category | jsonify }},
+        "tags": {{ item.keywords | jsonify }},
+        "content": {{ item.answer | jsonify }},
+        "answer": {{ item.answer | jsonify }}
+      }
+      {% assign has_document = true %}
+    {% endfor %}
+    {% for indexed_page in site.pages %}
+      {% assign clean_title = indexed_page.title | strip %}
+      {% unless clean_title == empty or indexed_page.url == '/rag-index.json' %}
+        {% if has_document %},{% endif %}
+        {
+          "id": {{ indexed_page.path | slugify | prepend: 'page-' | jsonify }},
+          "title": {{ clean_title | jsonify }},
+          "url": {{ indexed_page.url | relative_url | jsonify }},
+          "type": "페이지",
+          "tags": [],
+          "content": {{ indexed_page.content | markdownify | strip_html | normalize_whitespace | jsonify }}
+        }
+        {% assign has_document = true %}
+      {% endunless %}
+    {% endfor %}
+    {% for post in site.posts %}
+      {% if has_document %},{% endif %}
+      {
+        "id": {{ post.id | jsonify }},
+        "title": {{ post.title | jsonify }},
+        "url": {{ post.url | relative_url | jsonify }},
+        "type": "기술 글",
+        "tags": {{ post.tags | jsonify }},
+        "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
+        "content": {{ post.content | markdownify | strip_html | normalize_whitespace | jsonify }}
+      }
+      {% assign has_document = true %}
+    {% endfor %}
+  ]
+}

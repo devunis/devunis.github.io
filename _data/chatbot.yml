@@ -1,0 +1,69 @@
+- id: profile-overview
+  title: "허정윤 소개"
+  url: "/about/"
+  category: "소개"
+  keywords: [허정윤, 백엔드, AI, 개발자, 프로필, 소개]
+  answer: "허정윤은 Java Spring 기반 헬스케어 백엔드 경험을 바탕으로 Python, RAG, AI 서비스를 만드는 Backend & AI Developer입니다. 안정적인 API 설계부터 데이터 파이프라인, AI 검색, 클라우드 배포까지 제품의 전체 흐름을 다룹니다."
+
+- id: experience-purunsongnamu
+  title: "백엔드 실무 경력"
+  url: "/about/"
+  category: "경력"
+  keywords: [경력, 회사, 실무, 푸른소나무, 헬스케어, 병원, 백엔드]
+  answer: "2021년 11월부터 2024년 5월까지 ㈜푸른소나무에서 백엔드 개발자로 2년 7개월 근무했습니다. 건강기능식품 상담 시스템을 운영하고, 20개 이상의 병원·혈당기 연동 API와 CGMS 연구 대시보드를 개발했습니다."
+
+- id: skills
+  title: "기술 스택"
+  url: "/about/"
+  category: "기술"
+  keywords: [기술, 스택, 언어, 프레임워크, Java, Spring, Python, Django, FastAPI, RAG, LangGraph, AWS, Docker]
+  answer: "주요 기술은 Java·Spring, Python·Django·FastAPI, LangChain·LangGraph, Qdrant·FAISS, AWS·Docker, MariaDB·MySQL·PostgreSQL입니다. 백엔드와 RAG/에이전트 서비스를 연결하고 배포·운영하는 작업에 강점이 있습니다."
+
+- id: education-certificates
+  title: "학력과 자격"
+  url: "/about/"
+  category: "학력·자격"
+  keywords: [학력, 학교, 대학, 전공, 자격증, 서울과학기술대, 컴퓨터공학, SQLD, PCCP, 빅데이터분석기사]
+  answer: "서울과학기술대학교 컴퓨터공학과를 2021년에 졸업했습니다. SQLD(2021), PCCP Lv.3(2025), 빅데이터분석기사(2025) 자격을 보유하고 있습니다."
+
+- id: project-senpick
+  title: "SenPick 프로젝트"
+  url: "/projects/"
+  category: "프로젝트"
+  keywords: [SenPick, 센픽, 선물, 추천, GPT-4o, RAG, Qdrant, LangGraph]
+  answer: "SenPick은 사용자의 취향과 상황을 이해해 선물을 제안하는 개인화 추천 서비스입니다. GPT-4o, RAG, Qdrant, LangGraph를 활용했고, 아키텍처·백엔드·에이전트 오케스트레이션을 담당했습니다."
+
+- id: project-travel-checker
+  title: "Travel Checker 프로젝트"
+  url: "/projects/"
+  category: "프로젝트"
+  keywords: [Travel Checker, 여행, 반입금지, 공공데이터, Gemma, FAISS, Django, RAG]
+  answer: "Travel Checker는 국가별 반입금지 품목을 안내하는 여행 서비스입니다. Django, Gemma 3, FAISS RAG와 공공데이터를 연결했으며, LLM 백엔드·데이터 수집과 전처리·API 설계·파인튜닝을 담당했습니다."
+
+- id: project-tongue-twist
+  title: "Tongue Twist 프로젝트"
+  url: "/projects/"
+  category: "프로젝트"
+  keywords: [Tongue Twist, 발음, 음성, Whisper, GPT-4o, TTS, Streamlit]
+  answer: "Tongue Twist는 한국어 발음을 연습하는 음성 게임입니다. Streamlit과 OpenAI Whisper·GPT-4o·TTS를 연결해 실시간 음성 인식과 피드백 파이프라인을 구현했습니다."
+
+- id: project-vision-analyzer
+  title: "Vision Analyzer 프로젝트"
+  url: "/#selected-work"
+  category: "프로젝트"
+  keywords: [Vision Analyzer, 비전, 카메라, 영상, MediaPipe, TensorFlow, 온디바이스]
+  answer: "Vision Analyzer는 카메라와 영상에서 사물·표정·손짓을 실시간 분석하는 브라우저 기반 도구입니다. 서버 업로드 없이 온디바이스로 처리하도록 MediaPipe, TensorFlow Lite, Canvas API를 사용했습니다."
+
+- id: work-style
+  title: "일하는 방식과 강점"
+  url: "/"
+  category: "강점"
+  keywords: [강점, 장점, 일하는방식, 협업, 설계, 운영, 문제해결]
+  answer: "기술보다 해결할 문제와 데이터 흐름을 먼저 정리하고, 유지보수 가능한 구조로 구현하는 방식을 중요하게 생각합니다. AI 기능도 모델 호출에 그치지 않고 검색 품질, 응답 안정성, 사용자 경험, 배포와 운영까지 함께 설계합니다."
+
+- id: contact
+  title: "연락처와 GitHub"
+  url: "/about/"
+  category: "연락"
+  keywords: [연락, 연락처, 이메일, 메일, GitHub, 깃허브, 채용, 협업]
+  answer: "이메일은 gjwjddbsg@gmail.com이며, GitHub 계정은 devunis입니다. 백엔드와 AI가 만나는 제품, 채용, 협업에 관한 연락을 환영합니다."
