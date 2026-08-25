@@ -11,6 +11,7 @@ baseurl: ""
 lang: "ko"
 locale: "ko-KR"
 timezone: "Asia/Seoul"
+chatbot_api_url: "" # 별도 RAG 백엔드 배포 후 URL 설정
 
 # --- Author / Social (사이드바) ---
 author:
