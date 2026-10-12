@@ -11,7 +11,7 @@ baseurl: ""
 lang: "ko"
 locale: "ko-KR"
 timezone: "Asia/Seoul"
-chatbot_api_url: "" # 별도 RAG 백엔드 배포 후 URL 설정
+chatbot_api_url: "" # worker/README.md의 Claude 서버 배포 후 HTTPS URL 설정
 
 # --- Author / Social (사이드바) ---
 author:
@@ -56,3 +56,8 @@ exclude:
   - "vendor"
   - "tests"
   - "README.md"
+
+  - "worker"
+  - "package.json"
+  - "package-lock.json"
+  - "CHATBOT.md"
