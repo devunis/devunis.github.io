@@ -43,3 +43,14 @@ test("unknown questions return a grounded fallback", () => {
   assert.deepEqual(results, []);
   assert.match(rag.composeAnswer("오늘 점심 메뉴", results), /근거를 찾지 못/);
 });
+
+
+test("representative projects prefer owned projects over blog examples", () => {
+  const blog = {id:"blog",title:"대표 프로젝트 아이디어",url:"/posts/ideas/",type:"기술 글",content:"대표 프로젝트 AI 코드 리뷰어 프로젝트 포트폴리오 생성기 프로젝트"};
+  const another = {...documents[1],id:"travel",title:"Travel Checker 프로젝트",answer:"Travel Checker는 여행 서비스입니다."};
+  const results = rag.search("대표 프로젝트 알려줘",[blog,...documents,another],{limit:3});
+  assert.equal(results.length,2);
+  assert.ok(results.every(result=>result.type==='프로젝트'));
+  assert.match(rag.composeAnswer("대표 프로젝트 알려줘",results),/\*\*SenPick 프로젝트\*\*/);
+  assert.doesNotMatch(rag.composeAnswer("대표 프로젝트 알려줘",results),/코드 리뷰어/);
+});
