@@ -1,4 +1,4 @@
-import {iso, day, difference, anniversary, breaks} from './date-core.mjs';
+import {iso, day, difference, anniversary, breaks, holidays as holidayDates} from './date-core.mjs';
 const $ = id => document.getElementById(id);
 const parts = new Intl.DateTimeFormat('en', {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit'}).formatToParts(new Date());
 const part = name => parts.find(x => x.type === name).value;
@@ -31,6 +31,15 @@ function holidays() {
   const year = Number($('holiday-year').value), budget = Number($('leave-budget').value);
   const items = breaks(year,budget,$('future-only').checked ? today : `${year}-01-01`);
   $('holiday-summary').textContent = items.length ? `${budget ? '연차를 더해 길게 쉬는 순서' : '다가오는 연휴 순서'} · ${items.length}개 구간` : '선택한 조건에 맞는 연휴가 없어요. 다른 연도나 연차 일수를 선택해보세요.';
+  const substitutes = Object.entries(holidayDates).filter(([date,name]) => date.startsWith(String(year)) && name.includes('대체공휴일') && (!$('future-only').checked || date >= today));
+  $('substitute-results').replaceChildren(...substitutes.map(([date,name]) => {
+    const row = document.createElement('div'); row.className = 'dates-substitute';
+    const badge = document.createElement('span'); badge.textContent = '대체공휴일';
+    const label = document.createElement('strong'); label.textContent = name.replace(' 대체공휴일','');
+    const when = document.createElement('time'); when.dateTime = date; when.textContent = format(date);
+    row.append(badge,label,when); return row;
+  }));
+  $('substitute-empty').hidden = substitutes.length > 0;
   $('holiday-results').replaceChildren(...items.map((item,index) => {
     const card = document.createElement('article'); card.className = 'dates-break';
     const number = document.createElement('span'); number.className = 'dates-kicker'; number.textContent = String(index+1).padStart(2,'0');
@@ -38,7 +47,11 @@ function holidays() {
     const range = document.createElement('p'); range.textContent = `${format(item.start)} — ${format(item.end)}`;
     const names = document.createElement('p'); names.className = 'dates-break-name'; names.textContent = item.names.join(' · ') || '주말 + 연차';
     const leave = document.createElement('div'); leave.className = 'dates-leave'; leave.textContent = item.leave.length ? `연차 ${item.leave.length}일 · ${item.leave.map(x => x.slice(5).replace('-','/')).join(', ')}` : '연차 사용 없이';
-    card.append(number,title,range,names,leave); return card;
+    const substitutes = document.createElement('p'); substitutes.className = 'dates-break-substitutes';
+    substitutes.textContent = Object.entries(holidayDates).filter(([date,name]) => date >= item.start && date <= item.end && name.includes('대체공휴일')).map(([date,name]) => `${date.slice(5).replace('-','/')} ${name}`).join(' · ');
+    card.append(number,title,range,names);
+    if (substitutes.textContent) card.append(substitutes);
+    card.append(leave); return card;
   }));
 }
 $('dday-form').addEventListener('submit',countdown);
