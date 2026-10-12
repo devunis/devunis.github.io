@@ -3,7 +3,7 @@
 
   const INDEX_URL = window.DEVUNIS_RAG_INDEX_URL || "/rag-index.json";
   const API_URL = String(window.DEVUNIS_CHAT_API_URL || "").replace(/\/+$/, "");
-  const STARTERS = ["어떤 개발자예요?", "주요 기술 스택은?", "대표 프로젝트 알려줘", "경력은 어떻게 되나요?"];
+  const STARTERS = ["어떤 개발자예요?", "대표 프로젝트 알려줘", "주요 기술 스택은?", "경력은 어떻게 되나요?"];
   let documentsPromise;
 
   function createElement(tag, className, text) {
@@ -102,7 +102,11 @@
     launcher.type = "button";
     launcher.setAttribute("aria-label", "허정윤 AI 챗봇 열기");
     launcher.setAttribute("aria-expanded", "false");
-    launcher.innerHTML = '<span class="rag-launcher__spark" aria-hidden="true">✦</span><span class="rag-launcher__text">Ask me</span>';
+    const avatarUrl = new URL("assets/images/avatar.png", new URL(INDEX_URL, window.location.origin)).href;
+    const launcherAvatar = createElement("img", "rag-launcher__avatar");
+    launcherAvatar.src = avatarUrl;
+    launcherAvatar.alt = "";
+    launcher.append(launcherAvatar, createElement("span", "rag-launcher__text", "허정윤에게 물어보기"), createElement("span", "rag-launcher__arrow", "↗"));
 
     const panel = createElement("section", "rag-panel");
     panel.hidden = true;
@@ -113,12 +117,16 @@
     const header = createElement("header", "rag-header");
     const titleWrap = createElement("div", "rag-header__title");
     const statusDot = createElement("span", "rag-status-dot");
-    const heading = createElement("div");
+    const heading = createElement("div", "rag-heading");
     heading.append(
-      createElement("strong", "", "DEVUNIS AI"),
-      createElement("small", "", API_URL ? "Claude · 공개된 포트폴리오를 바탕으로 답해요" : "포트폴리오 검색 · 공개된 자료에서 답을 찾아요")
+      createElement("strong", "", "DEVUNIS / ASSISTANT"),
+      createElement("small", "", API_URL ? "Claude와 함께 둘러보는 포트폴리오" : "대화로 둘러보는 포트폴리오")
     );
-    titleWrap.append(statusDot, heading);
+    const profile = createElement("div", "rag-profile");
+    const avatar = createElement("img", "rag-avatar");
+    avatar.src = avatarUrl; avatar.alt = "";
+    profile.append(avatar, statusDot);
+    titleWrap.append(profile, heading);
     const close = createElement("button", "rag-close", "×");
     close.type = "button";
     close.setAttribute("aria-label", "챗봇 닫기");
@@ -127,21 +135,33 @@
     const log = createElement("div", "rag-log");
     log.setAttribute("role", "log");
     log.setAttribute("aria-live", "polite");
-    addMessage(log, "assistant", "안녕하세요! 허정윤의 경력, 기술, 프로젝트에 대해 물어보세요. 사이트에 공개된 내용만 근거로 답할게요.");
+    const welcome = createElement("div", "rag-welcome");
+    welcome.append(
+      createElement("p", "rag-eyebrow", "A LITTLE MORE ABOUT ME"),
+      createElement("h2", "rag-welcome__title", "안녕하세요,\n무엇이 궁금하세요?"),
+      createElement("p", "rag-welcome__copy", "만들어 온 서비스부터 일하는 방식까지.\n허정윤의 이야기를 편하게 물어보세요.")
+    );
+    const note = createElement("div", "rag-welcome__note");
+    note.append(createElement("span", "", "↗"), createElement("span", "", "공개된 포트폴리오를 근거로 답해요"));
+    welcome.append(note);
+    log.append(welcome);
 
     const starters = createElement("div", "rag-starters");
-    STARTERS.forEach((prompt) => {
-      const chip = createElement("button", "rag-starter", prompt);
+    STARTERS.forEach((prompt, index) => {
+      const chip = createElement("button", "rag-starter");
+      chip.append(createElement("span", "rag-starter__number", `0${index + 1}`), createElement("span", "rag-starter__text", prompt), createElement("span", "rag-starter__arrow", "↗"));
       chip.type = "button";
       chip.addEventListener("click", () => submitQuestion(prompt));
       starters.appendChild(chip);
     });
 
+    log.append(starters);
+
     const form = createElement("form", "rag-form");
     const input = createElement("textarea", "rag-input");
     input.rows = 1;
     input.maxLength = 280;
-    input.placeholder = "예: 어떤 RAG 프로젝트를 했나요?";
+    input.placeholder = "궁금한 점을 남겨주세요…";
     input.setAttribute("aria-label", "질문 입력");
     const submit = createElement("button", "rag-submit", "↑");
     submit.type = "submit";
@@ -153,7 +173,7 @@
       API_URL ? "질문은 서버와 Anthropic에 전송됩니다. 개인정보는 입력하지 마세요." : "질문은 저장되거나 외부로 전송되지 않습니다."
     );
 
-    panel.append(header, log, starters, form, privacy);
+    panel.append(header, log, form, privacy);
     root.append(panel, launcher);
     document.body.appendChild(root);
 
@@ -174,6 +194,7 @@
       if (!question || submit.disabled) return;
       if (question.length > 280) return;
       starters.hidden = true;
+      welcome.hidden = true;
       addMessage(log, "user", question);
       input.value = "";
       submit.disabled = true;
