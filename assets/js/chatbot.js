@@ -36,7 +36,7 @@
 
   async function askRemote(question) {
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    const timeout = window.setTimeout(() => controller.abort(), 35000);
     try {
       const response = await fetch(`${API_URL}/v1/chat`, {
         method: "POST",
@@ -44,7 +44,7 @@
         body: JSON.stringify({ message: question }),
         signal: controller.signal
       });
-      if (!response.ok) throw new Error(`RAG API returned ${response.status}`);
+      if (!response.ok) throw new Error(`Chat API returned ${response.status}`);
       const payload = await response.json();
       if (!payload || typeof payload.answer !== "string") throw new Error("Invalid RAG response");
       return {
@@ -116,7 +116,7 @@
     const heading = createElement("div");
     heading.append(
       createElement("strong", "", "DEVUNIS AI"),
-      createElement("small", "", API_URL ? "RAG 서버에서 근거를 찾아 답해요" : "포트폴리오에서 근거를 찾아 답해요")
+      createElement("small", "", API_URL ? "Claude · 공개된 포트폴리오를 바탕으로 답해요" : "포트폴리오 검색 · 공개된 자료에서 답을 찾아요")
     );
     titleWrap.append(statusDot, heading);
     const close = createElement("button", "rag-close", "×");
@@ -150,7 +150,7 @@
     const privacy = createElement(
       "p",
       "rag-privacy",
-      API_URL ? "질문은 답변 생성을 위해 RAG 서버에서 처리됩니다." : "질문은 저장되거나 외부로 전송되지 않습니다."
+      API_URL ? "질문은 서버와 Anthropic에 전송됩니다. 개인정보는 입력하지 마세요." : "질문은 저장되거나 외부로 전송되지 않습니다."
     );
 
     panel.append(header, log, starters, form, privacy);
@@ -172,6 +172,7 @@
     async function submitQuestion(value) {
       const question = String(value || input.value).trim();
       if (!question || submit.disabled) return;
+      if (question.length > 280) return;
       starters.hidden = true;
       addMessage(log, "user", question);
       input.value = "";
@@ -184,9 +185,11 @@
         if (API_URL) {
           try {
             result = await askRemote(question);
+            statusDot.classList.remove("rag-status-dot--error");
           } catch (_remoteError) {
             statusDot.classList.add("rag-status-dot--error");
             result = await askStatic(question);
+            result.answer = "지금은 AI 연결을 사용할 수 없어 포트폴리오 검색 결과를 보여드려요.\n\n" + result.answer;
           }
         } else {
           result = await askStatic(question);
@@ -200,7 +203,7 @@
         documentsPromise = undefined;
       } finally {
         submit.disabled = false;
-        input.focus();
+        if (!panel.hidden) input.focus();
       }
     }
 
