@@ -3,6 +3,8 @@ main:
     url: /
   - title: "프로젝트"
     url: /projects/
+  - title: "날짜 계산기"
+    url: /dates/
   - title: "게임"
     url: /games/
   - title: "소개"
