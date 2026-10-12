@@ -65,10 +65,67 @@
     };
   }
 
+  // Construct DOM nodes instead of accepting HTML from model responses.
+  function renderMarkdown(target, value) {
+    target.replaceChildren();
+    function inline(parent, text) {
+      const tokens = /(`[^`\n]+`|\*\*[^*\n]+\*\*|__[^_\n]+__|\[[^\]\n]+\]\([^\s)]+\)|\*[^*\n]+\*)/g;
+      let cursor = 0;
+      for (const match of text.matchAll(tokens)) {
+        parent.append(document.createTextNode(text.slice(cursor, match.index)));
+        const token = match[0];
+        let node;
+        if (token.startsWith('`')) node = createElement('code', '', token.slice(1,-1));
+        else if (token.startsWith('**') || token.startsWith('__')) node = createElement('strong', '', token.slice(2,-2));
+        else if (token.startsWith('*')) node = createElement('em', '', token.slice(1,-1));
+        else {
+          const link = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+          try {
+            const url = new URL(link[2], window.location.origin);
+            if (!['http:','https:','mailto:'].includes(url.protocol)) throw new Error('Unsupported link');
+            node = createElement('a', '', link[1]); node.href = url.href;
+            if (url.origin !== window.location.origin) { node.target = '_blank'; node.rel = 'noopener noreferrer'; }
+          } catch (_) { node = document.createTextNode(token); }
+        }
+        parent.append(node); cursor = match.index + token.length;
+      }
+      parent.append(document.createTextNode(text.slice(cursor)));
+    }
+    const lines = String(value).replace(/\r\n?/g, '\n').split('\n');
+    let list = null, paragraph = null, code = null;
+    for (const line of lines) {
+      if (/^\s*```/.test(line)) {
+        list = paragraph = null;
+        if (code) code = null;
+        else { const pre = createElement('pre'); code = createElement('code'); pre.append(code); target.append(pre); }
+        continue;
+      }
+      if (code) { code.append(document.createTextNode(line + '\n')); continue; }
+      if (!line.trim()) { list = paragraph = null; continue; }
+      const item = line.match(/^\s*(?:([-*+])|\d+[.)])\s+(.+)$/);
+      if (item) {
+        paragraph = null;
+        const kind = item[1] ? 'ul' : 'ol';
+        if (!list || list.tagName.toLowerCase() !== kind) { list = createElement(kind); target.append(list); }
+        const li = createElement('li'); inline(li,item[2]); list.append(li); continue;
+      }
+      if (list && /^\s{2,}\S/.test(line)) { list.lastElementChild.append(createElement('br')); inline(list.lastElementChild,line.trim()); continue; }
+      list = null;
+      const heading = line.match(/^#{1,6}\s+(.+)$/);
+      if (heading) { paragraph = null; const h = createElement('h3'); inline(h,heading[1]); target.append(h); continue; }
+      if (/^>\s?/.test(line)) { paragraph = null; const quote = createElement('blockquote'); inline(quote,line.replace(/^>\s?/,'')); target.append(quote); continue; }
+      if (!paragraph) { paragraph = createElement('p'); target.append(paragraph); }
+      else paragraph.append(createElement('br'));
+      inline(paragraph,line);
+    }
+  }
+
   function addMessage(log, role, text, sources) {
     const wrapper = createElement("div", `rag-message rag-message--${role}`);
     const label = createElement("span", "rag-message__label", role === "user" ? "YOU" : "DEVUNIS AI");
-    const bubble = createElement("div", "rag-message__bubble", text);
+    const bubble = createElement("div", "rag-message__bubble");
+    if (role === 'assistant') renderMarkdown(bubble, text);
+    else bubble.textContent = text;
     wrapper.append(label, bubble);
 
     if (sources && sources.length) {
@@ -189,6 +246,27 @@
       }
     }
 
+    const pause = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+    async function revealAnswer(result) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        addMessage(log, 'assistant', result.answer, result.sources); return;
+      }
+      const message = addMessage(log, 'assistant', '');
+      message.setAttribute('aria-hidden', 'true');
+      message.classList.add('rag-message--typing');
+      const bubble = message.querySelector('.rag-message__bubble');
+      const characters = Array.from(result.answer);
+      const step = Math.max(3, Math.ceil(characters.length / 90));
+      for (let end = step; end < characters.length; end += step) {
+        const follow = log.scrollHeight - log.scrollTop - log.clientHeight < 100;
+        renderMarkdown(bubble,characters.slice(0,end).join(''));
+        if (follow) log.scrollTop = log.scrollHeight;
+        await pause(30);
+      }
+      message.remove();
+      addMessage(log, 'assistant', result.answer, result.sources);
+    }
+
     async function submitQuestion(value) {
       const question = String(value || input.value).trim();
       if (!question || submit.disabled) return;
@@ -198,6 +276,7 @@
       addMessage(log, "user", question);
       input.value = "";
       submit.disabled = true;
+      const startedAt = Date.now();
       const pending = addMessage(log, "assistant", "사이트에서 근거를 찾고 있어요…");
       pending.classList.add("rag-message--pending");
 
@@ -215,8 +294,9 @@
         } else {
           result = await askStatic(question);
         }
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) await pause(Math.max(0, 450 - (Date.now() - startedAt)));
         pending.remove();
-        addMessage(log, "assistant", result.answer, result.sources);
+        await revealAnswer(result);
       } catch (_error) {
         pending.remove();
         addMessage(log, "assistant", "지금은 지식 인덱스를 불러오지 못했어요. 잠시 후 다시 시도하거나 소개·프로젝트 페이지를 확인해 주세요.");

@@ -120,6 +120,11 @@
     if (!terms.length) return [];
 
     const chunks = buildChunks(documents);
+    // Broad portfolio questions should return owned projects, not examples in blog posts.
+    if (/대표.*프로젝트|프로젝트.*(?:알려|목록|소개)|어떤.*프로젝트/.test(query)) {
+      const projects = chunks.filter(chunk => chunk.type === '프로젝트' && chunk.answer);
+      if (projects.length) return projects.slice(0, settings.limit).map(chunk => Object.assign({}, chunk, {score: 100}));
+    }
     const documentFrequency = new Map();
     for (const term of terms) {
       documentFrequency.set(term, chunks.filter((chunk) => chunk.normalizedText.includes(term)).length);
@@ -171,6 +176,9 @@
       return "사이트에서 관련 근거를 찾지 못했어요. 경력, 기술 스택, 프로젝트, 학력, 연락처처럼 조금 더 구체적으로 물어봐 주세요.";
     }
 
+    if (results.length > 1 && results.every(result => result.type === '프로젝트' && result.answer)) {
+      return '포트폴리오에 소개된 주요 프로젝트예요.\n\n' + results.map(result => `- **${result.title}**\n  ${result.answer}`).join('\n\n');
+    }
     const primary = results[0];
     let answer = primary.answer || primary.text;
     if (answer.length > 440) answer = `${answer.slice(0, 437).trim()}…`;
