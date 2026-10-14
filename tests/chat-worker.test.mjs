@@ -58,6 +58,23 @@ test('named project questions send only the selected project to the model', asyn
   assert.deepEqual((await response.json()).sources.map(source => source.title), ['Travel Checker 프로젝트']);
 });
 
+test('unknown project requests return a grounded fallback without a provider call', async (t) => {
+  const calls = [];
+  t.mock.method(globalThis, 'fetch', async url => {
+    calls.push(url);
+    if (url.endsWith('/rag-index.json')) return Response.json({ documents: [
+      { title: 'SenPick 프로젝트', type: '프로젝트', tags: ['RAG'], answer: '선물 추천 서비스입니다.' }
+    ] });
+    throw new Error('Unknown projects must not reach the provider');
+  });
+  const response = await worker.fetch(request('Quantum Garden 프로젝트 소개해줘'), environment());
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.deepEqual(payload.sources, []);
+  assert.match(payload.answer, /관련 정보를 찾지 못/);
+  assert.deepEqual(calls, [`${origin}/rag-index.json`]);
+});
+
 test('unknown questions avoid model charges and provider failures remain private', async (t) => {
   t.mock.method(globalThis, 'fetch', async (url) => {
     if (url.endsWith('/rag-index.json')) return Response.json({ documents: [] });
@@ -90,3 +107,4 @@ test('durable budget enforces per-client and global limits', async () => {
   await budget.alarm();
   assert.equal(await check('next-client'), true);
 });
+

@@ -113,6 +113,13 @@
     return count;
   }
 
+  function isProjectOverview(query) {
+    // Only generic list/introduction wording may fall back to every project.
+    // A name or topic that was not found must not silently become an overview.
+    const compact = query.replace(/\s+/g, '');
+    return /^(?:(?:대표|주요|어떤|전체|모든|진행한|참여한|만든|개발한))*프로젝트(?:들)?(?:은|는|을|를|이|가)?(?:(?:소개|목록|리스트)(?:을|를)?|알려|보여|만들었나요|했나요|있나요|뭐가|뭔가요|무엇인가요|좀|자세히|해|줘|주세요|요)*$/.test(compact);
+  }
+
   function search(question, documents, options) {
     const settings = Object.assign({ limit: 4, minScore: 1.4 }, options);
     const query = normalize(question);
@@ -129,8 +136,8 @@
       const specificTerms = originalTerms.filter(term => term !== '프로젝트');
       const named = projects.filter(chunk => specificTerms.some(term => chunk.titleTokens.includes(term)));
       const tagged = projects.filter(chunk => specificTerms.some(term => chunk.tagTokens.includes(term)));
-      const selected = named.length ? named : tagged.length ? tagged : projects;
-      if (selected.length) return selected.slice(0, settings.limit).map(chunk => Object.assign({}, chunk, {score: 100}));
+      const selected = named.length ? named : tagged.length ? tagged : isProjectOverview(query) ? projects : [];
+      return selected.slice(0, settings.limit).map(chunk => Object.assign({}, chunk, {score: 100}));
     }
     const documentFrequency = new Map();
     for (const term of terms) {
@@ -197,3 +204,4 @@
 
   return { normalize, tokenize, expandQuery, splitContent, buildChunks, search, composeAnswer };
 });
+
