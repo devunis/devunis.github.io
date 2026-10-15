@@ -42,6 +42,39 @@ test('retrieves trusted evidence and sends only server-held key to Claude', asyn
   assert.equal(JSON.parse(calls[1].options.body).model, 'claude-haiku-4-5-20251001');
   assert.ok(!JSON.stringify(payload).includes('test-only'));
 });
+test('named project questions send only the selected project to the model', async (t) => {
+  let references;
+  t.mock.method(globalThis, 'fetch', async (url, options) => {
+    if (url.endsWith('/rag-index.json')) return Response.json({ documents: [
+      { title: 'SenPick 프로젝트', type: '프로젝트', tags: ['RAG'], answer: '선물 추천 서비스입니다.' },
+      { title: 'Travel Checker 프로젝트', type: '프로젝트', tags: ['RAG', '여행'], answer: '국가별 반입금지 품목 안내 서비스입니다.' }
+    ] });
+    references = JSON.parse(JSON.parse(options.body).messages[0].content).reference_material;
+    return Response.json({ content: [{ type: 'text', text: 'Travel Checker는 여행 서비스입니다.' }] });
+  });
+  const response = await worker.fetch(request('Travel Checker 프로젝트 소개해줘'), environment());
+  assert.equal(response.status, 200);
+  assert.deepEqual(references.map(reference => reference.title), ['Travel Checker 프로젝트']);
+  assert.deepEqual((await response.json()).sources.map(source => source.title), ['Travel Checker 프로젝트']);
+});
+
+test('unknown project requests return a grounded fallback without a provider call', async (t) => {
+  const calls = [];
+  t.mock.method(globalThis, 'fetch', async url => {
+    calls.push(url);
+    if (url.endsWith('/rag-index.json')) return Response.json({ documents: [
+      { title: 'SenPick 프로젝트', type: '프로젝트', tags: ['RAG'], answer: '선물 추천 서비스입니다.' }
+    ] });
+    throw new Error('Unknown projects must not reach the provider');
+  });
+  const response = await worker.fetch(request('Quantum Garden 프로젝트 소개해줘'), environment());
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.deepEqual(payload.sources, []);
+  assert.match(payload.answer, /관련 정보를 찾지 못/);
+  assert.deepEqual(calls, [`${origin}/rag-index.json`]);
+});
+
 test('unknown questions avoid model charges and provider failures remain private', async (t) => {
   t.mock.method(globalThis, 'fetch', async (url) => {
     if (url.endsWith('/rag-index.json')) return Response.json({ documents: [] });
@@ -74,3 +107,4 @@ test('durable budget enforces per-client and global limits', async () => {
   await budget.alarm();
   assert.equal(await check('next-client'), true);
 });
+
