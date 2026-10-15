@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+<link rel="icon" href="{{ '/assets/images/avatar.png' | relative_url }}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}">
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header wrap"><a class="brand" href="/" aria-label="허정윤 홈">devunis<span>®</span></a><nav aria-label="주 메뉴"><a href="/#work">프로젝트</a><a href="/#about">소개</a><a href="/posts/">블로그</a></nav><a class="header-contact" href="mailto:gjwjddbsg@gmail.com">연락하기 ↗</a></header>
+{{ content }}
+<footer class="site-footer wrap"><a class="brand" href="/">devunis<span>®</span></a><p>생각을 코드로, 코드를 서비스로.</p><div><a href="/dates/">날짜 계산기</a><a href="/games/">게임</a><a href="https://github.com/devunis">GitHub ↗</a></div><small>© {{ 'now' | date: '%Y' }} 허정윤</small></footer>
+</body></html>
