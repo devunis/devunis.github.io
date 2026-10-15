@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/chatbot.css' | relative_url }}?v=20261012b">
+<script>window.DEVUNIS_CHAT_API_URL = {{ site.chatbot_api_url | jsonify }};</script>
+<script src="{{ '/assets/js/chatbot-core.js' | relative_url }}?v=20261012b" defer></script>
+<script src="{{ '/assets/js/chatbot.js' | relative_url }}?v=20261012b" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">본문 바로가기</a>
