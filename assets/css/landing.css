@@ -149,3 +149,8 @@ dd{margin:0}
 }
 
 h1,h2,h3,p{word-break:keep-all;overflow-wrap:break-word}
+
+.project-image{padding:0;align-items:center;justify-content:center}
+.project-image img{display:block;width:100%;height:100%;object-fit:contain}
+.project-image.gift-art{background:#f4eedb}
+.project-image.travel-art{background:#10202f}
