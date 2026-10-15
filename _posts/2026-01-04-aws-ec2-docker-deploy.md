@@ -1,90 +1,39 @@
 ---
-title: "AWS EC2에 Docker 애플리케이션 배포하기"
+title: "AWS EC2 Docker 배포: 네트워크·설정·운영 점검"
 date: 2026-01-04 09:00:00 +0900
 categories: [DevOps, AWS]
 tags: [AWS, EC2, Docker, Deployment, Cloud]
+last_modified_at: 2026-10-15 14:50:00 +0900
 ---
 
-AWS EC2에 Docker 기반 애플리케이션을 배포하는 실전 가이드입니다.
+EC2에 컨테이너를 실행하는 것과 서비스를 운영 가능한 상태로 만드는 것은 다릅니다. 이 글은 배포 절차의 개념 가이드이며 특정 프로젝트가 현재 안정적으로 운영 중이라는 주장은 하지 않습니다.
 
----
+## 🏗️ 배포 전 준비
 
-## 🚀 배포 단계
+OS·CPU 아키텍처에 맞는 Docker Engine과 Compose 플러그인을 공식 절차로 설치합니다. 이미지·의존성 버전을 관리하고, 테스트한 이미지 식별자로 배포합니다.
 
-### 1. EC2 인스턴스 생성
+## 🔒 네트워크 구성
 
-```bash
-# AMI: Ubuntu 22.04 LTS
-# 인스턴스 타입: t3.medium
-# 보안 그룹: 22(SSH), 80(HTTP), 443(HTTPS), 8000(App)
-```
+SSH는 관리 주체로 제한하고 앱 내부 포트를 무조건 인터넷에 공개하지 않습니다. 리버스 프록시·로드 밸런서와 TLS 구성을 정하고 DB는 필요한 네트워크에서만 접근하도록 합니다. 보안 그룹과 컨테이너 포트 바인딩을 함께 확인합니다.
 
-### 2. Docker 설치
+## 🚀 실행 절차 예시
+
+프로젝트에 검토한 compose.yaml과 환경 설정이 준비된 상황의 명령입니다.
 
 ```bash
-# EC2 접속
-ssh -i key.pem ubuntu@ec2-ip
-
-# Docker 설치
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker ubuntu
-
-# Docker Compose 설치
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+docker compose config --quiet
+docker compose pull
+docker compose up -d
+docker compose ps
+docker compose logs --tail=100
 ```
 
-### 3. 애플리케이션 배포
+이미지를 레지스트리에서 가져오는 방식의 예시입니다. 소스 빌드 방식이면 Dockerfile과 빌드 절차가 추가로 필요합니다. 환경 값은 이미지·공개 저장소에 넣지 않습니다.
 
-```bash
-# Git clone
-git clone https://github.com/yourname/yourapp.git
-cd yourapp
+## 🌐 HTTPS와 운영
 
-# 환경 변수 설정
-cat > .env << EOF
-DATABASE_URL=postgresql://...
-SECRET_KEY=...
-EOF
+인증서 발급 전에 도메인·DNS·80/443 경로를 준비합니다. 프록시가 호스트 프로세스인지 컨테이너인지에 따라 인증서 경로·갱신·재적용 방식이 달라집니다. Certbot 명령 하나가 모든 구조에 맞지는 않습니다.
 
-# 빌드 및 실행
-docker-compose up -d --build
+헬스체크, 재시작 정책, 로그 보존·민감 값 마스킹, 디스크, 비밀 값, 마이그레이션 실행 주체를 확인합니다. 볼륨·DB 백업과 복구·이전 이미지 전환을 별도로 검증해야 합니다.
 
-# 로그 확인
-docker-compose logs -f
-```
-
----
-
-## 🔒 SSL 인증서 (Let's Encrypt)
-
-```bash
-# Certbot 설치
-sudo apt install certbot python3-certbot-nginx
-
-# 인증서 발급
-sudo certbot --nginx -d yourdomain.com
-```
-
----
-
-## 📊 모니터링
-
-```bash
-# 컨테이너 상태
-docker ps
-
-# 리소스 사용량
-docker stats
-
-# 로그
-docker-compose logs --tail=100 -f
-```
-
-SenPick은 이 방법으로 배포하여 안정적으로 운영 중입니다! ⚡
-
----
-
-📚 **참고 자료**:
-- [AWS EC2 공식 문서](https://docs.aws.amazon.com/ec2/)
+📚 [EC2 보안 그룹](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html) · [Docker Ubuntu 설치](https://docs.docker.com/engine/install/ubuntu/)

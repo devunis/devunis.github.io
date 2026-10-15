@@ -7,8 +7,8 @@ permalink: /projects/
 ## 🛍 SenPick
 - **개요**: GPT-4o + RAG(Qdrant)로 취향·상황 기반 개인화 추천  
 - **역할**: 아키텍처 설계, 백엔드, 에이전트 오케스트레이션(LangGraph)
-- **성과**: 멀티툴 에이전트 구현 → **RAG + 웹서치 툴** 통합 적용  
-- **스택**: GPT-4o · LangGraph · Qdrant · RAG · FastAPI/Django  
+- **기능**: 대화 기반 선물 추천, 추천 이유 제공, 상품 비교
+- **스택**: GPT-4o · LangGraph · Qdrant · RAG · Django
 - **링크**: [GitHub](https://github.com/devunis/SenPick)  
 
 ---

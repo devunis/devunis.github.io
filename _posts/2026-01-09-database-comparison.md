@@ -1,64 +1,38 @@
 ---
-title: "PostgreSQL vs MySQL vs MariaDB: 프로젝트별 선택 가이드"
+title: "PostgreSQL vs MySQL vs MariaDB: 기능과 선택 기준"
 date: 2026-01-09 09:00:00 +0900
 categories: [Backend, Database]
 tags: [PostgreSQL, MySQL, MariaDB, Database, Comparison]
+last_modified_at: 2026-10-15 14:50:00 +0900
 ---
 
-헬스케어 시스템에서 MariaDB를 2년 7개월간 사용한 경험을 바탕으로 DB 선택 가이드를 제공합니다.
+세 제품 모두 관계형 DB이며 SQL·트랜잭션·인덱스·조인 등을 제공합니다. 고정된 성능 순위보다 실제 기능·버전·운영 요구를 비교해야 합니다.
 
----
+## 📊 비교 기준
 
-## 📊 핵심 비교
+| 항목 | PostgreSQL | MySQL | MariaDB |
+| --- | --- | --- | --- |
+| 특징 | 다양한 타입·인덱스·확장 | 넓은 웹 생태계, InnoDB 등 | MySQL에서 분기해 독립 발전 |
+| JSON | json·jsonb와 관련 연산 | JSON 타입과 관련 기능 | JSON 표현·관련 기능, MySQL과 차이 확인 |
+| 전문 검색 | 기본 기능과 확장 검토 | 엔진·버전별 기능 검토 | 엔진·버전별 기능 검토 |
+| 라이선스 | PostgreSQL License | Community·상용 제품의 조건 확인 | 서버·제품·구성 요소 조건 확인 |
 
-| 특징 | PostgreSQL | MySQL | MariaDB |
-|------|------------|-------|---------|
-| **성능** | 복잡한 쿼리에 강함 | 단순 읽기에 빠름 | MySQL 호환 |
-| **JSON** | 강력 (jsonb) | 제한적 | 제한적 |
-| **Full-text** | 우수 | 보통 | 보통 |
-| **라이선스** | PostgreSQL | GPL (v8부터 제한) | GPL |
+MySQL 8부터 GPL이 제한된다는 과거 설명은 제거했습니다. 제품·배포·구성 요소별 실제 조건을 확인해야 합니다. MySQL과 MariaDB도 모든 버전에서 완전한 교체 관계는 아닙니다.
 
----
+## 💻 집계 SQL 예제
 
-## 🏥 헬스케어 시스템 (MariaDB)
+아래는 가상의 테이블을 대상으로 한 쿼리이며 운영 성능 결과가 아닙니다. 집계 별칭을 HAVING에서 사용하는 DB별 차이를 피하려고 집계식을 사용했습니다.
 
-### 선택 이유
-- ✅ MySQL 호환 (기존 코드 재사용)
-- ✅ 완전한 오픈소스
-- ✅ 안정성
-
-### 실전 경험
 ```sql
--- 복잡한 환자 통계 쿼리도 빠름
-SELECT 
-    hospital_id,
-    COUNT(*) as patient_count,
-    AVG(age) as avg_age
+SELECT hospital_id, COUNT(*) AS patient_count, AVG(age) AS avg_age
 FROM patients
 WHERE status = 'active'
 GROUP BY hospital_id
-HAVING patient_count > 100;
-
--- 실행 시간: 45ms (50,000건)
+HAVING COUNT(*) > 100;
 ```
 
----
+## ✅ 선택할 때
 
-## 🎯 프로젝트별 선택
+필요한 데이터 타입·확장·복제·복구를 확인하고, 팀의 운영 경험과 관리형 지원을 봅니다. 실제 쿼리·데이터·동시성에서 실행 계획과 비용을 측정해야 합니다. MySQL·MariaDB를 단순 CRUD만 가능한 DB로 제한하지 않습니다.
 
-### PostgreSQL 추천
-- 📌 복잡한 쿼리
-- 📌 JSON 데이터
-- 📌 GIS (PostGIS)
-- 📌 Full-text search
-
-### MySQL/MariaDB 추천
-- 📌 단순 CRUD
-- 📌 읽기 위주
-- 📌 레거시 호환
-
----
-
-📚 **참고 자료**:
-- [PostgreSQL 공식 문서](https://www.postgresql.org/docs/)
-- [MariaDB 공식 문서](https://mariadb.com/kb/en/)
+📚 [PostgreSQL](https://www.postgresql.org/about/) · [MySQL](https://www.mysql.com/about/) · [MariaDB](https://mariadb.org/about/) · [관계형 제품 비교]({% post_url 2026-10-15-relational-distributed-sql-databases %})
