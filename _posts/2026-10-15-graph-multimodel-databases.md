@@ -17,13 +17,10 @@ tags: [Database, GraphDB, Neo4j, Knowledge-Graph, Multi-Model, Database-Series]
 
 속성 그래프(Property Graph)는 노드와 관계에 속성을 붙입니다.
 
-```text
-(사용자 A) ──구매──> (상품 X) <──구매── (사용자 B)
-                                         │
-                                        구매
-                                         ↓
-                                      (상품 Y)
-```
+<figure class="article-diagram relation-diagram">
+<figcaption>구매 관계를 연결한 그래프</figcaption>
+<ul><li>사용자 A <span>구매 →</span> 상품 X</li><li>사용자 B <span>구매 →</span> 상품 X</li><li>사용자 B <span>구매 →</span> 상품 Y</li></ul>
+</figure>
 
 이 구조에서는 “나와 같은 상품을 구매한 사람이 산 다른 상품”을 관계 탐색으로 표현할 수 있습니다. 관계형 DB에서도 조인으로 구현할 수 있지만, 탐색 단계와 관계 종류가 늘어날수록 그래프 모델을 비교할 가치가 생깁니다.
 

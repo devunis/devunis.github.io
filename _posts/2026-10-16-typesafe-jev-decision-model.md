@@ -15,15 +15,16 @@ TypeSafe는 Jev를 자사의 첫 공개 **System One 모델**로 소개합니다
 
 서비스 입장에서 보면 다음과 같은 역할입니다.
 
-```text
-고객 문의 입력
-    ↓
-Jev: 문의를 담당할 팀 선택
-    ↓
-서비스 코드: 선택 결과와 검토 기준 확인
-    ↓
-담당 팀으로 전달하거나 검토 대기열에 보관
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>고객 문의</li>
+<li>Jev: 담당 팀 선택</li>
+<li>서비스 코드: 결과·검토 기준 확인</li>
+<li>담당 팀 전달 또는 검토 대기열 보관</li>
+</ol>
+</figure>
+
 
 자유로운 답변 생성과 범위가 정해진 판단을 나누면 각각을 별도로 평가하기 쉬워집니다. Jev의 개념과 기본 입력은 [공식 Introduction](https://docs.typesafe.ai/introduction)에서 확인할 수 있습니다.
 

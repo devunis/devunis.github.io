@@ -19,10 +19,18 @@ tags: [Database, Vector-Database, RAG, Qdrant, pgvector, Database-Series]
 
 기본 흐름은 다음과 같습니다.
 
-```text
-원문 → 청크 분할 → 임베딩 생성 → 벡터·메타데이터 저장
-질문 → 같은 체계의 임베딩 생성 → 유사도 검색 → 권한·조건 확인 → 답변 생성
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>원문 → 청크 분할</li>
+<li>임베딩 생성</li>
+<li>벡터·메타데이터 저장</li>
+<li>질문 → 같은 체계의 임베딩 생성</li>
+<li>유사도 검색</li>
+<li>권한·조건 확인 → 답변 생성</li>
+</ol>
+</figure>
+
 
 모델과 벡터 차원, 거리 함수를 일관되게 관리해야 합니다. 모델을 바꾸면 기존 벡터의 재생성과 인덱스 갱신이 필요할 수 있습니다. [Qdrant 개요](https://qdrant.tech/documentation/overview/)
 

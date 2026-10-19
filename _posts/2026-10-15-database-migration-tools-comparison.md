@@ -225,14 +225,18 @@ Prisma 역시 과거 명령을 현재 버전의 복구 방법으로 가정하지
 
 기존 데이터가 있는 테이블에 필수 컬럼을 추가할 때는 다음과 같은 단계적 변경을 검토할 수 있습니다.
 
-```text
-NULL 허용 컬럼 추가
-  → 새 앱이 기존·신규 구조와 호환되도록 배포
-  → 기존 데이터 배치 보완(backfill)
-  → 신규 데이터와 누락 값 확인
-  → NOT NULL 적용
-  → 더 이상 필요 없는 이전 구조 정리
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>NULL 허용 컬럼 추가</li>
+<li>기존·신규 구조와 호환되는 앱 배포</li>
+<li>기존 데이터 보완 · backfill</li>
+<li>신규 데이터·누락 값 확인</li>
+<li>NOT NULL 적용</li>
+<li>사용하지 않는 이전 구조 정리</li>
+</ol>
+</figure>
+
 
 이는 Expand–Migrate–Contract 방식의 예시입니다. 정확한 순서는 앱의 읽기·쓰기 방식과 동시 실행되는 구버전의 동작에 맞춰 설계해야 합니다.
 

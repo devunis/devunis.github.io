@@ -20,12 +20,17 @@ Elasticsearch를 키워드 검색만 가능한 엔진으로 제한하지 않습�
 
 ## 🔗 함께 사용하는 예
 
-```text
-사용자 질문 → Elasticsearch에서 후보 검색
-            → 권한·관련성 확인
-            → 필요한 자료를 모델에 전달
-            → 답변과 출처 제공
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>사용자 질문</li>
+<li>Elasticsearch 후보 검색</li>
+<li>권한·관련성 확인</li>
+<li>모델에 자료 전달</li>
+<li>답변과 출처</li>
+</ol>
+</figure>
+
 
 하이브리드 검색은 여러 검색 신호를 결합하는 방법입니다. 키워드 검색 뒤에 생성 모델을 붙였다는 사실만으로 하이브리드 검색이라고 부르지는 않습니다.
 

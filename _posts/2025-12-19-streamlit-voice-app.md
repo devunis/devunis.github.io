@@ -10,9 +10,17 @@ Tongue Twist는 Streamlit과 음성 인식·언어 모델·음성 합성을 조�
 
 ## 🎤 처리 단계
 
-```text
-녹음 → 음성 인식(STT) → 문장 비교·피드백 생성 → 음성 합성(TTS) → 재생
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>녹음</li>
+<li>음성 인식 · STT</li>
+<li>문장 비교·피드백 생성</li>
+<li>음성 합성 · TTS</li>
+<li>재생</li>
+</ol>
+</figure>
+
 
 녹음이 끝난 뒤 처리하는 요청·응답 방식과 지속적으로 오디오를 전달하는 실시간 스트리밍을 구분합니다. 지연을 측정하지 않고 “즉시” 또는 “고정된 속도”를 보장하지 않습니다.
 

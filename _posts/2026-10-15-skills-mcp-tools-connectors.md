@@ -75,13 +75,15 @@ MCP(Model Context Protocol)는 AI 애플리케이션과 외부 도구·데이터
 | MCP Client | Host 안에서 특정 MCP 서버와의 통신을 담당하는 구성 요소 |
 | MCP Server | 도구·데이터·템플릿 등을 MCP 방식으로 제공하는 프로그램 |
 
-```text
-사용자
-  ↕
-AI 애플리케이션: MCP Host
-  ├─ MCP Client A ↔ MCP Server A ↔ 문서 서비스
-  └─ MCP Client B ↔ MCP Server B ↔ 저장소 서비스
-```
+<figure class="article-diagram diagram-alternatives">
+<figcaption>구조 및 흐름 1</figcaption>
+<ol>
+<li>사용자 ↔ AI 애플리케이션 · MCP Host</li>
+<li>연결 A: MCP Client A ↔ MCP Server A ↔ 문서 서비스</li>
+<li>연결 B: MCP Client B ↔ MCP Server B ↔ 저장소 서비스</li>
+</ol>
+</figure>
+
 
 클라이언트와 서버를 연결하는 것은 Host 애플리케이션입니다. “모델이 외부 서버에 직접 로그인한다”는 그림과 구분하면 인증·실행의 책임을 이해하기 쉽습니다.
 
@@ -130,17 +132,17 @@ MCP의 Prompt와 Skill도 같은 것은 아닙니다. 전자는 서버가 제공
 | 보고서 작성 | 모델 + Skill 지침 | 결과를 근거로 요약·구성 |
 | 외부 문서 저장 | 문서 생성 Tool과 해당 연결 | 저장이 요청된 경우 결과물 생성 |
 
-```text
-Skill: 보고서를 만드는 절차와 기준
-                  ↓
-AI 앱이 사용 가능한 Tool을 선택
-                  ↓
-커넥터로 설정한 MCP 연결을 통해 호출
-                  ↓
-MCP 서버의 Tool이 외부 서비스에 요청
-                  ↓
-결과 반환 → 모델이 보고서 작성
-```
+<figure class="article-diagram">
+<figcaption>구조 및 흐름 2</figcaption>
+<ol>
+<li>Skill: 보고서 작성 절차·기준</li>
+<li>AI 앱이 Tool 선택</li>
+<li>커넥터로 설정한 MCP 연결을 통해 호출</li>
+<li>MCP 서버 Tool → 외부 서비스 요청</li>
+<li>결과 반환 → 모델이 보고서 작성</li>
+</ol>
+</figure>
+
 
 모든 작업이 이 경로를 거쳐야 하는 것은 아닙니다. 로컬 파일만 요약하면 커넥터 없이 내장 파일 도구를 사용할 수 있고, 별도 Skill 없이도 MCP 툴을 호출할 수 있습니다.
 

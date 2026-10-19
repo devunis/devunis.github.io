@@ -54,12 +54,15 @@ DNS는 응용 계층 프로토콜입니다. UDP·TCP 또는 암호화된 전송 
 
 TCP 기반 HTTPS에서는 새 TCP 연결을 만들 때 일반적으로 다음 과정을 거칩니다.
 
-```text
-클라이언트                 서버
-    SYN ──────────────────→
-        ←────────── SYN + ACK
-    ACK ──────────────────→
-```
+<figure class="article-diagram">
+<figcaption>구조 및 흐름 1</figcaption>
+<ol>
+<li>클라이언트 → 서버: SYN</li>
+<li>서버 → 클라이언트: SYN + ACK</li>
+<li>클라이언트 → 서버: ACK</li>
+</ol>
+</figure>
+
 
 TCP는 순서가 있는 신뢰성 있는 바이트 스트림을 제공합니다. 손실에 대한 재전송, 흐름 제어, 혼잡 제어 등이 여기에 포함됩니다. 다만 연결이 영원히 성공한다거나, 요청이 애플리케이션에서 처리되었다는 사실까지 보장하지는 않습니다. TCP ACK는 주문 저장 완료 확인서가 아닙니다. [TCP RFC 9293](https://www.rfc-editor.org/rfc/rfc9293.html)
 
@@ -78,18 +81,18 @@ Host: example.com
 
 TCP 기반 HTTPS에서 데이터가 싸이는 모습을 단순화하면 다음과 같습니다.
 
-```text
-응용 데이터: HTTP 요청
-  ↓ TLS로 보호
-TLS 레코드
-  ↓ TCP 바이트 스트림의 일부로 전달
-TCP 세그먼트
-  ↓ IP 헤더 추가
-IP 패킷
-  ↓ 현재 링크의 헤더·트레일러 등 추가
-링크 프레임
-  ↓ 물리 매체의 신호로 전송
-```
+<figure class="article-diagram">
+<figcaption>구조 및 흐름 2</figcaption>
+<ol>
+<li>HTTP 요청</li>
+<li>TLS 레코드: 암호화·보호</li>
+<li>TCP 세그먼트: 바이트 스트림 전달</li>
+<li>IP 패킷: 네트워크 전달</li>
+<li>링크 프레임: 현재 링크 전달</li>
+<li>물리 신호</li>
+</ol>
+</figure>
+
 
 이를 **캡슐화**라고 합니다. 받는 쪽은 각 프로토콜의 정보를 처리하며 위쪽 기능으로 데이터를 전달합니다.
 
@@ -122,10 +125,14 @@ HTTP 요청 하나, TLS 레코드 하나, TCP 세그먼트 하나가 반드시 �
 
 지금까지의 TCP 연결 설명을 모든 HTTPS에 적용하면 안 됩니다. HTTP/3는 QUIC를 사용하고, QUIC는 UDP 위에서 동작하며 TLS 1.3을 통합합니다.
 
-```text
-HTTP/1.1·HTTP/2의 일반적인 HTTPS: HTTP → TLS → TCP → IP
-HTTP/3:                         HTTP → QUIC → UDP → IP
-```
+<figure class="article-diagram diagram-alternatives">
+<figcaption>구조 및 흐름 3</figcaption>
+<ol>
+<li>일반적인 HTTP/1.1·2 HTTPS: HTTP → TLS → TCP → IP</li>
+<li>HTTP/3: HTTP → QUIC → UDP → IP</li>
+</ol>
+</figure>
+
 
 UDP를 쓴다고 HTTP/3가 신뢰성 없는 웹 요청이 되는 것은 아닙니다. QUIC가 신뢰성 있는 스트림과 혼잡 제어 등 필요한 기능을 제공합니다. OSI의 기능 구분과 실제 프로토콜 경계를 동일하게 볼 수 없다는 좋은 예입니다. [HTTP/3 RFC 9114](https://www.rfc-editor.org/rfc/rfc9114)
 

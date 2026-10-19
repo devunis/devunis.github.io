@@ -12,9 +12,18 @@ Reranker는 검색 단계에서 찾은 후보를 질의와 함께 다시 평가�
 
 벡터 검색은 많은 문서에서 후보를 좁히고, Cross-Encoder 계열 reranker는 질의와 후보 문서 쌍을 함께 평가할 수 있습니다. 모든 reranker가 같은 구조인 것은 아니므로 모델 문서를 확인합니다.
 
-```text
-질의 → 후보 검색 → 질의·문서 쌍 평가 → 재정렬 → 상위 문서 → 답변 생성
-```
+<figure class="article-diagram">
+<figcaption>처리 흐름</figcaption>
+<ol>
+<li>질의</li>
+<li>후보 검색</li>
+<li>질의·문서 쌍 평가</li>
+<li>재정렬</li>
+<li>상위 문서</li>
+<li>답변 생성</li>
+</ol>
+</figure>
+
 
 검색 단계에서 정답 문서를 놓치면 reranker도 그 문서를 복원할 수 없습니다. 후보의 재현율과 재정렬 품질을 나눠 봐야 합니다.
 
