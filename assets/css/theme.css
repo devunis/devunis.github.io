@@ -456,3 +456,10 @@ section { scroll-margin-top: 80px; }
 @media(max-width:600px){.page__content .article-diagram{padding:16px}.page__content pre{padding:14px!important}.page__content .article-diagram ol>li{padding-right:12px;}}
 .page__content .diagram-alternatives ol>li:after{display:none;}
 .page__content .diagram-alternatives ol{gap:12px;}
+.page__content figure.article-diagram{display:block;width:auto;}
+.page__content .article-diagram figcaption,.page__content .article-diagram ol,.page__content .article-diagram ul{width:100%;max-width:none;}
+.page__title,.page__title a{color:var(--text-primary)!important;}
+.toc{background:var(--bg-card)!important;border-color:var(--border-color)!important;color:var(--text-secondary)!important;}
+.toc .nav__title{background:var(--bg-secondary)!important;color:var(--text-primary)!important;}
+.toc .toc__menu a{color:var(--text-secondary)!important;border-color:var(--border-color)!important;}
+.toc .toc__menu a:hover,.toc .toc__menu .active>a{background:var(--bg-secondary)!important;color:var(--primary)!important;}
