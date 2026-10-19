@@ -22,7 +22,7 @@ LangGraph는 상태와 노드·전이를 이용해 실행 흐름을 구성하는
 SenPick 원본은 감정·상황 기반 선물 추천 서비스입니다. 팀 회고에는 대화 진행, 상황 추출, 추천, 의도 파악의 역할 분리와, 필요한 정보가 갖춰진 경우 추천하도록 제어하는 흐름이 소개되어 있습니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>정보가 충분할 때 다음 단계로</figcaption>
 <ol>
 <li>입력</li>
 <li>상황 추출</li>

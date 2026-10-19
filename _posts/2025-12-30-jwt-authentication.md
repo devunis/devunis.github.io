@@ -26,7 +26,7 @@ Refresh Token이 반드시 JWT일 필요는 없습니다. 저장 위치와 수�
 서명 키가 같고 sub·exp만 검사하면 refresh token이 API 접근에 사용되거나 access token이 갱신에 사용되는 오류가 생길 수 있습니다. 용도 클레임·audience·별도 검증 함수 등으로 각 경계를 명시합니다.
 
 <figure class="article-diagram diagram-alternatives">
-<figcaption>처리 흐름</figcaption>
+<figcaption>인증의 세 가지 요청 경로</figcaption>
 <ol>
 <li>로그인 검증 → 접근·갱신 토큰 발급</li>
 <li>API 요청 → 토큰 정책 검증 → 사용자·객체 권한 확인</li>

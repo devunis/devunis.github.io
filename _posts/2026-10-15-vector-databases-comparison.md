@@ -20,7 +20,7 @@ tags: [Database, Vector-Database, RAG, Qdrant, pgvector, Database-Series]
 기본 흐름은 다음과 같습니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>자료 준비와 질문 처리</figcaption>
 <ol>
 <li>원문 → 청크 분할</li>
 <li>임베딩 생성</li>

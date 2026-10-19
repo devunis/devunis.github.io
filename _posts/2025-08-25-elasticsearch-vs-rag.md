@@ -21,7 +21,7 @@ Elasticsearch를 키워드 검색만 가능한 엔진으로 제한하지 않습�
 ## 🔗 함께 사용하는 예
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>검색과 생성의 역할 분담</figcaption>
 <ol>
 <li>사용자 질문</li>
 <li>Elasticsearch 후보 검색</li>

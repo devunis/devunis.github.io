@@ -157,7 +157,7 @@ OWL은 알려지지 않은 사실을 곧바로 거짓으로 보지 않는 개방
 아래는 가능한 구성 예시입니다. 모든 시스템이 이 순서를 거쳐야 하는 것은 아닙니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>원본 데이터에서 분석까지</figcaption>
 <ol>
 <li>업무 DB · 클릭 로그 · 상품 이미지</li>
 <li>수집 → 데이터 레이크: 원본·정제 데이터</li>
@@ -168,7 +168,7 @@ OWL은 알려지지 않은 사실을 곧바로 거짓으로 보지 않는 개방
 </ol>
 </figure>
 <figure class="article-diagram relation-diagram">
-<figcaption>온톨로지와 데이터의 관계</figcaption>
+<figcaption>온톨로지와 실제 데이터 연결</figcaption>
 <ul><li>온톨로지: 고객·주문·상품의 개념과 관계 정의</li><li>개념과 실제 데이터 매핑 ↔ 개체·관계 데이터</li><li>개체·관계 데이터를 지식 그래프로 구성해 탐색·활용</li></ul>
 </figure>
 

@@ -11,7 +11,7 @@ Tongue Twist는 Streamlit과 음성 인식·언어 모델·음성 합성을 조�
 ## 🎤 처리 단계
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>목소리에서 피드백까지</figcaption>
 <ol>
 <li>녹음</li>
 <li>음성 인식 · STT</li>

@@ -94,7 +94,7 @@ Skill이 작업 방법을 알려주고 MCP 도구가 필요한 데이터에 접�
 원본 README에 따르면 같은 모델의 서브에이전트에 동일한 과제와 서로 다른 전략 카드를 주고, 답안 생성 → 상호 비판 → 방어·수정 → 심사 → 토너먼트 반복을 수행합니다. 여러 종류의 모델을 비교하는 서비스와는 구조가 다릅니다.
 
 <figure class="article-diagram">
-<figcaption>Arena의 후보 비교 흐름</figcaption>
+<figcaption>후보를 비교해 답을 다듬는 과정</figcaption>
 <ol>
 <li>같은 과제 + 서로 다른 전략</li>
 <li>여러 후보 답안</li>

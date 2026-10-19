@@ -226,7 +226,7 @@ Prisma 역시 과거 명령을 현재 버전의 복구 방법으로 가정하지
 기존 데이터가 있는 테이블에 필수 컬럼을 추가할 때는 다음과 같은 단계적 변경을 검토할 수 있습니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>호환성을 유지하는 스키마 변경</figcaption>
 <ol>
 <li>NULL 허용 컬럼 추가</li>
 <li>기존·신규 구조와 호환되는 앱 배포</li>

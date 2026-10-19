@@ -16,7 +16,7 @@ TypeSafe는 Jev를 자사의 첫 공개 **System One 모델**로 소개합니다
 서비스 입장에서 보면 다음과 같은 역할입니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>판단과 실행을 나누는 흐름</figcaption>
 <ol>
 <li>고객 문의</li>
 <li>Jev: 담당 팀 선택</li>

@@ -21,7 +21,7 @@ LangChain과 LangGraph는 경쟁하는 두 성능 등급이 아니라 함께 사
 ## 🎯 간단한 흐름과 제어가 많은 흐름
 
 <figure class="article-diagram diagram-alternatives">
-<figcaption>처리 흐름</figcaption>
+<figcaption>직선 흐름과 조건부 흐름</figcaption>
 <ol>
 <li>단순 흐름: 질문 → 검색 → 답변</li>
 <li>조건 판단: 정보 부족 → 추가 질문 / 충분 → 검색</li>

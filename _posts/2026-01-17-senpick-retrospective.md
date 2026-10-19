@@ -34,7 +34,7 @@ SenPick은 선물 선택이 어려운 사용자의 감정과 상황을 대화로
 원본 회고에는 대화 진행, 상황 추출, 추천, 사용자 의도 파악의 역할을 나눠 프롬프트를 설계·조합한 경험이 기록되어 있습니다. LangGraph 기반 상태 전이로 필요한 정보가 갖춰진 경우 추천을 수행하도록 구성하는 관점도 설명합니다.
 
 <figure class="article-diagram">
-<figcaption>처리 흐름</figcaption>
+<figcaption>대화에서 추천까지</figcaption>
 <ol>
 <li>사용자와 대화</li>
 <li>상황·조건 추출</li>

@@ -76,7 +76,7 @@ MCP(Model Context Protocol)는 AI 애플리케이션과 외부 도구·데이터
 | MCP Server | 도구·데이터·템플릿 등을 MCP 방식으로 제공하는 프로그램 |
 
 <figure class="article-diagram diagram-alternatives">
-<figcaption>구조 및 흐름 1</figcaption>
+<figcaption>하나의 호스트, 독립된 연결</figcaption>
 <ol>
 <li>사용자 ↔ AI 애플리케이션 · MCP Host</li>
 <li>연결 A: MCP Client A ↔ MCP Server A ↔ 문서 서비스</li>
@@ -133,7 +133,7 @@ MCP의 Prompt와 Skill도 같은 것은 아닙니다. 전자는 서버가 제공
 | 외부 문서 저장 | 문서 생성 Tool과 해당 연결 | 저장이 요청된 경우 결과물 생성 |
 
 <figure class="article-diagram">
-<figcaption>구조 및 흐름 2</figcaption>
+<figcaption>절차에서 도구 실행까지</figcaption>
 <ol>
 <li>Skill: 보고서 작성 절차·기준</li>
 <li>AI 앱이 Tool 선택</li>

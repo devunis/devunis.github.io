@@ -22,7 +22,7 @@ tags: [Session, JWT, Authentication, XSS, CSRF, Refresh-Token, Security]
 ### 서버 세션 방식
 
 <figure class="article-diagram">
-<figcaption>구조 및 흐름 1</figcaption>
+<figcaption>서버가 로그인 상태를 기억하는 방식</figcaption>
 <ol>
 <li>로그인 성공</li>
 <li>서버: 사용자·세션 상태 저장</li>
@@ -38,7 +38,7 @@ tags: [Session, JWT, Authentication, XSS, CSRF, Refresh-Token, Security]
 ### JWT 액세스 토큰 방식
 
 <figure class="article-diagram">
-<figcaption>구조 및 흐름 2</figcaption>
+<figcaption>토큰을 검증하는 방식</figcaption>
 <ol>
 <li>로그인 성공</li>
 <li>인증 서버: 서명된 JWT 발급</li>
@@ -122,7 +122,7 @@ XSS는 출력 문맥에 맞는 인코딩, 안전한 DOM API, 필요한 HTML 정�
 리프레시 토큰 회전(rotation)은 갱신할 때 새 토큰을 발급하고 이전 토큰을 무효화하는 방식입니다.
 
 <figure class="article-diagram">
-<figcaption>구조 및 흐름 3</figcaption>
+<figcaption>사용된 갱신 토큰이 다시 나타나면</figcaption>
 <ol>
 <li>리프레시 R1 사용</li>
 <li>R1 무효화 + R2 발급</li>

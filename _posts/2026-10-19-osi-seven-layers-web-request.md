@@ -54,13 +54,15 @@ DNS는 응용 계층 프로토콜입니다. UDP·TCP 또는 암호화된 전송 
 
 TCP 기반 HTTPS에서는 새 TCP 연결을 만들 때 일반적으로 다음 과정을 거칩니다.
 
-<figure class="article-diagram">
-<figcaption>구조 및 흐름 1</figcaption>
+<figure class="article-diagram sequence-diagram">
+<figcaption>TCP 연결의 세 번의 메시지</figcaption>
+<div class="sequence-actors"><span>클라이언트</span><span>서버</span></div>
 <ol>
-<li>클라이언트 → 서버: SYN</li>
-<li>서버 → 클라이언트: SYN + ACK</li>
-<li>클라이언트 → 서버: ACK</li>
+<li><span class="message-name">SYN</span><span class="message-detail">연결 요청</span></li>
+<li class="message-return"><span class="message-name">SYN + ACK</span><span class="message-detail">요청 확인 + 연결 요청</span></li>
+<li><span class="message-name">ACK</span><span class="message-detail">확인 응답</span></li>
 </ol>
+<p class="diagram-note">화살표는 메시지의 전달 방향을 나타냅니다.</p>
 </figure>
 
 
@@ -81,8 +83,8 @@ Host: example.com
 
 TCP 기반 HTTPS에서 데이터가 싸이는 모습을 단순화하면 다음과 같습니다.
 
-<figure class="article-diagram">
-<figcaption>구조 및 흐름 2</figcaption>
+<figure class="article-diagram layer-diagram">
+<figcaption>요청이 전송 신호가 되기까지</figcaption>
 <ol>
 <li>HTTP 요청</li>
 <li>TLS 레코드: 암호화·보호</li>
@@ -125,12 +127,12 @@ HTTP 요청 하나, TLS 레코드 하나, TCP 세그먼트 하나가 반드시 �
 
 지금까지의 TCP 연결 설명을 모든 HTTPS에 적용하면 안 됩니다. HTTP/3는 QUIC를 사용하고, QUIC는 UDP 위에서 동작하며 TLS 1.3을 통합합니다.
 
-<figure class="article-diagram diagram-alternatives">
-<figcaption>구조 및 흐름 3</figcaption>
-<ol>
-<li>일반적인 HTTP/1.1·2 HTTPS: HTTP → TLS → TCP → IP</li>
-<li>HTTP/3: HTTP → QUIC → UDP → IP</li>
-</ol>
+<figure class="article-diagram protocol-diagram">
+<figcaption>HTTP 버전별 전송 구조</figcaption>
+<div class="protocol-columns">
+<div><h4>HTTP/1.1 · HTTP/2</h4><p class="protocol-context">일반적인 HTTPS 구성</p><ol><li>HTTP</li><li>TLS</li><li>TCP</li><li>IP</li></ol></div>
+<div><h4>HTTP/3</h4><p class="protocol-context">QUIC에 TLS 1.3 통합</p><ol><li>HTTP</li><li>QUIC</li><li>UDP</li><li>IP</li></ol></div>
+</div>
 </figure>
 
 

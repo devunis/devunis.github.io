@@ -17,9 +17,17 @@ tags: [Database, GraphDB, Neo4j, Knowledge-Graph, Multi-Model, Database-Series]
 
 속성 그래프(Property Graph)는 노드와 관계에 속성을 붙입니다.
 
-<figure class="article-diagram relation-diagram">
-<figcaption>구매 관계를 연결한 그래프</figcaption>
-<ul><li>사용자 A <span>구매 →</span> 상품 X</li><li>사용자 B <span>구매 →</span> 상품 X</li><li>사용자 B <span>구매 →</span> 상품 Y</li></ul>
+<figure class="article-diagram graph-diagram">
+<figcaption>같은 상품으로 연결되는 사용자</figcaption>
+<svg viewBox="0 0 480 260" role="img" aria-labelledby="purchase-graph-title purchase-graph-desc">
+<title id="purchase-graph-title">사용자와 상품의 구매 관계</title>
+<desc id="purchase-graph-desc">사용자 A와 사용자 B는 상품 X를 구매했습니다. 사용자 B는 상품 Y도 구매했습니다.</desc>
+<g class="graph-edges"><path d="M120 70 L360 70 M120 190 L360 70 M120 190 L360 190"/></g>
+<g class="graph-labels"><text x="240" y="57">구매 →</text><text x="225" y="122">구매 ↗</text><text x="240" y="177">구매 →</text></g>
+<g class="graph-people"><circle cx="90" cy="70" r="40"/><circle cx="90" cy="190" r="40"/></g>
+<g class="graph-products"><rect x="350" y="36" width="100" height="68" rx="12"/><rect x="350" y="156" width="100" height="68" rx="12"/></g>
+<g class="graph-node-labels"><text x="90" y="75">사용자 A</text><text x="90" y="195">사용자 B</text><text x="400" y="75">상품 X</text><text x="400" y="195">상품 Y</text></g>
+</svg>
 </figure>
 
 이 구조에서는 “나와 같은 상품을 구매한 사람이 산 다른 상품”을 관계 탐색으로 표현할 수 있습니다. 관계형 DB에서도 조인으로 구현할 수 있지만, 탐색 단계와 관계 종류가 늘어날수록 그래프 모델을 비교할 가치가 생깁니다.
