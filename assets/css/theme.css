@@ -463,3 +463,7 @@ section { scroll-margin-top: 80px; }
 .toc .nav__title{background:var(--bg-secondary)!important;color:var(--text-primary)!important;}
 .toc .toc__menu a{color:var(--text-secondary)!important;border-color:var(--border-color)!important;}
 .toc .toc__menu a:hover,.toc .toc__menu .active>a{background:var(--bg-secondary)!important;color:var(--primary)!important;}
+/* Theme's thead fill must not show through translucent header cells. */
+.page__content table thead,.page__content table thead tr,.page__content table th{background:#e8eef8!important;color:#1a202c!important;}
+[data-theme="dark"] .page__content table thead,[data-theme="dark"] .page__content table thead tr,[data-theme="dark"] .page__content table th{background:#243249!important;color:#f5f6fa!important;}
+.page__content table th :is(a,strong,em,span){color:inherit!important;}
