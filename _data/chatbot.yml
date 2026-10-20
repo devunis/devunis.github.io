@@ -3,7 +3,7 @@
   url: "/about/"
   category: "소개"
   keywords: [허정윤, 백엔드, AI, 개발자, 프로필, 소개]
-  answer: "허정윤은 Java Spring 기반 헬스케어 백엔드 경험을 바탕으로 Python, RAG, AI 서비스를 만드는 Backend & AI Developer입니다. 안정적인 API 설계부터 데이터 파이프라인, AI 검색, 클라우드 배포까지 제품의 전체 흐름을 다룹니다."
+  answer: "허정윤은 이너웨이브에서 풀스택 개발과 AI·인프라 업무를 담당하는 Backend & AI Developer입니다. 2025년 9월 22일부터 재직 중이며 Nomos·PAtif 개발에 참여합니다. 이전에는 Java Spring 기반 헬스케어 백엔드를 개발·운영했습니다."
 
 - id: experience-purunsongnamu
   title: "백엔드 실무 경력"
@@ -67,3 +67,10 @@
   category: "연락"
   keywords: [연락, 연락처, 이메일, 메일, GitHub, 깃허브, 채용, 협업]
   answer: "이메일은 gjwjddbsg@gmail.com이며, GitHub 계정은 devunis입니다. 백엔드와 AI가 만나는 제품, 채용, 협업에 관한 연락을 환영합니다."
+
+- id: experience-innerwave
+  title: "이너웨이브 경력과 Nomos·PAtif"
+  url: "/projects/"
+  category: "경력"
+  keywords: [이너웨이브, 현재, 재직, 경력, Nomos, 노모스, PAtif, Patif, 파티프, 풀스택, Jenkins, 인프라, 에이전트]
+  answer: "2025년 9월 22일부터 이너웨이브에 재직 중입니다. AX 플랫폼 Nomos와 이를 기반으로 한 변리사 업무 지원 솔루션 PAtif 개발에 참여합니다. 메일 관련 기능·프론트엔드 개발, AI 에이전트 일부 기능 구현, 머신러닝 인프라 관련 업무, Jenkins 배포 및 서버 환경 구축·운영을 담당합니다."
