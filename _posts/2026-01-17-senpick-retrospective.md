@@ -1,296 +1,67 @@
 ---
-title: "SenPick 개발 회고: GPT-4o + RAG로 CTR 15% 달성"
+title: "SenPick 개발 회고: 감정·상황 기반 선물 추천과 에이전트 설계"
 date: 2026-01-17 09:00:00 +0900
 categories: [Project, Retrospective]
 tags: [SenPick, RAG, LangGraph, Project, GPT-4o]
+last_modified_at: 2026-10-15 14:50:00 +0900
 ---
 
-개인화 기술 뉴스 추천 서비스 SenPick 개발 회고입니다. GPT-4o와 RAG를 활용해 CTR 15%를 달성한 과정을 공유합니다.
+SenPick은 선물 선택이 어려운 사용자의 감정과 상황을 대화로 파악하고 상품과 추천 이유를 제안하는 팀 프로젝트입니다. 기술 뉴스 추천 서비스로 소개했던 내용을 원본 프로젝트에 맞게 바로잡았습니다.
 
----
-
-## 🎯 프로젝트 배경
-
-### 문제 인식
-- 🔍 기술 정보 과부하
-- ⏰ 양질의 콘텐츠 발견 시간 소요
-- 🎯 개인화 부족
-
-### 목표
-> "사용자 취향에 맞는 기술 뉴스를 AI가 추천"
+> 정정: 이전 글의 클릭률·검색 정확도·응답 시간 등 정량 성과와 실험 결과는 측정 근거가 없어 삭제했습니다. 아래는 공개 저장소에서 확인할 수 있는 서비스와 설계 내용 중심의 기록입니다.
 
 ---
 
-## 🛠️ 기술 스택 선정
+## 🎁 무엇을 만드는 프로젝트인가?
 
-### 왜 이 기술들인가?
+공개 README에 따르면 프로젝트는 SK Networks AI Camp의 팀 프로젝트이며 기간은 2025년 4월 23일부터 6월 20일까지입니다. 수령인과 선물 상황을 입력하고 대화를 진행해 추천을 받는 흐름, 상품 비교, 추천·좋아요 이력 같은 기능을 소개합니다.
 
-```
-Frontend: Streamlit (빠른 프로토타입)
-Backend: FastAPI (비동기 처리)
-LLM: GPT-4o (최신 모델)
-Vector DB: Qdrant (메타데이터 필터링)
-Framework: LangGraph (멀티 에이전트)
-Deployment: AWS EC2 + Docker
-```
+사용자의 취향만으로 상품을 고르기보다 관계, 상황, 감정과 예산 등 추천에 필요한 맥락을 확보하는 것이 중요합니다. 정보가 부족한 상태에서 추천을 시작하면 그럴듯하지만 상황에 맞지 않는 결과가 나올 수 있습니다.
 
-**FastAPI 선택 이유**:
-- ✅ 비동기 처리로 AI 추론 효율화
-- ✅ Pydantic 통합으로 타입 안전성
-- ✅ 자동 API 문서화
+## 🛠️ 원본에서 확인되는 기술 구성
 
----
+| 영역 | README에 소개된 기술 |
+| --- | --- |
+| 웹 서비스 | Django, HTML·JavaScript·CSS |
+| 데이터·인프라 | MySQL, Amazon RDS·S3·EC2, Docker, Nginx, Gunicorn |
+| 대화·추천 흐름 | GPT-4o, LangChain, LangGraph |
+| 임베딩·검색 | multilingual-e5-large-instruct, Qdrant |
 
-## 🏗️ 아키텍처 설계
+이는 팀 프로젝트의 구성입니다. 모든 기능을 개인이 단독 구현했다는 의미는 아닙니다. 과거 글에 쓰인 FastAPI·Streamlit 중심 설명은 이 프로젝트의 원본 구성과 달라 제거했습니다.
 
-### 멀티 에이전트 시스템
+## 🧩 역할을 나누고 흐름을 제어하기
 
-```
-User Query
-    ↓
-[Router Agent] ← 질문 분석
-    ↓
-    ├─→ [RAG Agent] ← 벡터 DB 검색
-    ├─→ [Web Search Agent] ← 실시간 검색
-    └─→ [Personalization Agent] ← 사용자 프로필
-    ↓
-[Response Generator]
-    ↓
-Personalized Result
-```
+원본 회고에는 대화 진행, 상황 추출, 추천, 사용자 의도 파악의 역할을 나눠 프롬프트를 설계·조합한 경험이 기록되어 있습니다. LangGraph 기반 상태 전이로 필요한 정보가 갖춰진 경우 추천을 수행하도록 구성하는 관점도 설명합니다.
 
-### LangGraph 구현
+<figure class="article-diagram">
+<figcaption>대화에서 추천까지</figcaption>
+<ol>
+<li>사용자와 대화</li>
+<li>상황·조건 추출</li>
+<li>정보 충분 여부 판단</li>
+<li>부족 → 추가 질문 후 재확인 / 충족 → 검색·추천</li>
+<li>추천 이유와 상품 정보</li>
+</ol>
+</figure>
 
-```python
-from langgraph.graph import StateGraph
 
-workflow = StateGraph(AgentState)
+위 그림은 공개 설명을 요약한 개념도이며 실제 함수·노드의 전체 명세는 아닙니다. 역할을 나눴다는 사실만으로 반드시 다른 모델을 사용하거나 성능이 향상된다고 볼 수는 없습니다.
 
-# 에이전트 추가
-workflow.add_node("router", router_node)
-workflow.add_node("rag", rag_agent_node)
-workflow.add_node("web_search", web_search_node)
-workflow.add_node("personalizer", personalization_node)
+## ⚡ 응답 속도 최적화에서 다룰 내용
 
-# 조건부 라우팅
-workflow.add_conditional_edges(
-    "router",
-    route_decision,
-    {
-        "knowledge": "rag",
-        "latest": "web_search"
-    }
-)
+응답 속도는 중요한 개선 대상입니다. 최적화 방법과 측정된 결과를 구분해 기록해야 합니다. 다음은 점검할 방법이며, 모두 실제 프로젝트에 적용되었다고 단정하는 목록은 아닙니다.
 
-app = workflow.compile()
-```
+- 독립적인 외부 요청은 동시 실행을 검토하되, 앞 단계 결과에 의존하는 작업은 순서를 유지합니다.
+- 같은 계산·조회가 반복되면 캐싱을 검토하고 키·만료·개인화 범위를 정합니다.
+- 검색·모델 호출·후처리 시간을 나눠 병목을 확인합니다.
+- 평균뿐 아니라 P95 지연, 오류·타임아웃, 캐시 적중 여부도 함께 기록합니다.
 
----
+비동기 I/O는 대기를 겹치는 방법이지 모델 추론 계산 자체를 자동으로 빠르게 만드는 기능은 아닙니다. 검증한 로그가 생기면 환경·요청 수·조건과 함께 개선 결과를 추가할 수 있습니다.
 
-## 🔥 핵심 기능 구현
+## 🔍 앞으로 평가할 것
 
-### 1. RAG + 웹 검색 하이브리드
+추천이 상황·예산·수령인 조건을 충족하는지, 상품 정보와 이유가 근거에 맞는지, 추가 질문이 필요한 시점을 잘 판단하는지부터 평가해야 합니다. 클릭률을 성과로 공개하려면 노출·클릭의 정의, 기간, 표본, 비교 조건이 필요합니다.
 
-```python
-async def hybrid_search(query: str, user_profile: dict):
-    # 병렬 검색
-    rag_results, web_results = await asyncio.gather(
-        qdrant_search(query, user_profile["interests"]),
-        tavily_search(query)
-    )
-    
-    # Reranker로 재정렬
-    all_results = rag_results + web_results
-    ranked = rerank(query, all_results)
-    
-    return ranked[:5]
-```
+정량 결과를 제시하지 않아도 문제, 설계 판단, 구현한 역할, 한계를 구체적으로 설명할 수 있습니다. 이 글에서는 역할 분리와 대화 흐름 제어를 중심으로 프로젝트를 정리합니다.
 
-### 2. 개인화 추천 로직
-
-```python
-def personalize_results(results: list, user_profile: dict):
-    """사용자 선호도 기반 재정렬"""
-    
-    for result in results:
-        score = 0
-        
-        # 관심 태그 매칭
-        for tag in result["tags"]:
-            if tag in user_profile["interests"]:
-                score += 2
-        
-        # 읽은 기사 유사도
-        similarity = compute_similarity(
-            result["embedding"],
-            user_profile["avg_embedding"]
-        )
-        score += similarity * 3
-        
-        # 클릭 이력 반영
-        if result["source"] in user_profile["preferred_sources"]:
-            score += 1.5
-        
-        result["personalized_score"] = score
-    
-    return sorted(results, key=lambda x: x["personalized_score"], reverse=True)
-```
-
-### 3. 실시간 피드백 학습
-
-```python
-@app.post("/feedback")
-async def collect_feedback(
-    article_id: int,
-    action: str,  # "click", "like", "skip"
-    user_id: int
-):
-    """사용자 행동 수집"""
-    
-    # 프로필 업데이트
-    user_profile = get_user_profile(user_id)
-    
-    if action == "click":
-        user_profile["clicked_articles"].append(article_id)
-        article = get_article(article_id)
-        
-        # 임베딩 평균 갱신
-        update_user_embedding(user_id, article["embedding"])
-        
-        # 선호 태그 강화
-        for tag in article["tags"]:
-            user_profile["interests"][tag] = user_profile["interests"].get(tag, 0) + 1
-    
-    save_user_profile(user_profile)
-    
-    return {"status": "success"}
-```
-
----
-
-## 💪 개발 과정 도전과제
-
-### 1. Hallucination 문제
-**문제**: GPT-4o가 없는 정보 생성
-```python
-# 해결: 프롬프트 개선
-prompt = """
-⚠️ 중요: 다음 컨텍스트의 정보만 사용하세요.
-컨텍스트에 없으면 "정보가 없습니다"라고 답하세요.
-
-컨텍스트: {context}
-질문: {question}
-"""
-```
-
-### 2. 검색 정확도 향상
-**Before**: NDCG@5 = 0.67
-**After (Reranker 도입)**: NDCG@5 = 0.87 (+30%)
-
-### 3. 응답 속도 최적화
-```python
-# 비동기 + 캐싱
-@lru_cache(maxsize=100)
-def embed_query(query: str):
-    return embedding_model.embed(query)
-
-# 병렬 처리
-results = await asyncio.gather(
-    search_qdrant(),
-    search_web(),
-    generate_summary()
-)
-```
-
----
-
-## 📊 CTR 15% 달성 과정
-
-### 실험 과정
-
-| 버전 | 변경사항 | CTR |
-|------|----------|-----|
-| v1.0 | 기본 벡터 검색 | 8% |
-| v1.1 | + Reranker | 11% (+3%) |
-| v1.2 | + 개인화 | 13% (+2%) |
-| v1.3 | + 실시간 피드백 | 15% (+2%) |
-
-### 핵심 개선 요인
-
-1. **Reranker 도입** (3% 기여)
-   - BGE Reranker로 관련도 재정렬
-   
-2. **개인화 알고리즘** (2% 기여)
-   - 사용자 프로필 기반 스코어링
-   
-3. **실시간 학습** (2% 기여)
-   - 클릭 피드백 즉시 반영
-
----
-
-## 🎓 배운 점
-
-### 기술적 학습
-- ✅ LangGraph로 복잡한 워크플로우 구현
-- ✅ Qdrant 메타데이터 필터링 활용
-- ✅ 비동기 프로그래밍으로 성능 최적화
-- ✅ Reranker의 중요성 체감
-
-### 제품적 학습
-- ✅ 사용자 피드백의 중요성
-- ✅ 점진적 개선 (v1.0 → v1.3)
-- ✅ A/B 테스트로 검증
-
----
-
-## 😔 아쉬운 점
-
-### 1. 스케일링 이슈
-- 현재: 단일 EC2 서버
-- 개선 필요: 로드 밸런싱, 캐시 레이어
-
-### 2. 평가 지표 부족
-- RAGAS 등 자동 평가 미도입
-- 사용자 만족도 정량화 필요
-
-### 3. 비용 최적화
-- GPT-4o 비용 관리 필요
-- 캐싱 전략 강화
-
----
-
-## 🚀 향후 개선 방향
-
-### 단기 (1개월)
-- [ ] 캐싱 레이어 추가 (Redis)
-- [ ] 응답 시간 1초 이하로 단축
-- [ ] 오프라인 임베딩 pre-compute
-
-### 중기 (3개월)
-- [ ] 다중 언어 지원
-- [ ] 모바일 앱 개발
-- [ ] 커뮤니티 기능 추가
-
-### 장기 (6개월)
-- [ ] 자체 LLM 파인튜닝
-- [ ] 수평 확장 아키텍처
-- [ ] B2B 서비스 전환
-
----
-
-## 📝 정리
-
-SenPick 개발을 통해 **RAG + 멀티 에이전트 + 개인화**의 시너지를 경험했습니다.
-
-**핵심 성과**:
-- ✅ CTR 15% 달성
-- ✅ 응답 정확도 87% (NDCG@5)
-- ✅ 평균 응답 시간 2.3초
-
-가장 중요한 교훈은 **"사용자 피드백을 빠르게 반영하는 시스템"**이 성공의 열쇠라는 것입니다! 🎯
-
----
-
-📚 **프로젝트 링크**:
-- [SenPick GitHub](https://github.com/devunis)
-- [데모 사이트](https://senpick.example.com)
+📚 **프로젝트 근거**: [SenPick 원본 저장소와 팀 회고](https://github.com/devunis/SenPick)

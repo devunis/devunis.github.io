@@ -1,71 +1,41 @@
 ---
-title: "Spring vs Django: 헬스케어 시스템 개발 경험 비교"
+title: "Spring Boot vs Django: 구성과 개발 방식 비교"
 date: 2026-01-01 09:00:00 +0900
 categories: [Backend, Experience]
 tags: [Spring, Django, Java, Python, Backend, Healthcare]
+last_modified_at: 2026-10-15 14:50:00 +0900
 ---
 
-2년 7개월간 Spring으로 헬스케어 시스템을 개발한 경험과 Django 프로젝트 경험을 비교합니다.
+Spring Boot와 Django를 비교할 때 고정된 개발 속도·성능 등급 대신 제공 기능, 팀 경험과 운영 환경을 봅니다. 이 글의 코드는 개념 설명이며 특정 운영 시스템의 성과를 나타내지 않습니다.
 
----
+## 📊 구성 비교
 
-## 🏥 헬스케어 시스템 (Spring Boot)
+| 관점 | Spring Boot | Django |
+| --- | --- | --- |
+| 중심 언어 | Java·Kotlin 등 JVM | Python |
+| 구성 | Spring 생태계의 기능을 선택·통합 | ORM·Admin·템플릿·인증 등 통합 |
+| 데이터 접근 | JPA·MyBatis 등 선택 | Django ORM 중심, 다른 접근도 가능 |
+| 트랜잭션 | 선택한 데이터 접근과 트랜잭션 관리 설정 | ORM·트랜잭션 API와 DB 지원 |
+| 운영 | JVM·스레드·연결 풀 등 관리 | WSGI·ASGI·워커·연결 등 관리 |
 
-### 프로젝트 개요
-- **기간**: 2년 7개월
-- **역할**: 백엔드 개발
-- **기술 스택**: Spring Boot, MariaDB, MyBatis
+Java의 컴파일 시 타입 검사와 Python의 동적 타입 특성은 차이가 있지만, 이것만으로 시스템의 안전성·성능을 판정하지 않습니다.
 
-### Spring 장점
-- ✅ 강력한 타입 안전성 (Java)
-- ✅ 엔터프라이즈급 기능
-- ✅ 풍부한 생태계
+## 🧩 관리자 기능 예제
 
-```java
-@Service
-public class PatientService {
-    @Autowired
-    private PatientRepository patientRepository;
-    
-    @Transactional
-    public Patient registerPatient(PatientDto dto) {
-        Patient patient = new Patient();
-        patient.setName(dto.getName());
-        return patientRepository.save(patient);
-    }
-}
-```
-
-### Django 장점
-- ✅ 빠른 개발 속도
-- ✅ Admin 패널
-- ✅ ORM 간편
+Django 모델을 정의했다고 Admin에 자동으로 표시되는 것은 아닙니다. 관리 사이트 활성화와 모델 등록·접근 권한이 필요합니다.
 
 ```python
-from django.db import models
+# admin.py: 해당 앱에 Patient 모델이 있다고 가정한 부분 예제
+from django.contrib import admin
+from .models import Patient
 
-class Patient(models.Model):
-    name = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-# Admin은 자동 생성!
+@admin.register(Patient)
+class PatientAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
 ```
 
----
+## ✅ 선택 기준
 
-## ⚖️ 비교 요약
+관리자·인증·API·배치 요구와 기존 시스템 통합을 나열합니다. 트랜잭션 경계·인증·배포는 어느 쪽에서도 검증해야 합니다. 서로 다른 프로젝트의 응답 시간을 언어·프레임워크 전체의 순위로 일반화하지 않습니다.
 
-| 특징 | Spring | Django |
-|------|--------|--------|
-| **개발 속도** | 보통 | 빠름 |
-| **성능** | 높음 | 중간 |
-| **타입 안전성** | 강력 | 약함 |
-| **학습 곡선** | 가파름 | 완만함 |
-
-프로젝트 규모와 팀 역량에 따라 선택하세요! 🚀
-
----
-
-📚 **참고 자료**:
-- [Spring Boot 공식 문서](https://spring.io/projects/spring-boot)
-- [Django 공식 문서](https://www.djangoproject.com/)
+📚 [Spring Boot](https://spring.io/projects/spring-boot) · [Django Admin](https://docs.djangoproject.com/en/stable/ref/contrib/admin/)

@@ -1,234 +1,28 @@
 ---
-layout: splash
-title: " "
+layout: portfolio
+title: "허정윤 | Backend & AI Developer"
+description: "백엔드의 기본기 위에 AI를 연결합니다. 허정윤의 프로젝트, 개발 경험, 기술 기록."
 permalink: /
 ---
-
-<link rel="stylesheet" href="/assets/css/landing.css">
-
-<main class="portfolio-home">
-  <section class="home-hero" aria-labelledby="home-title">
-    <div class="home-shell home-hero-grid">
-      <div class="home-hero-copy">
-        <p class="home-kicker"><span aria-hidden="true"></span> Backend &amp; AI Developer</p>
-        <h1 id="home-title">
-          복잡한 기술을<br>
-          <em>쓸 수 있는 제품</em>으로 만듭니다.
-        </h1>
-        <p class="home-intro">
-          Java Spring 기반 헬스케어 백엔드 경험 위에 Python과 AI를 연결합니다.
-          안정적인 API부터 RAG·에이전트 서비스, 배포까지 한 흐름으로 설계합니다.
-        </p>
-        <div class="home-actions">
-          <a class="home-button home-button--primary" href="#selected-work">
-            대표 프로젝트 보기 <span aria-hidden="true">↘</span>
-          </a>
-          <a class="home-button home-button--ghost" href="https://github.com/devunis" target="_blank" rel="noopener noreferrer">
-            GitHub <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <dl class="home-quick-facts" aria-label="주요 경력 수치">
-          <div>
-            <dt>2년 7개월</dt>
-            <dd>백엔드 실무 경력</dd>
-          </div>
-          <div>
-            <dt>20+</dt>
-            <dd>병원 시스템 연동</dd>
-          </div>
-          <div>
-            <dt>{{ site.posts | size }}</dt>
-            <dd>기술 아티클</dd>
-          </div>
-        </dl>
-      </div>
-
-      <aside class="home-profile-card" aria-label="개발자 프로필">
-        <div class="home-card-bar">
-          <span><i aria-hidden="true"></i> profile.json</span>
-          <span>SEOUL · KR</span>
-        </div>
-        <div class="home-profile-main">
-          <img src="/assets/images/avatar.png" alt="노트북으로 개발하는 허정윤의 픽셀 아트 아바타">
-          <div>
-            <p class="home-overline">HELLO, I’M</p>
-            <h2>허정윤</h2>
-            <p>Backend &amp; AI Developer</p>
-          </div>
-        </div>
-        <div class="home-capability-list">
-          <div><span>01</span><strong>Backend Systems</strong><small>Spring · Django · FastAPI</small></div>
-          <div><span>02</span><strong>AI Products</strong><small>RAG · LangGraph · Vision</small></div>
-          <div><span>03</span><strong>Cloud Delivery</strong><small>AWS · Docker · CI/CD</small></div>
-        </div>
-        <div class="home-current-work">
-          <span>CURRENTLY EXPLORING</span>
-          <strong>실시간 Computer Vision 서비스</strong>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section class="home-focus" aria-labelledby="focus-title">
-    <div class="home-shell">
-      <header class="home-section-heading home-section-heading--compact">
-        <div>
-          <p class="home-section-label">HOW I WORK</p>
-          <h2 id="focus-title">기술보다 문제를 먼저 봅니다.</h2>
-        </div>
-        <p>서비스의 맥락을 이해하고, 운영 가능한 구조로 끝까지 연결하는 개발을 지향합니다.</p>
-      </header>
-
-      <div class="home-focus-grid">
-        <article>
-          <span class="home-focus-number">01</span>
-          <h3>견고한 백엔드</h3>
-          <p>도메인과 데이터 흐름을 먼저 정리하고, 유지보수 가능한 API와 서버 구조를 설계합니다.</p>
-        </article>
-        <article>
-          <span class="home-focus-number">02</span>
-          <h3>검증 가능한 AI</h3>
-          <p>모델 호출에 그치지 않고 검색 품질, 응답 안정성, 사용자 경험을 함께 설계합니다.</p>
-        </article>
-        <article>
-          <span class="home-focus-number">03</span>
-          <h3>운영까지 한 흐름</h3>
-          <p>데이터 수집부터 배포와 관찰까지, 실제로 계속 사용할 수 있는 제품을 만듭니다.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-work" id="selected-work" aria-labelledby="work-title">
-    <div class="home-shell">
-      <header class="home-section-heading">
-        <div>
-          <p class="home-section-label">SELECTED WORK</p>
-          <h2 id="work-title">문제를 해결한 방식이<br>드러나는 작업들.</h2>
-        </div>
-        <p>백엔드, AI, 데이터가 만나는 지점에서 만든 대표 프로젝트입니다.</p>
-      </header>
-
-      <div class="home-project-grid">
-        <article class="home-project home-project--featured">
-          <div class="home-project-visual home-vision-visual" aria-hidden="true">
-            <span class="home-vision-ring home-vision-ring--one"></span>
-            <span class="home-vision-ring home-vision-ring--two"></span>
-            <span class="home-vision-cross">+</span>
-            <strong>VISION<br>ANALYZER</strong>
-            <small>ON-DEVICE · REAL-TIME</small>
-          </div>
-          <div class="home-project-copy">
-            <div class="home-project-meta"><span>01 · 2026</span><span>Computer Vision</span></div>
-            <h3>Vision Analyzer</h3>
-            <p>카메라와 영상에서 사물·표정·손짓을 실시간 분석하는 브라우저 기반 도구입니다. 서버 업로드 없이 온디바이스로 처리합니다.</p>
-            <ul class="home-tags" aria-label="사용 기술">
-              <li>MediaPipe</li><li>TensorFlow Lite</li><li>Canvas API</li>
-            </ul>
-            <a href="https://github.com/devunis" target="_blank" rel="noopener noreferrer">GitHub 프로필에서 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="home-project">
-          <div class="home-project-visual home-project-visual--image home-project-visual--senpick">
-            <img src="/assets/images/project-senpick.png" alt="" loading="lazy">
-          </div>
-          <div class="home-project-copy">
-            <div class="home-project-meta"><span>02 · 2025</span><span>LLM Product</span></div>
-            <h3>SenPick</h3>
-            <p>사용자의 취향과 상황을 이해해 선물을 제안하는 GPT-4o·RAG 기반 개인화 추천 서비스입니다.</p>
-            <ul class="home-tags" aria-label="사용 기술">
-              <li>LangGraph</li><li>Qdrant</li><li>RAG</li>
-            </ul>
-            <a href="https://github.com/devunis/Senpick" target="_blank" rel="noopener noreferrer">프로젝트 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="home-project">
-          <div class="home-project-visual home-project-visual--image home-project-visual--travel">
-            <img src="/assets/images/project-travel.png" alt="" loading="lazy">
-          </div>
-          <div class="home-project-copy">
-            <div class="home-project-meta"><span>03 · 2025</span><span>RAG Service</span></div>
-            <h3>Travel Checker</h3>
-            <p>국가별 반입금지 품목을 빠르게 확인할 수 있도록 공공데이터와 FAISS 검색을 연결한 여행 안내 서비스입니다.</p>
-            <ul class="home-tags" aria-label="사용 기술">
-              <li>Django</li><li>Gemma 3</li><li>FAISS</li>
-            </ul>
-            <a href="https://github.com/devunis/travel-checker" target="_blank" rel="noopener noreferrer">프로젝트 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-      </div>
-
-      <div class="home-more-link">
-        <a href="/projects/">전체 프로젝트 살펴보기 <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-experience" aria-labelledby="experience-title">
-    <div class="home-shell home-experience-grid">
-      <header>
-        <p class="home-section-label">EXPERIENCE</p>
-        <h2 id="experience-title">실제 운영 환경에서<br>배운 것들.</h2>
-        <p>헬스케어 도메인에서 데이터의 정확성과 서비스의 연속성을 지키는 개발을 경험했습니다.</p>
-      </header>
-
-      <article class="home-experience-card">
-        <div class="home-experience-top">
-          <div>
-            <span>2021.11 — 2024.05</span>
-            <h3>㈜푸른소나무</h3>
-            <p>Backend Developer</p>
-          </div>
-          <strong>2Y 7M</strong>
-        </div>
-        <ul>
-          <li><span>01</span>건강기능식품 상담 시스템 운영 및 성능 개선</li>
-          <li><span>02</span>20개 이상 병원·혈당기 연동 API 개발</li>
-          <li><span>03</span>CGMS 연구 대시보드 서버와 UI 구축</li>
-          <li><span>04</span>AWS EC2·Docker 기반 서비스 배포와 운영</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="home-writing" aria-labelledby="writing-title">
-    <div class="home-shell">
-      <header class="home-section-heading">
-        <div>
-          <p class="home-section-label">WRITING</p>
-          <h2 id="writing-title">배운 것을<br>내 언어로 정리합니다.</h2>
-        </div>
-        <a class="home-text-link" href="/posts/">모든 글 보기 <span aria-hidden="true">→</span></a>
-      </header>
-
-      <div class="home-post-grid">
-        {% for post in site.posts limit:3 %}
-        <article>
-          <div class="home-post-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
-            {% if post.tags.first %}<span>{{ post.tags.first }}</span>{% endif %}
-          </div>
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 115 }}</p>
-          <a class="home-post-link" href="{{ post.url | relative_url }}" aria-label="{{ post.title }} 읽기">Read article <span aria-hidden="true">↗</span></a>
-        </article>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <section class="home-contact" aria-labelledby="contact-title">
-    <div class="home-shell">
-      <div class="home-contact-card">
-        <p class="home-section-label">LET’S BUILD SOMETHING USEFUL</p>
-        <h2 id="contact-title">좋은 아이디어를<br>작동하는 서비스로.</h2>
-        <p>백엔드와 AI가 만나는 제품에 대해 함께 이야기하고 싶습니다.</p>
-        <a class="home-button home-button--light" href="mailto:gjwjddbsg@gmail.com">
-          이메일 보내기 <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
+<main id="main">
+<section class="hero wrap">
+<div class="eyebrow"><span class="status-dot"></span> BACKEND & AI DEVELOPER · SEOUL</div>
+<h1>기술을 연결하고,<br>경험을 <span>만듭니다.</span></h1>
+<div class="hero-bottom"><p>안녕하세요, 개발자 허정윤입니다.<br>이너웨이브에서 풀스택 개발과 AI·인프라를 담당하며<br>제품의 기능부터 배포·운영까지 연결합니다.</p><a class="round-link" href="#work" aria-label="프로젝트 살펴보기">↓</a></div>
+<div class="hero-caption"><span>JAVA / PYTHON / RAG / CLOUD</span><span>SCROLL TO EXPLORE</span></div>
+</section>
+<section class="work-section" id="work"><div class="wrap">
+<div class="section-heading"><div><span class="eyebrow">01 / SELECTED WORK</span><h2>코드 너머의 서비스.</h2></div><p>질문에서 시작해, 실제로 동작하는 제품으로.<br>현재 참여 중인 서비스와 공개 프로젝트를 소개합니다.</p></div>
+<div class="current-work" aria-label="이너웨이브에서 참여 중인 서비스">
+<div class="current-work-heading"><span>이너웨이브 · 현재 참여 중</span><a class="text-link" href="/projects/">담당 업무 보기 ↗</a></div>
+<div class="current-work-grid"><article><span class="current-work-category">AX 플랫폼</span><h3>Nomos</h3><p>Patif의 기반이 되는 AX 플랫폼.<br>풀스택 개발과 AI·인프라 관련 업무에 참여합니다.</p></article><article><span class="current-work-category">변리사 업무 솔루션</span><h3>Patif</h3><p>Nomos 기반의 변리사 업무 지원 솔루션.<br>메일·프론트엔드 개발과 AI 에이전트 일부 구현, 배포·서버 환경 구축을 담당합니다.</p></article></div>
+</div>
+<article class="project project-senpick"><div class="project-art project-image gift-art"><img src="{{ '/assets/images/project-senpick.png' | relative_url }}" alt="SenPick 프로젝트 소개 이미지" width="610" height="610" loading="lazy"></div><div class="project-detail"><span class="eyebrow">01 — PERSONALIZED RECOMMENDATION</span><h3>SenPick<span>상황을 이해하는 선물 추천</span></h3><p>누구에게, 어떤 마음으로 건네는 선물인지. 대화에서 맥락을 추출하고 RAG로 상품 정보를 연결하는 AI 추천 서비스입니다.</p><dl><dt>참여 영역</dt><dd>백엔드 · AI 에이전트 흐름 설계</dd></dl><div class="tags"><span>Django</span><span>LangGraph</span><span>Qdrant</span><span>GPT-4o</span></div><a class="text-link" href="https://github.com/devunis/SenPick">프로젝트 코드 보기 ↗</a></div></article>
+<article class="project reverse"><div class="project-art project-image travel-art"><img src="{{ '/assets/images/project-travel.png' | relative_url }}" alt="Travel Checker 프로젝트 소개 이미지" width="1024" height="1024" loading="lazy"></div><div class="project-detail"><span class="eyebrow">02 — TRAVEL INFORMATION</span><h3>Travel Checker<span>짐을 싸기 전, 규정을 묻다</span></h3><p>국가마다 다른 반입 금지 물품 정보를 자연어로 탐색합니다. 수집한 규정 데이터와 언어 모델을 연결해 여행 준비를 돕습니다.</p><dl><dt>참여 영역</dt><dd>데이터 수집 · LLM 백엔드 · API 개발</dd></dl><div class="tags"><span>Django</span><span>Gemma 3</span><span>FAISS</span><span>RAG</span></div><a class="text-link" href="https://github.com/devunis/Travel-Checker">프로젝트 코드 보기 ↗</a></div></article>
+<article class="project"><div class="project-art voice-art" aria-label="한국어 발음 연습 서비스 개념도"><span class="art-label">SPEAK. LISTEN. TRY AGAIN.</span><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="art-title">Your voice.<br>Your next level.</div><span class="art-footer">TongueTwist / SPEECH PLAYGROUND</span></div><div class="project-detail"><span class="eyebrow">03 — INTERACTIVE AI</span><h3>TongueTwist<span>게임처럼 연습하는 한국어 발음</span></h3><p>말하고, 피드백을 듣고, 다시 도전합니다. 음성 인식과 언어 모델, 음성 합성을 하나의 발음 연습 흐름으로 연결했습니다.</p><dl><dt>참여 영역</dt><dd>서비스 구현 · 음성 처리 흐름 구성</dd></dl><div class="tags"><span>Python</span><span>Streamlit</span><span>Whisper</span><span>TTS</span></div><a class="text-link" href="https://github.com/devunis/tongue-twist">프로젝트 코드 보기 ↗</a></div></article>
+<a class="all-link" href="/projects/">프로젝트 상세 모아보기 <span>↗</span></a>
+</div></section>
+<section class="about-section wrap" id="about"><div class="section-heading"><div><span class="eyebrow">02 / ABOUT ME</span><h2>운영을 아는 개발,<br>새로움을 향한 탐구.</h2></div><a class="text-link" href="/about/">프로필 자세히 ↗</a></div><div class="about-grid"><div class="about-intro"><p>서비스는 배포 이후에도 계속됩니다. 헬스케어 시스템의 개발과 운영을 경험하며, 데이터가 흐르고 사용자가 만나는 지점까지 생각하는 법을 배웠습니다.</p><p>현재 이너웨이브에서 Nomos·Patif 개발에 참여하고 있습니다. 메일 기능과 프론트엔드, AI 에이전트 일부 구현부터 서버 환경 구축과 배포·운영까지 담당합니다.</p><a class="text-link" href="https://github.com/devunis">GitHub에서 더 보기 ↗</a></div><div class="experience"><span class="eyebrow">EXPERIENCE</span><h3>이너웨이브</h3><div class="job-meta"><span>풀스택 · AI · 인프라</span><span>2025.09.22 — 현재</span></div><ul><li>Nomos·Patif 서비스 개발 참여</li><li>메일 관련 기능 및 프론트엔드 개발</li><li>AI 에이전트 일부 기능 구현</li><li>서버 환경 구축·운영</li><li>Jenkins 기반 배포 환경 구축·운영</li></ul><div class="previous-experience"><h3>㈜푸른소나무</h3><div class="job-meta"><span>Backend Developer</span><span>2021.11 — 2024.05</span></div><p>Spring 기반 헬스케어 시스템 · 병원 연동 API · CGMS 연구 대시보드 개발 및 운영</p></div></div></div><div class="skill-grid"><div><span>01</span><h3>Backend</h3><p>Java · Spring · MyBatis<br>Python · Django · FastAPI</p></div><div><span>02</span><h3>AI & Data</h3><p>LangChain · LangGraph · RAG<br>Qdrant · FAISS · SQL</p></div><div><span>03</span><h3>Infrastructure</h3><p>AWS · Docker · Jenkins<br>서버 환경 구축 · 배포 및 운영</p></div></div></section>
+<section class="writing-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">03 / NOTES & IDEAS</span><h2>배운 것을 남깁니다.</h2></div><a class="text-link" href="/posts/">모든 글 보기 ↗</a></div><div class="post-list">{% for post in site.posts limit:3 %}<a class="post-row" href="{{ post.url | relative_url }}"><span class="post-date">{{ post.date | date: '%Y.%m.%d' }}</span><div><span class="post-category">{{ post.categories | first | default: 'Engineering' }}</span><h3>{{ post.title | escape }}</h3></div><span class="post-arrow" aria-hidden="true">↗</span></a>{% endfor %}</div></div></section>
+<section class="contact-section wrap" id="contact"><span class="eyebrow">LET’S CONNECT</span><h2>다음 이야기를<br>함께 만들어볼까요?</h2><a class="contact-email" href="mailto:gjwjddbsg@gmail.com">gjwjddbsg@gmail.com <span>↗</span></a><p>프로젝트 이야기, 기술에 대한 생각, 반가운 인사도 좋습니다.</p></section>
 </main>

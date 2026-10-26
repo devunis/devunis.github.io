@@ -1,155 +1,63 @@
 ---
-title: "RESTful API 설계 베스트 프랙티스 10가지"
+title: "REST API 설계에서 확인할 10가지"
 date: 2026-01-02 09:00:00 +0900
 categories: [Backend, API]
 tags: [REST-API, API-Design, Best-Practices, Backend]
+last_modified_at: 2026-10-15 14:50:00 +0900
 ---
 
-좋은 API 설계는 백엔드 개발의 핵심입니다. 실전 경험을 바탕으로 한 RESTful API 설계 가이드를 제공합니다.
+API 설계는 URL 모양뿐 아니라 HTTP 의미, 권한, 오류, 재시도와 호환성을 함께 다룹니다. 아래는 설계 시 확인할 항목입니다.
 
----
+## 1. 리소스를 표현하는 URL
 
-## 1️⃣ 명확한 URL 네이밍
+`/users`, `/users/123`처럼 리소스와 식별자를 표현할 수 있습니다. 조회를 가장한 삭제 같은 부작용을 GET에 넣지 않습니다.
 
-```
-✅ GET  /users          - 사용자 목록
-✅ GET  /users/123      - 특정 사용자
-✅ POST /users          - 사용자 생성
-✅ PUT  /users/123      - 사용자 수정
-✅ DELETE /users/123    - 사용자 삭제
+## 2. 메서드와 멱등성
 
-❌ GET /getUserList
-❌ POST /createUser
-❌ GET /users/delete/123
-```
+| 메서드 | 일반적인 역할 | 멱등성 |
+| --- | --- | --- |
+| GET | 표현 조회 | 멱등·안전 |
+| POST | 리소스별 처리·생성 등 | 기본적으로 보장되지 않음 |
+| PUT | 대상 표현 생성·교체 | 멱등 |
+| PATCH | 부분 변경 | 보장되지 않으며 연산 설계에 따라 가능 |
+| DELETE | 대상 연결 제거 | 멱등 |
 
----
+멱등은 반복 요청의 의도된 서버 효과를 뜻합니다. 반복 DELETE가 항상 같은 상태 코드를 반환한다는 뜻은 아닙니다. POST도 별도 멱등 키를 설계할 수 있습니다.
 
-## 2️⃣ HTTP 메서드 올바른 사용
+## 3. 상태 코드
 
-| 메서드 | 용도 | 멱등성 |
-|--------|------|--------|
-| GET | 조회 | O |
-| POST | 생성 | X |
-| PUT | 전체 수정 | O |
-| PATCH | 부분 수정 | X |
-| DELETE | 삭제 | O |
+200·201·204의 의미와 400·401·403·404를 구분합니다. 본문 없는 204에 JSON을 붙이지 않습니다. 인증 오류와 객체 접근 권한 오류를 함께 설계합니다.
 
----
+## 4. 버전과 호환성
 
-## 3️⃣ 적절한 상태 코드
+URL·헤더 버전 같은 방식을 선택하고 필드 제거·의미 변경의 영향을 관리합니다. 버전 번호만 추가한다고 호환성 문제가 해결되지는 않습니다.
 
-```python
-# 성공
-200 OK - 조회 성공
-201 Created - 생성 성공
-204 No Content - 삭제 성공
+## 5. 페이지네이션
 
-# 클라이언트 에러
-400 Bad Request - 잘못된 요청
-401 Unauthorized - 인증 필요
-403 Forbidden - 권한 없음
-404 Not Found - 리소스 없음
+offset 또는 cursor를 데이터 변경·정렬·성능 요구에 맞게 선택합니다. 고정된 정렬 기준과 동률 처리, 최대 페이지 크기를 정합니다.
 
-# 서버 에러
-500 Internal Server Error
-503 Service Unavailable
-```
+## 6. 필터·정렬
 
----
+허용할 필드와 연산을 제한하고 검증합니다. 사용자 입력을 SQL 문자열에 직접 이어 붙이지 않습니다.
 
-## 4️⃣ 버저닝
-
-```
-# URL 버저닝 (추천)
-/api/v1/users
-/api/v2/users
-
-# Header 버저닝
-Accept: application/vnd.myapi.v1+json
-```
-
----
-
-## 5️⃣ 페이지네이션
-
-```python
-GET /users?page=1&per_page=20
-
-{
-    "data": [...],
-    "pagination": {
-        "page": 1,
-        "per_page": 20,
-        "total": 100,
-        "total_pages": 5
-    }
-}
-```
-
----
-
-## 6️⃣ 필터링 및 정렬
-
-```
-GET /users?status=active&sort=-created_at
-GET /posts?category=tech&author=123
-```
-
----
-
-## 7️⃣ 일관된 에러 응답
+## 7. 오류 형식
 
 ```json
-{
-    "error": {
-        "code": "VALIDATION_ERROR",
-        "message": "입력값이 올바르지 않습니다",
-        "details": [
-            {
-                "field": "email",
-                "message": "이메일 형식이 아닙니다"
-            }
-        ]
-    }
-}
+{"error":{"code":"VALIDATION_ERROR","message":"입력값을 확인해주세요"}}
 ```
 
----
+클라이언트가 처리할 코드와 메시지를 구분하고 내부 SQL·비밀 값을 노출하지 않습니다.
 
-## 8️⃣ HATEOAS (선택)
+## 8. 링크와 상태 전이
 
-```json
-{
-    "id": 123,
-    "name": "John",
-    "_links": {
-        "self": "/users/123",
-        "posts": "/users/123/posts",
-        "friends": "/users/123/friends"
-    }
-}
-```
+다음 행동을 링크로 안내할 수 있습니다. 명사형 URL만으로 모든 REST 제약을 충족한다고 표현하지 않습니다.
 
----
+## 9. 문서·검증
 
-## 9️⃣ API 문서화
+OpenAPI·예시와 실제 응답을 함께 검사합니다. 재시도·타임아웃·속도 제한 정책도 설명합니다.
 
-- Swagger/OpenAPI
-- Postman Collections
-- API Blueprint
+## 10. 보안
 
----
+인증 후에도 대상 객체 권한을 검사하고 입력·출력 필드를 통제합니다. CORS는 인증·인가가 아니며 HTTPS와 별도 보안 정책이 필요합니다.
 
-## 🔟 보안 고려사항
-
-- ✅ HTTPS 사용
-- ✅ API 키 / JWT 인증
-- ✅ Rate Limiting
-- ✅ Input Validation
-- ✅ CORS 설정
-
----
-
-📚 **참고 자료**:
-- [REST API Tutorial](https://restfulapi.net/)
+📚 [HTTP Semantics RFC 9110](https://www.rfc-editor.org/rfc/rfc9110) · [PATCH RFC 5789](https://www.rfc-editor.org/rfc/rfc5789)
