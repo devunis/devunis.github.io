@@ -23,6 +23,51 @@ const documents = [
   }
 ];
 
+const projects = [
+  documents[1],
+  { id: "travel", title: "Travel Checker 프로젝트", url: "/projects/", type: "프로젝트",
+    tags: ["Travel Checker", "여행", "FAISS", "RAG"], answer: "Travel Checker는 여행 서비스입니다." },
+  { id: "voice", title: "Tongue Twist 프로젝트", url: "/projects/", type: "프로젝트",
+    tags: ["Tongue Twist", "발음", "Whisper"], answer: "Tongue Twist는 발음 연습 게임입니다." }
+];
+
+test("named project introductions do not return the entire portfolio", () => {
+  for (const question of ["Travel Checker 프로젝트 소개해줘", "travel checker 프로젝트 알려줘", "Travel Checker RAG 프로젝트 소개해줘"]) {
+    const results = rag.search(question, projects);
+    assert.deepEqual(results.map(result => result.id), ["travel-0"]);
+    assert.equal(rag.composeAnswer(question, results), projects[1].answer);
+  }
+});
+
+test("project keyword questions select matching projects", () => {
+  assert.deepEqual(rag.search("여행 프로젝트 소개해줘", projects).map(result => result.id), ["travel-0"]);
+  assert.deepEqual(rag.search("RAG 프로젝트 알려줘", projects).map(result => result.id), ["project-0", "travel-0"]);
+});
+
+test("unknown project names and topics do not substitute other owned projects", () => {
+  for (const question of ["Quantum Garden 프로젝트 소개해줘", "블록체인 프로젝트 알려줘", "대표 블록체인 프로젝트 소개해줘"]) {
+    const results = rag.search(question, projects);
+    assert.deepEqual(results, []);
+    assert.match(rag.composeAnswer(question, results), /근거를 찾지 못/);
+  }
+});
+
+test("an overview does not treat blog examples as owned projects", () => {
+  const blog = { title: "프로젝트 소개", url: "/posts/ideas/", type: "기술 글", content: "블록체인 프로젝트 아이디어입니다." };
+  assert.deepEqual(rag.search("대표 프로젝트 알려줘", [blog]), []);
+});
+
+test("common overview wording still returns the complete owned-project list", () => {
+  for (const question of ["대표 프로젝트 알려줘", "주요 프로젝트 목록 알려주세요", "어떤 프로젝트를 만들었나요?", "프로젝트 소개 좀 해줘", "대표프로젝트알려줘"]) {
+    assert.deepEqual(rag.search(question, projects).map(result => result.id), ["project-0", "travel-0", "voice-0"]);
+  }
+});
+
+test("broad project introductions still list owned projects and respect the limit", () => {
+  const blog = { title: "Travel Checker 프로젝트 소개", type: "기술 글", content: "Travel Checker 예제입니다." };
+  assert.deepEqual(rag.search("대표 프로젝트 알려줘", [blog, ...projects], { limit: 2 }).map(result => result.id), ["project-0", "travel-0"]);
+});
+
 test("Korean particles are normalized for retrieval", () => {
   assert.ok(rag.tokenize("경력은 어떻게 되나요?").includes("경력"));
 });
@@ -54,3 +99,4 @@ test("representative projects prefer owned projects over blog examples", () => {
   assert.match(rag.composeAnswer("대표 프로젝트 알려줘",results),/\*\*SenPick 프로젝트\*\*/);
   assert.doesNotMatch(rag.composeAnswer("대표 프로젝트 알려줘",results),/코드 리뷰어/);
 });
+
