@@ -3,7 +3,7 @@ title: "PostgreSQL vs MySQL vs MariaDB: 기능과 선택 기준"
 date: 2026-01-09 09:00:00 +0900
 categories: [Backend, Database]
 tags: [PostgreSQL, MySQL, MariaDB, Database, Comparison]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 세 제품 모두 관계형 DB이며 SQL·트랜잭션·인덱스·조인 등을 제공합니다. 고정된 성능 순위보다 실제 기능·버전·운영 요구를 비교해야 합니다.
@@ -17,11 +17,11 @@ last_modified_at: 2026-10-15 14:50:00 +0900
 | 전문 검색 | 기본 기능과 확장 검토 | 엔진·버전별 기능 검토 | 엔진·버전별 기능 검토 |
 | 라이선스 | PostgreSQL License | Community·상용 제품의 조건 확인 | 서버·제품·구성 요소 조건 확인 |
 
-MySQL 8부터 GPL이 제한된다는 과거 설명은 제거했습니다. 제품·배포·구성 요소별 실제 조건을 확인해야 합니다. MySQL과 MariaDB도 모든 버전에서 완전한 교체 관계는 아닙니다.
+라이선스는 제품·배포판·구성 요소별 조건을 확인해야 합니다. MySQL과 MariaDB도 모든 버전에서 완전한 교체 관계는 아닙니다.
 
 ## 💻 집계 SQL 예제
 
-아래는 가상의 테이블을 대상으로 한 쿼리이며 운영 성능 결과가 아닙니다. 집계 별칭을 HAVING에서 사용하는 DB별 차이를 피하려고 집계식을 사용했습니다.
+아래는 가상의 테이블을 대상으로 한 집계 쿼리입니다. 집계 별칭을 HAVING에서 사용하는 DB별 차이를 피하려고 집계식을 사용했습니다.
 
 ```sql
 SELECT hospital_id, COUNT(*) AS patient_count, AVG(age) AS avg_age

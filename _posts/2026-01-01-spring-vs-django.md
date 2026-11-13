@@ -3,10 +3,10 @@ title: "Spring Boot vs Django: 구성과 개발 방식 비교"
 date: 2026-01-01 09:00:00 +0900
 categories: [Backend, Experience]
 tags: [Spring, Django, Java, Python, Backend, Healthcare]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-Spring Boot와 Django를 비교할 때 고정된 개발 속도·성능 등급 대신 제공 기능, 팀 경험과 운영 환경을 봅니다. 이 글의 코드는 개념 설명이며 특정 운영 시스템의 성과를 나타내지 않습니다.
+Spring Boot와 Django를 비교할 때 고정된 개발 속도·성능 등급 대신 제공 기능, 팀 경험과 운영 환경을 봅니다.
 
 ## 📊 구성 비교
 

@@ -3,13 +3,12 @@ title: "Claude Skills 입문 ②: 디자인·개발·DB·영상 분야 인기 �
 date: 2026-10-15 11:01:00 +0900
 categories: [AI, LLM]
 tags: [Claude-Code, Agent-Skills, Frontend, React, Supabase, Remotion, Developer-Tools]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 Arena와 Claude MD Doctor 외에도 디자인·코드 리뷰·브라우저·DB·영상 작업에 활용하는 스킬이 있습니다. 이번 글에서는 **개별 Skill, Skill 묶음, 실행 도구를 구분**해 9개를 소개합니다.
 
-2026년 10월 15일 기준 [skills.sh 디렉터리](https://skills.sh/)와 [Trending 목록](https://skills.sh/trending)을 후보 탐색에 사용하고, 기능은 각 제작자의 원본 저장소로 확인했습니다. 트렌딩에서 확인한 frontend-design, React·웹 가이드, agent-browser, Remotion 등을 포함하되, 아래 순서는 인기 순위가 아닌 용도별 구성입니다. Arena·Doctor를 포함한 모든 프로젝트가 순위 상위라는 의미는 아닙니다.
-
-문서 기반 소개이며 설치·실행 후기가 아닙니다. 설치 수와 스타 수는 계속 변하므로 고정된 성능 지표로 사용하지 않았습니다.
+2026년 10월 15일 기준 [skills.sh 디렉터리](https://skills.sh/)와 [Trending 목록](https://skills.sh/trending)을 후보 탐색에 사용하고, 기능은 각 제작자의 원본 저장소로 확인했습니다. frontend-design, React·웹 가이드, agent-browser, Remotion 등을 용도별로 정리했습니다.
 
 ---
 
@@ -27,7 +26,7 @@ Arena와 Claude MD Doctor 외에도 디자인·코드 리뷰·브라우저·DB·
 | remotion-best-practices | Remotion | 관련 Remotion Skills로 안내 | React 기반 영상 작업 |
 | UI UX Pro Max | 커뮤니티 프로젝트 | UI/UX 디자인 지식·검색 워크플로 | 디자인 시스템·화면 설계 |
 
-공식 출처는 각 제작자가 공개한 자료라는 뜻입니다. Anthropic 외의 프로젝트까지 Anthropic 공식 Skill이라는 뜻은 아닙니다.
+표의 출처는 각 프로젝트 제작자의 저장소입니다.
 
 ---
 
@@ -89,7 +88,7 @@ DB를 직접 운영해 주는 서비스나 데이터를 조회하는 MCP 서버�
 
 ## 🔀 어떤 순서로 조합할까?
 
-아래는 기능에서 도출한 활용 예시이며 실제 성능을 측정한 결과가 아닙니다.
+작업에 따라 다음처럼 조합할 수 있습니다.
 
 | 작업 | 가능한 조합 | 확인할 결과 |
 | --- | --- | --- |

@@ -3,6 +3,7 @@ title: "데이터베이스 종류와 대표 제품 총정리 ⑥: 벡터 DB와 p
 date: 2026-10-15 09:05:00 +0900
 categories: [Backend, Database]
 tags: [Database, Vector-Database, RAG, Qdrant, pgvector, Database-Series]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 > 데이터베이스 종류와 대표 제품을 비교하는 7편 시리즈의 6편입니다. 각 제품명은 공식 소개 또는 문서로 연결됩니다.
@@ -46,7 +47,7 @@ tags: [Database, Vector-Database, RAG, Qdrant, pgvector, Database-Series]
 | [Pinecone](https://docs.pinecone.io/guides/get-started/overview) | 관리형 벡터 검색 서비스 | 인프라 운영 부담을 줄이는 검색 서비스 | 사용량·저장 비용, 서비스 제한, 데이터 이동 검토 |
 | [Chroma](https://docs.trychroma.com/docs/overview/introduction) | 임베딩과 문서·메타데이터를 다루는 개발 인터페이스 | 로컬 실험, RAG 개발과 초기 검증 | 로컬·서버·클라우드 배포별 동시성·내구성·운영 조건 확인 |
 
-사용처는 가능한 선택 예시입니다. “로컬 개발에 편리하다”는 설명이 해당 제품을 실험용으로만 제한한다는 뜻은 아닙니다. 반대로 분산 배포를 지원한다는 사실만으로 대규모 운영 검증을 생략할 수는 없습니다.
+실제 도입 전에는 데이터량·동시 요청·필터 조건에 맞는 배포 구성을 검증합니다.
 
 ---
 

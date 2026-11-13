@@ -3,7 +3,7 @@ title: "RAG 문서 분할 전략: 고정 길이·구조·의미 기반 청킹"
 date: 2025-12-24 09:00:00 +0900
 categories: [AI, RAG]
 tags: [RAG, Chunking, Semantic-Split, Document-Processing]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 청킹은 검색과 문맥 전달에 사용할 문서 단위를 만드는 과정입니다. 한 문서가 너무 길면 필요한 부분을 찾거나 모델에 전달하기 어려워지고, 너무 작게 나누면 설명·표·조건이 분리될 수 있습니다.
@@ -50,6 +50,6 @@ print(split_text("abcdefghij", 4, 1))
 
 같은 평가 질의·정답 문서를 사용해 청킹 조건만 바꿉니다. 정답이 검색되는지, 필요한 조건이 한 문맥에 남는지, 중복 후보가 늘어나는지를 확인합니다. 청크 수·색인 비용·검색·생성 지연도 기록합니다.
 
-과거 SenPick 실험표와 고정된 최적 설정은 측정 근거가 없어 제거했습니다. 큰 표·코드·짧은 문서가 있는 데이터셋에서 따로 실패 사례를 확인해야 합니다.
+큰 표·코드·짧은 문서가 포함된 데이터셋에서는 유형별 실패 사례도 확인합니다.
 
 📚 [LangChain Text Splitters](https://docs.langchain.com/oss/python/integrations/splitters/index)

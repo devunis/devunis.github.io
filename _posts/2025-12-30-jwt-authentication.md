@@ -3,10 +3,10 @@ title: "JWT 인증 설계: Access·Refresh Token과 검증 경계"
 date: 2025-12-30 09:00:00 +0900
 categories: [Backend, Security]
 tags: [JWT, OAuth2, FastAPI, Authentication, Security]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-JWT는 클레임을 전달하는 토큰 형식입니다. OAuth 2.0은 권한 위임 프레임워크이고, JWT와 같은 개념이 아닙니다. 이 글은 인증 설계의 핵심을 설명하며 완성된 인증 서버 구현을 제공하지 않습니다.
+JWT는 클레임을 전달하는 토큰 형식입니다. OAuth 2.0은 권한 위임 프레임워크이고, JWT와 같은 개념이 아닙니다.
 
 ## 🔐 서명과 암호화 구분
 
@@ -34,8 +34,6 @@ Refresh Token이 반드시 JWT일 필요는 없습니다. 저장 위치와 수�
 </ol>
 </figure>
 
-
-이 그림은 설계 흐름이며 토큰을 발급하는 코드 전체가 아닙니다. 이전 글의 불완전한 발급·갱신 예제는 제거했습니다.
 
 ## 🛡️ 검증할 실패 조건
 

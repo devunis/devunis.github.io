@@ -3,11 +3,12 @@ title: "Mercury 3 조사: 확산 LLM은 어떻게 빠르게 답할까?"
 date: 2026-10-20 00:05:00 +0900
 categories: [AI, Models]
 tags: [Mercury-3, Inception, Diffusion-LLM, Streaming, AI-Agent]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 Inception이 2026년 10월 19일 **Mercury 3**를 발표했습니다. 관심을 끄는 것은 속도뿐 아니라, 여러 토큰을 병렬로 예측하는 **확산 기반 언어 모델(diffusion LLM, dLLM)**이라는 접근입니다.
 
-이 글은 2026년 10월 20일 확인한 발표·공식 API 문서·기존 Mercury 연구를 바탕으로 정리합니다. Mercury 3를 직접 벤치마크하거나 유료 API로 시험한 후기는 아닙니다. 제품 사양과 발표자의 성능 주장을 구분합니다. [공식 발표](https://www.inceptionlabs.ai/blog/introducing-mercury-3)
+이 글은 2026년 10월 20일 확인한 발표·공식 API 문서·기존 Mercury 연구를 바탕으로 정리합니다. 성능 수치는 제공자의 발표 기준이며 독립적으로 측정하지 않았습니다. [공식 발표](https://www.inceptionlabs.ai/blog/introducing-mercury-3)
 
 ## 발표에서 무엇을 주장했나?
 
@@ -136,7 +137,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-호출 형태는 [공식 Quick Start](https://docs.inceptionlabs.ai/get-started)를 따릅니다. 이 글에서는 Python 문법을 검사했으며 실제 API 호출·청구·응답 품질은 검증하지 않았습니다. 결과를 실행한 것처럼 만들어 넣지 않았습니다.
+호출 형태는 [공식 Quick Start](https://docs.inceptionlabs.ai/get-started)를 따릅니다. 예제는 Python 문법만 검사했으며 실제 API 호출은 검증하지 않았습니다.
 
 일반 스트리밍으로 바꾼 예시는 다음과 같습니다.
 
@@ -182,7 +183,7 @@ JSON 스키마를 따르는 출력도 내용의 사실성이나 업무 규칙의
 
 ## 도입을 검토한다면 이렇게 확인한다
 
-아래는 직접 측정한 결과가 아닌 평가 설계 제안입니다.
+도입 전에는 다음 항목을 평가합니다.
 
 | 평가 항목 | 같은 조건으로 기록할 것 |
 | --- | --- |

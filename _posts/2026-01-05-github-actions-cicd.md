@@ -3,10 +3,10 @@ title: "GitHub Actions: 테스트와 실제 배포를 구분하는 CI/CD"
 date: 2026-01-05 09:00:00 +0900
 categories: [DevOps, CI-CD]
 tags: [GitHub-Actions, CI-CD, Automation, DevOps]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-CI는 변경을 자동으로 검사하고, CD는 검증한 결과물을 전달·배포하는 흐름입니다. 로그에 “Deploying”을 출력하는 것만으로 서버 배포가 구현되지는 않습니다.
+CI는 변경을 자동으로 검사하고, CD는 검증한 결과물을 전달·배포하는 흐름입니다.
 
 ## 🔄 최소 Python 테스트 워크플로우
 

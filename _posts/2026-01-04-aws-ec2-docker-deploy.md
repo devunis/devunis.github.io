@@ -3,10 +3,10 @@ title: "AWS EC2 Docker 배포: 네트워크·설정·운영 점검"
 date: 2026-01-04 09:00:00 +0900
 categories: [DevOps, AWS]
 tags: [AWS, EC2, Docker, Deployment, Cloud]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-EC2에 컨테이너를 실행하는 것과 서비스를 운영 가능한 상태로 만드는 것은 다릅니다. 이 글은 배포 절차의 개념 가이드이며 특정 프로젝트가 현재 안정적으로 운영 중이라는 주장은 하지 않습니다.
+EC2에 Docker 컨테이너를 배포할 때 필요한 실행 환경, 네트워크, HTTPS와 운영 점검 항목을 살펴봅니다.
 
 ## 🏗️ 배포 전 준비
 

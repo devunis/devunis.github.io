@@ -3,10 +3,10 @@ title: "RAG Reranker: 검색 후보 재정렬과 평가 방법"
 date: 2025-12-22 09:00:00 +0900
 categories: [AI, RAG]
 tags: [RAG, Reranker, BGE, ColBERT, Search-Optimization]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-Reranker는 검색 단계에서 찾은 후보를 질의와 함께 다시 평가해 순서를 정하는 구성 요소입니다. 이 글은 동작과 평가 방법을 설명하며, 측정 근거가 없는 검색 개선율·사용자 반응 수치는 제시하지 않습니다.
+Reranker는 검색 단계에서 찾은 후보를 질의와 함께 다시 평가해 순서를 정하는 구성 요소입니다.
 
 ## 🔎 검색과 재정렬의 역할
 

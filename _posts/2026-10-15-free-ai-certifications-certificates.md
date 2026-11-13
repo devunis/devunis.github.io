@@ -3,11 +3,12 @@ title: "무료 AI 자격증·수료증 6가지: 비용과 발급 조건 비교"
 date: 2026-10-15 12:01:00 +0900
 categories: [AI, Learning]
 tags: [AI-Certification, Free-Courses, Oracle, IBM-SkillsBuild, Hugging-Face, Kaggle]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 AI를 공부하며 학습 결과를 남기고 싶다면 자격증 시험, 과정 수료증, 디지털 배지를 살펴볼 수 있습니다. 다만 “무료 AI 자격증”이라는 이름으로 소개되어도 **시험 합격 기반 자격증인지, 학습 과정을 마쳤다는 수료증인지**는 다릅니다.
 
-이 글에서는 2026년 10월 15일 기준 공식 자료에서 비용·발급 조건을 확인한 6개 후보를 소개합니다. 개인의 학습 계획이나 취득 후기가 아닌 과정 안내입니다. Kaggle처럼 여러 강좌의 수료증을 제공하는 경우에는 하나의 플랫폼 항목으로 묶었습니다.
+이 글에서는 2026년 10월 15일 기준 공식 자료에서 비용·발급 조건을 확인한 6개 후보를 소개합니다. Kaggle처럼 여러 강좌의 수료증을 제공하는 경우에는 하나의 플랫폼 항목으로 묶었습니다.
 
 ---
 
@@ -55,8 +56,6 @@ AI 에이전트의 동작, 도구 사용, LangChain, MCP와 Oracle의 AI 플랫�
 
 공식 안내는 시험 무료를 명시하고, 확인 시점에 40문항·60분·합격 기준 65%로 설명합니다. 과정 안에는 준비 자료와 연습 시험도 안내되어 있습니다. 시험 형식·언어·응시 조건은 등록할 시험의 최신 페이지를 기준으로 확인합니다.
 
-에이전트와 MCP에 관심이 있다면 내용을 비교해볼 만합니다. 이 글은 시험을 응시하거나 합격했다는 후기가 아닙니다.
-
 - [Oracle 공식 과정·인증 소개와 학습·시험 링크](https://blogs.oracle.com/oracleuniversity/oracle-agentic-ai-foundations-training-certification-now-available)
 
 ## 🧠 3. IBM Artificial Intelligence Fundamentals
@@ -65,7 +64,7 @@ IBM SkillsBuild의 학습형 디지털 자격 증명입니다. AI의 활용, 자
 
 IBM이 발급하는 Credly 페이지에는 비용이 Free로 표시되어 있습니다. 지정된 Artificial Intelligence Fundamentals 강좌를 마치고, 채점 퀴즈·최종 평가와 실습 시뮬레이션 등의 조건을 충족해야 합니다.
 
-성인 학습자와 학생·교육자용 경로가 구분되어 있으므로 본인에게 맞는 등록 링크를 선택합니다. 별도의 Oracle 시험 자격증과 동일한 평가 체계로 설명하지 않습니다.
+성인 학습자와 학생·교육자용 경로가 구분되어 있으므로 본인에게 맞는 등록 링크를 선택합니다.
 
 - [IBM 발급 배지와 취득 조건](https://www.credly.com/org/ibm-skillsbuild/badge/artificial-intelligence-fundamentals)
 

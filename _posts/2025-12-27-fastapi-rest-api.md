@@ -3,10 +3,10 @@ title: "FastAPI REST API: 입력 검증·응답 모델·비동기 처리"
 date: 2025-12-27 09:00:00 +0900
 categories: [Backend, API]
 tags: [FastAPI, Python, REST-API, Backend, Performance]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-FastAPI는 Python 타입 선언과 Pydantic을 활용해 입력 검증과 API 스키마를 구성하는 프레임워크입니다. 프레임워크 이름만으로 다른 언어·프레임워크보다 특정 배수만큼 빠르다고 단정하지 않습니다.
+FastAPI는 Python 타입 선언과 Pydantic을 활용해 입력 검증과 API 스키마를 구성하는 프레임워크입니다.
 
 ## 💻 최소 API 예제
 
@@ -55,6 +55,6 @@ await를 지원하는 I/O를 사용하는 경로는 async def로 작성할 수 �
 
 ## ⚡ 응답 속도 최적화
 
-검색·DB·외부 모델 호출·직렬화 시간을 나눠 측정합니다. 같은 조건에서 평균·P95·처리량·오류율을 기록하고 병목에 맞춰 쿼리·캐싱·동시성 등을 조정합니다. 이 글에는 실행 근거가 없는 RPS 비교표나 SenPick의 FastAPI 성과를 제시하지 않습니다.
+검색·DB·외부 모델 호출·직렬화 시간을 나눠 측정합니다. 같은 조건에서 평균·P95·처리량·오류율을 기록하고 병목에 맞춰 쿼리·캐싱·동시성 등을 조정합니다.
 
 📚 [FastAPI 공식 문서](https://fastapi.tiangolo.com/) · [비동기 설명](https://fastapi.tiangolo.com/async/)

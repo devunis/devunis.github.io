@@ -3,10 +3,10 @@ title: "Qdrant vs FAISS: 라이브러리와 벡터 DB의 선택 기준"
 date: 2025-12-21 09:00:00 +0900
 categories: [AI, Database]
 tags: [Qdrant, FAISS, VectorDB, RAG, Performance]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
-FAISS와 Qdrant는 모두 벡터 검색에 사용할 수 있지만 제공 범위가 다릅니다. 이 글은 기능과 운영 책임을 비교하며, 근거 없는 벤치마크 결과나 프로젝트의 이전 이력을 주장하지 않습니다.
+FAISS와 Qdrant는 모두 벡터 검색에 사용할 수 있지만 제공 범위가 다릅니다. 기능과 운영 책임을 기준으로 두 도구의 선택 기준을 살펴봅니다.
 
 ## 📊 기능보다 먼저 구조를 비교
 

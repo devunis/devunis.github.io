@@ -3,7 +3,7 @@ title: "Python async/await: I/O 동시성과 응답 속도 최적화"
 date: 2025-12-29 09:00:00 +0900
 categories: [Backend, Python]
 tags: [Python, Async, Asyncio, Concurrency, Performance]
-last_modified_at: 2026-10-15 14:50:00 +0900
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 async/await는 대기하는 I/O 작업 사이에 다른 작업이 진행되도록 구성하는 문법입니다. CPU 계산을 자동으로 병렬 실행하거나 모든 요청을 일정 배수로 빠르게 만드는 기능은 아닙니다.
@@ -54,6 +54,6 @@ async 함수 안에서 time.sleep이나 동기 HTTP 함수를 호출하면 이�
 
 ## 🧪 측정하기
 
-순차·동시 실행을 같은 입력으로 비교하고 결과 동일성, 오류·취소·자원 정리를 확인합니다. 평균·P95 지연과 전체 처리량을 구분합니다. 가짜 API 주소를 호출한 예제에 고정된 실행 시간을 결과로 붙이지 않습니다.
+순차·동시 실행을 같은 입력으로 비교하고 결과 동일성, 오류·취소·자원 정리를 확인합니다. 평균·P95 지연과 전체 처리량을 구분합니다.
 
 📚 [Python 코루틴·태스크](https://docs.python.org/3/library/asyncio-task.html)

@@ -3,13 +3,14 @@ title: "Claude Skills 입문 ①: SKILL.md, Arena, Claude MD Doctor"
 date: 2026-10-15 11:00:00 +0900
 categories: [AI, LLM]
 tags: [Claude-Code, Agent-Skills, SKILL.md, Arena, CLAUDE.md, Context-Engineering]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 AI에게 매번 같은 작업 순서와 기준을 설명하고 있다면, 그 절차를 재사용할 수 있도록 묶는 방법이 있습니다. **Agent Skills**입니다.
 
 이 글에서는 Skills의 구조를 살펴보고, 서로 다른 문제를 해결하는 커뮤니티 프로젝트 **Arena**와 **Claude MD Doctor**를 소개합니다. 다음 편에서는 디자인·개발·DB·영상 분야의 스킬과 관련 도구를 비교합니다.
 
-2026년 10월 15일 기준 공식 문서와 원본 저장소를 확인한 소개입니다. 설치·실행 후기나 성능 실험 결과가 아니라, 문서에 명시된 기능과 이를 활용할 때의 판단 기준을 정리했습니다.
+2026년 10월 15일 기준 공식 문서와 원본 저장소의 기능·사용 조건을 정리했습니다.
 
 ---
 

@@ -3,11 +3,12 @@ title: "IPC·RPC·gRPC·JSON-RPC 비교: 프로세스 통신에서 원격 호출
 date: 2026-10-20 00:01:00 +0900
 categories: [Backend, Network]
 tags: [IPC, RPC, gRPC, JSON-RPC, Protobuf, MCP]
+last_modified_at: 2026-11-13 15:20:30 +0900
 ---
 
 프로세스끼리 데이터를 주고받는 IPC, 다른 곳의 함수를 부르는 RPC, 그리고 gRPC와 JSON-RPC. 이름이 비슷하지만 **서로 다른 범위의 개념**입니다. 이 차이를 먼저 구분하면 “어떤 방식이 더 좋은가?”라는 질문도 구체적으로 바뀝니다.
 
-이 글은 2026년 10월 20일 확인한 공식 문서와 명세를 바탕으로 정리했습니다. 예제는 개념 설명용이며 서비스 성능을 측정한 결과는 아닙니다.
+이 글은 2026년 10월 20일 확인한 공식 문서와 명세를 바탕으로 정리했습니다.
 
 ## 네 가지 용어의 관계
 
@@ -105,7 +106,7 @@ gRPC의 일반적인 전송은 HTTP/2를 기반으로 합니다. 스트리밍, �
 
 JSON-RPC는 최근에 생긴 기술이 아닙니다. 2.0 명세에는 2010년 원본과 2013년 갱신 날짜가 기재되어 있습니다. 핵심은 `method`·`params`로 작업을 요청하고 `id`로 응답을 연결하는 것입니다. HTTP에 묶이지 않는 규약입니다. [JSON-RPC 2.0 명세](https://www.jsonrpc.org/specification)
 
-다음은 이 글에서 만든 요청 예시입니다.
+사용자 조회 요청 예시입니다.
 
 ```json
 {
@@ -145,8 +146,6 @@ JSON-RPC는 최근에 생긴 기술이 아닙니다. 2.0 명세에는 2010년 �
 AI 도구 연결에서 접하는 MCP는 JSON-RPC 메시지를 기반으로 상호작용을 정의합니다. 하지만 MCP에는 초기화·기능 협상·도구와 리소스 등의 추가 규칙이 있습니다. 임의의 JSON-RPC 서버가 곧 MCP 서버가 되는 것은 아닙니다. [MCP 기본 구조 명세](https://modelcontextprotocol.io/specification/2025-11-25/basic)
 
 에디터와 언어 서버를 연결하는 LSP(Language Server Protocol) 역시 JSON-RPC를 사용합니다. 언어 서버가 별도 프로세스로 실행되는 구성은 **로컬 프로세스 통신과 RPC 메시지 규약을 함께 사용하는 예**입니다. [VS Code 언어 서버 가이드](https://code.visualstudio.com/api/language-extensions/language-server-extension-guide)
-
-이런 생태계를 통해 이름을 자주 접할 수 있지만, 이를 근거 없이 시장 점유율이나 성능 우위로 해석하지는 않습니다.
 
 ## gRPC와 JSON-RPC 비교
 
