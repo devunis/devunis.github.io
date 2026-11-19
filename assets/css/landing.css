@@ -165,3 +165,7 @@ h1,h2,h3,p{word-break:keep-all;overflow-wrap:break-word}
 .previous-experience h3{font-size:18px;}
 .previous-experience p{font-size:12px;color:var(--muted);line-height:1.8;}
 @media(max-width:600px){.current-work-grid{grid-template-columns:1fr;gap:24px}.current-work{margin-bottom:40px}.current-work-grid h3{font-size:30px}.current-work-grid p{font-size:13px}.current-work-heading{font-size:10px}}
+
+.hero{padding-bottom:clamp(44px,8vw,92px)}
+.hero-bottom p{max-width:580px}
+.writing-section .section-heading{margin-bottom:0}

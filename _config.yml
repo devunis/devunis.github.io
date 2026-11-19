@@ -5,7 +5,8 @@ remote_theme: "mmistakes/minimal-mistakes"
 # --- Site ---
 title: "허정윤 | Backend & AI Developer"
 name: "허정윤"
-description: "백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오 & 블로그"
+velog_url: "https://velog.io/@devunis/"
+description: "백엔드 · AI · RAG · 데이터 엔지니어링 포트폴리오"
 url: "https://devunis.github.io"
 baseurl: ""
 lang: "ko"
@@ -31,20 +32,14 @@ author:
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
-  - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-paginate
   - jekyll-sitemap
   - jemoji
-
-# --- Pagination ---
-paginate: 5
-paginate_path: "/page:num/"
 
 # --- Defaults ---
 defaults:
   - scope: { path: "", type: posts }
-    values: { layout: single, author_profile: true, read_time: true, toc: true, toc_sticky: true }
+    values: { layout: blog-moved, sitemap: false }
   - scope: { path: "", type: pages }
     values: { layout: single, author_profile: true }
 

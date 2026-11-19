@@ -22,7 +22,7 @@ sitemap: false
     {% endfor %}
     {% for indexed_page in site.pages %}
       {% assign clean_title = indexed_page.title | strip %}
-      {% unless clean_title == empty or indexed_page.url == '/rag-index.json' %}
+      {% unless clean_title == empty or indexed_page.url == '/rag-index.json' or indexed_page.url == '/posts/' %}
         {% if has_document %},{% endif %}
         {
           "id": {{ indexed_page.path | slugify | prepend: 'page-' | jsonify }},
@@ -34,19 +34,6 @@ sitemap: false
         }
         {% assign has_document = true %}
       {% endunless %}
-    {% endfor %}
-    {% for post in site.posts %}
-      {% if has_document %},{% endif %}
-      {
-        "id": {{ post.id | jsonify }},
-        "title": {{ post.title | jsonify }},
-        "url": {{ post.url | relative_url | jsonify }},
-        "type": "기술 글",
-        "tags": {{ post.tags | jsonify }},
-        "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
-        "content": {{ post.content | markdownify | strip_html | normalize_whitespace | jsonify }}
-      }
-      {% assign has_document = true %}
     {% endfor %}
   ]
 }

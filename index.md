@@ -1,18 +1,18 @@
 ---
 layout: portfolio
 title: "허정윤 | Backend & AI Developer"
-description: "백엔드의 기본기 위에 AI를 연결합니다. 허정윤의 프로젝트, 개발 경험, 기술 기록."
+description: "AI 에이전트 오케스트레이션과 백엔드 개발을 하는 허정윤의 포트폴리오."
 permalink: /
 ---
 <main id="main">
 <section class="hero wrap">
-<div class="eyebrow"><span class="status-dot"></span> BACKEND & AI DEVELOPER · SEOUL</div>
-<h1>기술을 연결하고,<br>경험을 <span>만듭니다.</span></h1>
-<div class="hero-bottom"><p>안녕하세요, 개발자 허정윤입니다.<br>이너웨이브에서 풀스택 개발과 AI·인프라를 담당하며<br>제품의 기능부터 배포·운영까지 연결합니다.</p><a class="round-link" href="#work" aria-label="프로젝트 살펴보기">↓</a></div>
-<div class="hero-caption"><span>JAVA / PYTHON / RAG / CLOUD</span><span>SCROLL TO EXPLORE</span></div>
+<div class="eyebrow"><span class="status-dot"></span> 허정윤 · 백엔드 및 AI 개발</div>
+<h1>AI 에이전트<br><span>오케스트레이터</span></h1>
+<div class="hero-bottom"><p>에이전트 디렉터의 관점으로 작업을 나누고, 백엔드에서 모델·검색·도구를 연결합니다. 이너웨이브에서 Nomos와 Patif 개발에 참여하고 있습니다.</p><a class="round-link" href="#work" aria-label="프로젝트 살펴보기">↓</a></div>
+
 </section>
 <section class="work-section" id="work"><div class="wrap">
-<div class="section-heading"><div><span class="eyebrow">01 / SELECTED WORK</span><h2>코드 너머의 서비스.</h2></div><p>질문에서 시작해, 실제로 동작하는 제품으로.<br>현재 참여 중인 서비스와 공개 프로젝트를 소개합니다.</p></div>
+<div class="section-heading"><div><span class="eyebrow">01 / SELECTED WORK</span><h2>프로젝트</h2></div></div>
 <div class="current-work" aria-label="이너웨이브에서 참여 중인 서비스">
 <div class="current-work-heading"><span>이너웨이브 · 현재 참여 중</span><a class="text-link" href="/projects/">담당 업무 보기 ↗</a></div>
 <div class="current-work-grid"><article><span class="current-work-category">AX 플랫폼</span><h3>Nomos</h3><p>Patif의 기반이 되는 AX 플랫폼.<br>풀스택 개발과 AI·인프라 관련 업무에 참여합니다.</p></article><article><span class="current-work-category">변리사 업무 솔루션</span><h3>Patif</h3><p>Nomos 기반의 변리사 업무 지원 솔루션.<br>메일·프론트엔드 개발과 AI 에이전트 일부 구현, 배포·서버 환경 구축을 담당합니다.</p></article></div>
@@ -22,7 +22,7 @@ permalink: /
 <article class="project"><div class="project-art voice-art" aria-label="한국어 발음 연습 서비스 개념도"><span class="art-label">SPEAK. LISTEN. TRY AGAIN.</span><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="art-title">Your voice.<br>Your next level.</div><span class="art-footer">TongueTwist / SPEECH PLAYGROUND</span></div><div class="project-detail"><span class="eyebrow">03 — INTERACTIVE AI</span><h3>TongueTwist<span>게임처럼 연습하는 한국어 발음</span></h3><p>말하고, 피드백을 듣고, 다시 도전합니다. 음성 인식과 언어 모델, 음성 합성을 하나의 발음 연습 흐름으로 연결했습니다.</p><dl><dt>참여 영역</dt><dd>서비스 구현 · 음성 처리 흐름 구성</dd></dl><div class="tags"><span>Python</span><span>Streamlit</span><span>Whisper</span><span>TTS</span></div><a class="text-link" href="https://github.com/devunis/tongue-twist">프로젝트 코드 보기 ↗</a></div></article>
 <a class="all-link" href="/projects/">프로젝트 상세 모아보기 <span>↗</span></a>
 </div></section>
-<section class="about-section wrap" id="about"><div class="section-heading"><div><span class="eyebrow">02 / ABOUT ME</span><h2>운영을 아는 개발,<br>새로움을 향한 탐구.</h2></div><a class="text-link" href="/about/">프로필 자세히 ↗</a></div><div class="about-grid"><div class="about-intro"><p>서비스는 배포 이후에도 계속됩니다. 헬스케어 시스템의 개발과 운영을 경험하며, 데이터가 흐르고 사용자가 만나는 지점까지 생각하는 법을 배웠습니다.</p><p>현재 이너웨이브에서 Nomos·Patif 개발에 참여하고 있습니다. 메일 기능과 프론트엔드, AI 에이전트 일부 구현부터 서버 환경 구축과 배포·운영까지 담당합니다.</p><a class="text-link" href="https://github.com/devunis">GitHub에서 더 보기 ↗</a></div><div class="experience"><span class="eyebrow">EXPERIENCE</span><h3>이너웨이브</h3><div class="job-meta"><span>풀스택 · AI · 인프라</span><span>2025.09.22 — 현재</span></div><ul><li>Nomos·Patif 서비스 개발 참여</li><li>메일 관련 기능 및 프론트엔드 개발</li><li>AI 에이전트 일부 기능 구현</li><li>서버 환경 구축·운영</li><li>Jenkins 기반 배포 환경 구축·운영</li></ul><div class="previous-experience"><h3>㈜푸른소나무</h3><div class="job-meta"><span>Backend Developer</span><span>2021.11 — 2024.05</span></div><p>Spring 기반 헬스케어 시스템 · 병원 연동 API · CGMS 연구 대시보드 개발 및 운영</p></div></div></div><div class="skill-grid"><div><span>01</span><h3>Backend</h3><p>Java · Spring · MyBatis<br>Python · Django · FastAPI</p></div><div><span>02</span><h3>AI & Data</h3><p>LangChain · LangGraph · RAG<br>Qdrant · FAISS · SQL</p></div><div><span>03</span><h3>Infrastructure</h3><p>AWS · Docker · Jenkins<br>서버 환경 구축 · 배포 및 운영</p></div></div></section>
-<section class="writing-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">03 / NOTES & IDEAS</span><h2>배운 것을 남깁니다.</h2></div><a class="text-link" href="/posts/">모든 글 보기 ↗</a></div><div class="post-list">{% for post in site.posts limit:3 %}<a class="post-row" href="{{ post.url | relative_url }}"><span class="post-date">{{ post.date | date: '%Y.%m.%d' }}</span><div><span class="post-category">{{ post.categories | first | default: 'Engineering' }}</span><h3>{{ post.title | escape }}</h3></div><span class="post-arrow" aria-hidden="true">↗</span></a>{% endfor %}</div></div></section>
-<section class="contact-section wrap" id="contact"><span class="eyebrow">LET’S CONNECT</span><h2>다음 이야기를<br>함께 만들어볼까요?</h2><a class="contact-email" href="mailto:gjwjddbsg@gmail.com">gjwjddbsg@gmail.com <span>↗</span></a><p>프로젝트 이야기, 기술에 대한 생각, 반가운 인사도 좋습니다.</p></section>
+<section class="about-section wrap" id="about"><div class="section-heading"><div><span class="eyebrow">02 / ABOUT ME</span><h2>경력과 기술</h2></div><a class="text-link" href="/about/">프로필 자세히 ↗</a></div><div class="about-grid"><div class="about-intro"><p>서비스는 배포 이후에도 계속됩니다. 헬스케어 시스템의 개발과 운영을 경험하며, 데이터가 흐르고 사용자가 만나는 지점까지 생각하는 법을 배웠습니다.</p><p>현재 이너웨이브에서 Nomos·Patif 개발에 참여하고 있습니다. 메일 기능과 프론트엔드, AI 에이전트 일부 구현부터 서버 환경 구축과 배포·운영까지 담당합니다.</p><a class="text-link" href="https://github.com/devunis">GitHub에서 더 보기 ↗</a></div><div class="experience"><span class="eyebrow">EXPERIENCE</span><h3>이너웨이브</h3><div class="job-meta"><span>풀스택 · AI · 인프라</span><span>2025.09.22 — 현재</span></div><ul><li>Nomos·Patif 서비스 개발 참여</li><li>메일 관련 기능 및 프론트엔드 개발</li><li>AI 에이전트 일부 기능 구현</li><li>서버 환경 구축·운영</li><li>Jenkins 기반 배포 환경 구축·운영</li></ul><div class="previous-experience"><h3>㈜푸른소나무</h3><div class="job-meta"><span>Backend Developer</span><span>2021.11 — 2024.05</span></div><p>Spring 기반 헬스케어 시스템 · 병원 연동 API · CGMS 연구 대시보드 개발 및 운영</p></div></div></div><div class="skill-grid"><div><span>01</span><h3>Backend</h3><p>Java · Spring · MyBatis<br>Python · Django · FastAPI</p></div><div><span>02</span><h3>AI & Data</h3><p>LangChain · LangGraph · RAG<br>Qdrant · FAISS · SQL</p></div><div><span>03</span><h3>Infrastructure</h3><p>AWS · Docker · Jenkins<br>서버 환경 구축 · 배포 및 운영</p></div></div></section>
+<section class="writing-section" aria-labelledby="writing-title"><div class="wrap section-heading"><div><h2 id="writing-title">기술 블로그</h2><p>백엔드, 검색, AI 에이전트 개발을 기록합니다.</p></div><a class="text-link" href="{{ site.velog_url }}">Velog에서 읽기 ↗</a></div></section>
+<section class="contact-section wrap" id="contact"><span class="eyebrow">LET’S CONNECT</span><h2>연락하기</h2><a class="contact-email" href="mailto:gjwjddbsg@gmail.com">gjwjddbsg@gmail.com <span>↗</span></a></section>
 </main>

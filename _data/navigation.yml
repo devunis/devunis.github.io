@@ -5,9 +5,7 @@ main:
     url: /projects/
   - title: "날짜 계산기"
     url: /dates/
-  - title: "게임"
-    url: /games/
   - title: "소개"
     url: /about/
   - title: "블로그"
-    url: /posts/
+    url: https://velog.io/@devunis/
