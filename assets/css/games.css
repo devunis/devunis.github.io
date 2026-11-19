@@ -941,3 +941,173 @@
     transition-duration: .01ms !important;
   }
 }
+
+/* Playground gallery and game surface */
+.arcade-page {
+  background: #f4f3ec;
+  color: #202821;
+  font-family: "DM Sans", "Noto Sans KR", sans-serif;
+}
+
+.arcade-hero {
+  padding: 28px 0 0;
+  border: 0;
+}
+
+.arcade-hero::before,
+.arcade-hero::after {
+  content: none;
+}
+
+.arcade-hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .77fr);
+  align-items: center;
+  gap: clamp(24px, 6vw, 82px);
+  border-radius: 28px;
+  padding: clamp(28px, 6vw, 76px);
+  background: #dce8d0;
+  color: #23372b;
+}
+
+.arcade-hero h1 {
+  margin: 0 !important;
+  color: inherit;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1.12;
+}
+
+.arcade-hero-grid p {
+  margin-top: 18px;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.arcade-hero-link {
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 26px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #243b2d;
+  color: #fff;
+  font-weight: 700 !important;
+}
+
+.arcade-hero-art {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: min(100%, 300px);
+  justify-self: center;
+  transform: rotate(-8deg);
+}
+
+.arcade-hero-art span {
+  aspect-ratio: 1;
+  background: #e69a76;
+  border-radius: 50% 50% 10% 50%;
+}
+
+.arcade-hero-art span:nth-child(2) {
+  background: #a6a0dc;
+  border-radius: 15% 50% 50% 50%;
+}
+
+.arcade-hero-art span:nth-child(3) {
+  background: #526f56;
+  border-radius: 50% 15% 50% 50%;
+}
+
+.arcade-hero-art span:nth-child(4) {
+  background: #eed78c;
+  border-radius: 50% 50% 50% 15%;
+}
+
+.arcade-station {
+  padding: clamp(40px, 6vw, 74px) 0;
+}
+
+.arcade-section-heading h2 { color: #202821 !important; }
+.arcade-section-heading > span { color: #505e52; }
+
+.arcade-selector {
+  display: grid;
+  overflow: visible;
+  margin: 0 0 24px;
+  padding: 0;
+  gap: 14px;
+}
+
+.arcade-selector-card,
+.arcade-selector-card.is-active {
+  --card-color: #f0d0bc;
+  --card-ink: #994e32;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px;
+  color: #202821;
+  background: #fffefa;
+  border: 1px solid #d6dbd1;
+}
+
+.arcade-selector-card:nth-child(2) { --card-color: #ded9f2; --card-ink: #62538c; }
+.arcade-selector-card:nth-child(3) { --card-color: #dbe9d1; --card-ink: #42684d; }
+.arcade-selector-card:nth-child(4) { --card-color: #faedbc; --card-ink: #84611a; }
+
+.arcade-selector-card.is-active {
+  border-color: #365e44;
+  box-shadow: inset 0 0 0 1px #365e44;
+}
+
+.arcade-card-art {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 2.2;
+  border-radius: 11px;
+  background: var(--card-color);
+}
+
+.arcade-card-art::before {
+  content: "";
+  width: 28%;
+  aspect-ratio: 1;
+  border: 3px solid var(--card-ink);
+  border-radius: 30%;
+  transform: rotate(-12deg);
+  box-shadow: 7px 7px var(--card-ink);
+}
+
+#tab-memory .arcade-card-art::before { border-radius: 6px; transform: rotate(12deg); }
+#tab-snake .arcade-card-art::before { border-radius: 50% 50% 12% 50%; }
+#tab-flappy .arcade-card-art::before { border-radius: 50%; transform: rotate(24deg) scaleY(.7); }
+
+.arcade-selector-card strong { margin: 13px 2px 0; font-size: clamp(.9rem, 2vw, 1.1rem); }
+.arcade-selector-card small,
+.arcade-selector-card.is-active small { margin: 6px 2px 2px; color: #505e52; }
+
+.arcade-console {
+  color: var(--arcade-text);
+  margin: 0;
+  box-shadow: 0 18px 48px rgb(23 35 27 / 15%);
+}
+
+@media (max-width: 640px) {
+  .arcade-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(64px, .42fr);
+    gap: 12px;
+    padding: 23px;
+  }
+
+  .arcade-hero-grid p { font-size: .88rem; }
+  .arcade-hero-art { gap: 4px; }
+  .arcade-selector { gap: 9px; }
+}
+
+.arcade-section-heading {
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.arcade-section-heading h2 { margin-top: 0 !important; }

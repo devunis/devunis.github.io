@@ -4,18 +4,19 @@ title: "놀이터"
 permalink: /games/
 ---
 
-<link rel="stylesheet" href="/assets/css/games.css">
+<link rel="stylesheet" href="{{ '/assets/css/games.css' | relative_url }}?v=20261119-playground">
 
 <main class="arcade-page" id="main">
-  <section class="arcade-hero">
+  <section class="arcade-hero" aria-labelledby="playground-title">
     <div class="arcade-shell">
       <div class="arcade-hero-grid">
         <div>
-
-          <h1>놀이터</h1>
+          <h1 id="playground-title">놀이터</h1>
+          <p>색을 찾고, 카드를 맞추고, 장애물을 피해 보세요.</p>
+          <a class="arcade-hero-link" href="#arcade-select-title">게임 고르기 <span aria-hidden="true">↓</span></a>
         </div>
-        <div class="arcade-hero-copy">
-          <p>JavaScript로 구현한 네 가지 게임입니다. 게임을 선택하면 조작법과 플레이 화면을 볼 수 있습니다.</p>
+        <div class="arcade-hero-art" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
         </div>
       </div>
     </div>
@@ -33,19 +34,23 @@ permalink: /games/
 
       <div class="arcade-selector" role="tablist" aria-label="게임 선택">
         <button type="button" class="arcade-selector-card is-active" id="tab-color" role="tab" aria-selected="true" aria-controls="game-color" data-game-target="game-color">
-          <strong>CHROMA<br>SCAN</strong>
+          <span class="arcade-card-art" aria-hidden="true"></span>
+          <strong>Chroma Scan</strong>
           <small>다른 색 찾기</small>
         </button>
         <button type="button" class="arcade-selector-card" id="tab-memory" role="tab" aria-selected="false" aria-controls="game-memory" data-game-target="game-memory">
-          <strong>STACK<br>MEMORY</strong>
+          <span class="arcade-card-art" aria-hidden="true"></span>
+          <strong>Stack Memory</strong>
           <small>개발 용어 매칭</small>
         </button>
         <button type="button" class="arcade-selector-card" id="tab-snake" role="tab" aria-selected="false" aria-controls="game-snake" data-game-target="game-snake">
-          <strong>BYTE<br>SNAKE</strong>
+          <span class="arcade-card-art" aria-hidden="true"></span>
+          <strong>Byte Snake</strong>
           <small>방향 감각 테스트</small>
         </button>
         <button type="button" class="arcade-selector-card" id="tab-flappy" role="tab" aria-selected="false" aria-controls="game-flappy" data-game-target="game-flappy">
-          <strong>BUG<br>ESCAPE</strong>
+          <span class="arcade-card-art" aria-hidden="true"></span>
+          <strong>Bug Escape</strong>
           <small>반응 속도 테스트</small>
         </button>
       </div>
@@ -148,18 +153,6 @@ permalink: /games/
     </div>
   </section>
 
-  <section class="arcade-tech">
-    <div class="arcade-shell">
-      <p>BUILT WITHOUT A GAME ENGINE</p>
-      <div>
-        <span>CANVAS 2D</span>
-        <span>VANILLA JAVASCRIPT</span>
-        <span>LOCAL STORAGE</span>
-        <span>TOUCH + KEYBOARD</span>
-      </div>
-      <a href="/projects/">프로젝트 더 보기 <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
 </main>
 
 <script src="/assets/js/arcade.js"></script>
