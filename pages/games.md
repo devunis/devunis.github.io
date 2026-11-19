@@ -1,6 +1,6 @@
 ---
 layout: portfolio
-title: "브라우저 게임 실험실"
+title: "놀이터"
 permalink: /games/
 ---
 
@@ -12,7 +12,7 @@ permalink: /games/
       <div class="arcade-hero-grid">
         <div>
 
-          <h1>브라우저 게임 실험실</h1>
+          <h1>놀이터</h1>
         </div>
         <div class="arcade-hero-copy">
           <p>JavaScript로 구현한 네 가지 게임입니다. 게임을 선택하면 조작법과 플레이 화면을 볼 수 있습니다.</p>
